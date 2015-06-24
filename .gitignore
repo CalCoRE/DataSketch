@@ -2,7 +2,7 @@
 Gemfile.lock
 **/.sass-cache
 **/node_modules
-doc
+docs
 server/public/cslib/
 server/public/index.html
 
