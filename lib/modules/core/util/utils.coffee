@@ -92,10 +92,7 @@ define (require) ->
         paths = [paths]
       new Promise (resolve, reject) ->
         require paths, () ->
-          if arguments.length == 1
-            resolve arguments[0]
-          else
-            resolve arguments
+          resolve arguments
         , (err) ->
           reject err
     
