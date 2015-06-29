@@ -1,5 +1,7 @@
 'use-strict'
 
+# # Gulp Tasks
+
 gulp = require 'gulp'
 coffee = require 'gulp-coffee'
 sourcemaps = require 'gulp-sourcemaps'
@@ -31,14 +33,15 @@ taskPaths =
     src: 'lib/**/*.coffee'
     dest: 'docs/'
 
+# ## Command Line Options
 
 options = minimist process.argv.slice(2),
-  string: ['env']
-  alias:
-    port: ['p']
   default:
     env: process.env.NODE_ENV || 'development'
     port: 3000
+  string: ['env']
+  alias:
+    port: ['p']
 
 gulp.task 'default', ['clean', 'coffee', 'sass', 'thirdparty', 'index', 'docs']
 
