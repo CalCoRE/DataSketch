@@ -39,6 +39,8 @@ require.config
   shim:
     "thirdparty/modernizr-2.8.3":
       exports: "Modernizr"
+    "thirdparty/fabric":
+      exports: "fabric"
   config:
     text:
       useXhr: () ->
@@ -51,3 +53,4 @@ require ['jquery', 'app'], ($, Main) ->
       main.init()
     .then () ->
       main.run()
+  window.App = main

@@ -4,7 +4,7 @@
 # 
 # All modules are deal with in phases:
 # 
-# * `load`:
+# * `load`: All modules are loaded
 # * `init`:
 # * `run`:
 
@@ -33,15 +33,15 @@ define (require) ->
       moduleClasses = HM.invoke 'Application.Modules', new Set
 # The set is then modified to ensure any first-level requirements
 # TODO: make requirements check recursive
-      for pic in moduleClasses.elements().slice(0)
-        if pic.requires?
-          moduleClasses.addMany pic.requires
+      for mc in moduleClasses.elements().slice(0)
+        if mc.requires?
+          moduleClasses.addMany mc.requires
 
 # Then the modules are set to load, with the promises returned from their
 # load functions stored in an array.
       @_modules = []
-      for pic in moduleClasses.elements()
-        module = new pic
+      for mc in moduleClasses.elements()
+        module = new mc
         @_modules.push module
         promises.push module.load()
 # Finally, the View class load promise is created and added to the array.

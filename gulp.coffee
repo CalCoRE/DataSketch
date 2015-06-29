@@ -26,6 +26,9 @@ taskPaths =
   thirdparty:
     src: 'lib/thirdparty/**/*'
     dest: SPUB + 'cslib/thirdparty/'
+  html:
+    src: 'lib/modules/**/*.html'
+    dest: SPUB + 'cslib/modules/'
   index:
     src: 'lib/index.html'
     dest: SPUB
@@ -43,7 +46,7 @@ options = minimist process.argv.slice(2),
   alias:
     port: ['p']
 
-gulp.task 'default', ['clean', 'coffee', 'sass', 'thirdparty', 'index', 'docs']
+gulp.task 'default', ['clean', 'coffee', 'sass', 'html', 'thirdparty', 'index', 'docs']
 
 gulp.task 'clean:coffee', (cb) ->
   del [taskPaths.coffee.dest + "**/*.js", "!#{taskPaths.coffee.dest}/thirdparty/**/*.js"], cb
@@ -80,6 +83,10 @@ gulp.task 'thirdparty', ['clean:thirdparty'], () ->
     # .pipe changed taskPaths.thirdparty.dest
     .pipe gulp.dest taskPaths.thirdparty.dest
 
+gulp.task 'html', () ->
+  gulp.src taskPaths.html.src
+    .pipe gulp.dest taskPaths.html.dest
+
 gulp.task 'index', () ->
   gulp.src taskPaths.index.src
     # .pipe changed taskPaths.index.dest
@@ -99,6 +106,7 @@ gulp.task 'watch', ['default'], () ->
   gulp.watch taskPaths.sass.src, ['sass']
   gulp.watch taskPaths.thirdparty.src, ['thirdparty']
   gulp.watch taskPaths.index.src, ['index']
+  gulp.watch taskPaths.html.src, ['html']
 
 gulp.task 'up', () ->
   opts =

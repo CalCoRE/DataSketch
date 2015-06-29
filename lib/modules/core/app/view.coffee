@@ -5,7 +5,7 @@
 
 define (require) ->
   DomView = require 'core/view/dom_view'
-  Template = require 'text!templates/core/app.html'
+  Template = require 'text!./app.html'
 
   class AppView extends DomView
     constructor: (tmpl) ->
