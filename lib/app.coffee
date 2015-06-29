@@ -1,5 +1,11 @@
 define (require) ->
   Application = require 'core/app/application'
-  require 'link!style.css'
+  HM = require 'core/event/hook_manager'
+  DSCanvas = require 'modules/datasketch/canvas/module'
 
-  class App extends Application
+  class Main extends Application
+    constructor: (domRoot) ->
+      super domRoot
+
+      HM.hook 'Application.Modules', (set) ->
+        set.add DSCanvas

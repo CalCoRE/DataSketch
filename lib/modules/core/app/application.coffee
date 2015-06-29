@@ -1,8 +1,8 @@
 # # Application
 # 
-# Base class for an application. Handles plugin integration.
+# Base class for an application. Handles module integration.
 # 
-# All plugins are deal with in phases:
+# All modules are deal with in phases:
 # 
 # * `load`:
 # * `init`:
@@ -28,22 +28,22 @@ define (require) ->
 # `load()`
     load: () =>
       promises = []
-# First, the application invoke the `Application.Plugins` hook to obtain
-# a set of all desired plugins.
-      pluginClasses = HM.invoke 'Application.Plugins', new Set
+# First, the application invoke the `Application.Modules` hook to obtain
+# a set of all desired modules.
+      moduleClasses = HM.invoke 'Application.Modules', new Set
 # The set is then modified to ensure any first-level requirements
 # TODO: make requirements check recursive
-      for pic in pluginClasses.elements().slice(0)
+      for pic in moduleClasses.elements().slice(0)
         if pic.requires?
-          pluginClasses.addMany pic.requires
+          moduleClasses.addMany pic.requires
 
-# Then the plugins are set to load, with the promises returned from their
+# Then the modules are set to load, with the promises returned from their
 # load functions stored in an array.
-      @_plugins = []
-      for pic in pluginClasses.elements()
-        plugin = new pic
-        @_plugins.push plugin
-        promises.push plugin.load()
+      @_modules = []
+      for pic in moduleClasses.elements()
+        module = new pic
+        @_modules.push module
+        promises.push module.load()
 # Finally, the View class load promise is created and added to the array.
       viewClassPath = HM.invoke 'Application.ViewClass', 'core/app/view'
       promises.push new Promise (resolve, reject) =>
@@ -60,14 +60,14 @@ define (require) ->
 
 # `init()`
 
-# Initializes all plugins.
+# Initializes all modules.
     init: () =>
-      Promise.all(pi.init() for pi in @_plugins)
+      Promise.all(pi.init() for pi in @_modules)
 
 # `run()`
 
-# Runs the application by running all plugins.
+# Runs the application by running all modules.
     run: () =>
-      for pi in @_plugins
+      for pi in @_modules
         pi.run()
       @dispatchEvent 'Application.Run', {}
