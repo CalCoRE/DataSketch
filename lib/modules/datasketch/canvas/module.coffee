@@ -1,6 +1,7 @@
 define (require) ->
   Module = require 'core/app/module'
   Globals = require 'core/model/globals'
+  Canvas = require './canvas'
 
   class DSCanvas extends Module
     constuctor: () ->
@@ -13,10 +14,15 @@ define (require) ->
 
     handlePreload: (ActionHistory, CanvasView) =>
       Globals.set 'ActionHistory', new ActionHistory
-      @_view = new CanvasView
+      @canvas = new Canvas
 
     init: () =>
-      Globals.get('App.view').addChild @_view
-
+      Globals.get('App.view').addChild @canvas.view()
+      Globals.get('App.view').addEventListener 'Tool.RequestAction', @_onActionRequest
+      Globals.set 'Canvas', @canvas
+      @canvas.initCanvas()
+      
     run: () =>
-      @_view.startCanvas()
+
+    _onActionRequest: (evt) =>
+      Globals.get('ActionHistory').execute evt.data.action

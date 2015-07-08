@@ -27,7 +27,7 @@ taskPaths =
     src: 'lib/thirdparty/**/*'
     dest: SPUB + 'cslib/thirdparty/'
   html:
-    src: 'lib/modules/**/*.html'
+    src: ['lib/modules/**/*.html', 'lib/modules/**/*.jpg', 'lib/modules/**/*.gif', 'lib/modules/**/*.png']
     dest: SPUB + 'cslib/modules/'
   index:
     src: 'lib/index.html'
