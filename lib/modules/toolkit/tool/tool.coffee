@@ -15,7 +15,7 @@ define (require) ->
       @view().addEventListener 'Tool.GenerateActionRequest', @_onActionRequest
 
     _onActionRequest: (evt) =>
-      @view().dispatchEvent 'Tool.RequestAction',
+      @view().dispatchEvent 'Action.RequestAction',
         action: @generateAction()
       , true
 

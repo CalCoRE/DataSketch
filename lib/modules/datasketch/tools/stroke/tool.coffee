@@ -1,6 +1,6 @@
 define (require) ->
   Tool = require 'modules/toolkit/tool/tool'
-  StrokeAction = require './action'
+  StrokeAction = require 'modules/datasketch/actions/set_stroke_width'
   Globals = require 'core/model/globals'
 
   require 'link!./style.css'

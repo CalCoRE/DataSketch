@@ -1,6 +1,6 @@
 define (require) ->
   Tool = require 'modules/toolkit/tool/tool'
-  ColorAction = require './action'
+  ColorAction = require 'modules/datasketch/actions/set_color'
   Globals = require 'core/model/globals'
   View = require './view'
 

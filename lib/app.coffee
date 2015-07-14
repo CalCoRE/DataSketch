@@ -8,7 +8,9 @@ define (require) ->
   DSModeTools = require 'modules/datasketch/tools/mode/module'
   DSStrokeTools = require 'modules/datasketch/tools/stroke/module'
   DSColorTools = require 'modules/datasketch/tools/color/module'
+  DSTrashTool = require 'modules/datasketch/tools/trash/module'
   WindowResize = require 'modules/windowresize/module'
+  KeyboardShortcuts = require 'modules/datasketch/keyboard_shortcuts/module'
 
   require 'link!./style.css'
 
@@ -23,3 +25,5 @@ define (require) ->
         set.add DSModeTools
         set.add DSStrokeTools
         set.add DSColorTools
+        set.add DSTrashTool
+        set.add KeyboardShortcuts
