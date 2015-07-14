@@ -4,8 +4,8 @@ define (require) ->
   require 'link!./style.css'
 
   class ToolView extends DomView
-    constructor: (model) ->
-      super Template
+    constructor: (model, tmpl) ->
+      super if tmpl? then tmpl else Template
 
       @_render model
       model.addEventListener 'Model.Change', @_onChange

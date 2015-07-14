@@ -25,6 +25,12 @@ define (require) ->
     setStrokeWidth: (width) =>
       @_model.set 'strokeWidth', width
 
+    getStrokeColor: () =>
+      @_model.get 'strokeColor'
+
+    setStrokeColor: (color) =>
+      @_model.set 'strokeColor', color
+
     _onModelChange: (evt) =>
       switch evt.data.path
         when "strokeWidth"
@@ -33,6 +39,9 @@ define (require) ->
         when "mode"
           @dispatchEvent "Canvas.ModeChange",
             mode: evt.data.value
+        when "strokeColor"
+          @dispatchEvent "Canvas.StrokeColorChange",
+            color: evt.data.value
 
     initCanvas: () =>
       @_view.initCanvas @_model
