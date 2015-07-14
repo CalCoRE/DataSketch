@@ -1,6 +1,6 @@
 define (require) ->
   Tool = require 'modules/toolkit/tool/tool'
-  DrawModeAction = require './action'
+  DrawModeAction = require 'modules/datasketch/actions/set_mode'
   Globals = require 'core/model/globals'
 
   require 'link!./style.css'

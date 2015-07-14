@@ -19,6 +19,9 @@ define (require) ->
         mode: new Toolbar
           modelData:
             id: "mode"
+        trash: new Toolbar
+          modelData:
+            id: "trash"
       toolbars
 
     init: () =>
