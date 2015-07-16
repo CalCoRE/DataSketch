@@ -12,6 +12,9 @@ define (require) ->
   WindowResize = require 'modules/windowresize/module'
   KeyboardShortcuts = require 'modules/datasketch/keyboard_shortcuts/module'
 
+  ContextMenu = require 'modules/datasketch/contextmenu/module'
+  DeleteMenuItem = require 'modules/datasketch/menuitems/delete'
+
   require 'link!./style.css'
 
   class Main extends Application
@@ -27,3 +30,6 @@ define (require) ->
         set.add DSColorTools
         set.add DSTrashTool
         set.add KeyboardShortcuts
+        set.add ContextMenu
+
+        set.add DeleteMenuItem

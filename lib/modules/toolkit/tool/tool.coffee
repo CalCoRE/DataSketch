@@ -15,9 +15,8 @@ define (require) ->
       @view().addEventListener 'Tool.GenerateActionRequest', @_onActionRequest
 
     _onActionRequest: (evt) =>
-      @view().dispatchEvent 'Action.RequestAction',
+      Globals.get('Relay').dispatchEvent 'Action.RequestAction',
         action: @generateAction()
-      , true
 
     generateAction: () =>
 

@@ -18,5 +18,5 @@ define (require) ->
         evt.preventDefault()
       switch evt.keyCode
         when 8 # delete
-          Globals.get('App.view').dispatchEvent 'Action.RequestAction',
+          Globals.get('Relay').dispatchEvent 'Action.RequestAction',
             action: new DeleteAction Globals.get('Canvas'), Globals.get('Canvas').getSelectedObjects()

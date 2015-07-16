@@ -6,6 +6,8 @@ define (require) ->
 
     execute: () =>
       @canvas.removeObjects(@_objects)
+      @canvas.selectObjects []
 
     undo: () =>
       @canvas.addObjects @_objects
+      @canvas.selectObjects @_objects

@@ -18,7 +18,7 @@ define (require) ->
 
     init: () =>
       Globals.get('App.view').addChild @canvas.view()
-      Globals.get('App.view').addEventListener 'Action.RequestAction', @_onActionRequest
+      Globals.get('Relay').addEventListener 'Action.RequestAction', @_onActionRequest
       Globals.set 'Canvas', @canvas
       @canvas.initCanvas()
       

@@ -2,6 +2,7 @@ define (require) ->
   Controller = require 'core/controller/controller'
   View = require './view'
   Model = require './model'
+  Globals = require 'core/model/globals'
 
   class DSCanvas extends Controller
     constructor: (config) ->
@@ -77,6 +78,13 @@ define (require) ->
         when "strokeColor"
           @dispatchEvent "Canvas.StrokeColorChange",
             color: evt.data.value
+        when "selected"
+          if evt.data.value?.length
+            Globals.get('Relay').dispatchEvent 'ContextMenu.RequestDisplay',
+              context:
+                selection: evt.data.value
+          else
+            Globals.get('Relay').dispatchEvent 'ContextMenu.RequestClose', {}
 
     _onPathCreated: (evt) =>
       @addPath evt.data.path, true
