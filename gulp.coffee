@@ -74,7 +74,10 @@ gulp.task 'sass', ['clean:sass'], () ->
   gulp.src taskPaths.sass.src
     # .pipe changed taskPaths.sass.dest
     .pipe sourcemaps.init()
-    .pipe sass().on('error', gutil.log)
+    .pipe sass().on('error', (err) ->
+      sass.logError(err);
+      this.emit('end');
+    )
     .pipe sourcemaps.write './maps'
     .pipe gulp.dest taskPaths.sass.dest
 
