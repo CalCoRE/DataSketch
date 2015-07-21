@@ -4,6 +4,9 @@ define (require) ->
   Globals = require 'core/model/globals'
   Template = require 'text!./view.html'
 
+  Group = require './objects/group'
+  Path = require './objects/path'
+
   Fabric = require 'thirdparty/fabric'
   require 'link!./style.css'
 
@@ -27,12 +30,15 @@ define (require) ->
       @updateDimensions()
 
     _onPathCreated: (evt) =>
+      path = new Path evt.path
+      evt.path.set 'id', path.get('id')
       @dispatchEvent 'Path.Created',
-        path: evt.path
+        path: path
 
     _onSelectionCreated: (evt) =>
       @dispatchEvent 'Selection.Created',
-        objects: @_fabric.getActiveGroup().getObjects()
+        objects: evt.target.getObjects()
+        objectIds: (obj.get('id') for obj in evt.target.getObjects())
 
     _onSelectionCleared: (evt) =>
       @dispatchEvent 'Selection.Cleared', {}
@@ -45,6 +51,7 @@ define (require) ->
 
       @dispatchEvent 'Selection.Created',
         objects: objects
+        objectIds: (obj.get('id') for obj in objects)
 
     updateDimensions: () =>
       @_fabric.setDimensions
@@ -65,6 +72,8 @@ define (require) ->
         when "selected"
           if evt.data.value?.length == 0
             @clearSelection()
+          else if !@_fabric.getActiveGroup()?
+            @_fabric.setActiveGroup new fabric.Group (obj.get('view') for obj in evt.data.value)
 
     _onChangeMode: (val) =>
       switch val
@@ -74,15 +83,21 @@ define (require) ->
           @_fabric.isDrawingMode = true
 
     _onObjectRemoved: (evt) =>
-      evt.data.object.remove()
+      evt.data.object.get('view').remove()
       @clearSelection()
 
     _onObjectAdded: (evt) =>
-      @_fabric.add evt.data.object
+      if evt.data.object instanceof Group and !evt.data.object.get('view')?
+        objs = (obj.get('view') for obj in evt.data.object.getObjects())
+        grp = new fabric.Group objs
+        grp.set 'id', evt.data.object.get('id')
+        evt.data.object.set 'view', grp
+        @_fabric.clear().renderAll()
+      @_fabric.add evt.data.object.get 'view'
 
     _onObjectsRemoved: (evt) =>
       for obj in evt.data.objects
-        obj.remove()
+        obj.get('view').remove()
       @clearSelection()
 
     _onObjectsAdded: (evt) =>

@@ -4,6 +4,9 @@ define (require) ->
   Model = require './model'
   Globals = require 'core/model/globals'
 
+  Path = require './objects/path'
+  Group = require './objects/group'
+
   class DSCanvas extends Controller
     constructor: (config) ->
       config ?= {}
@@ -39,10 +42,11 @@ define (require) ->
       @_model.get 'selected'
 
     selectObjects: (objects) =>
-      @_model.set 'selected', objects
+      objectIds = (obj.get('id') for obj in objects)
+      @_model.set 'selected', (obj for obj in @_model.get('objects') when obj.get('id') in objectIds)
 
-    addPath: (path, silent = false) =>
-      @_model.addPath path, silent
+    addObject: (object, silent = false) =>
+      @_model.addObject object, silent
 
     addObjects: (objects) =>
       @_model.addObjects objects
@@ -62,10 +66,16 @@ define (require) ->
       if !objects?
         return null
 
-      @_model.createGroup objects
+      group = new Group objects
+      @addObject group
+      @removeObjects objects
+      @selectObjects [group]
+      group
 
     breakGroup: (group) =>
-      @_model.breakGroup group
+      @removeObject group
+      @addObjects group.getObjects()
+      group.getObjects()
 
     _onModelChange: (evt) =>
       switch evt.data.path
@@ -87,7 +97,7 @@ define (require) ->
             Globals.get('Relay').dispatchEvent 'ContextMenu.RequestClose', {}
 
     _onPathCreated: (evt) =>
-      @addPath evt.data.path, true
+      @_model.addObject evt.data.path, true
 
     _onSelectionCreated: (evt) =>
       @selectObjects evt.data.objects

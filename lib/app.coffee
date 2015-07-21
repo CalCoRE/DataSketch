@@ -13,6 +13,7 @@ define (require) ->
   KeyboardShortcuts = require 'modules/datasketch/keyboard_shortcuts/module'
 
   ContextMenu = require 'modules/datasketch/contextmenu/module'
+  GroupMenuItem = require 'modules/datasketch/menuitems/group'
   DeleteMenuItem = require 'modules/datasketch/menuitems/delete'
 
   require 'link!./style.css'
@@ -32,4 +33,5 @@ define (require) ->
         set.add KeyboardShortcuts
         set.add ContextMenu
 
+        set.add GroupMenuItem
         set.add DeleteMenuItem

@@ -14,11 +14,14 @@ define (require) ->
         data: data
         defaults: defaults
 
-    addPath: (path, silent=false) =>
-      @get('objects').push path
+    addObject: (object, silent=false) =>
+      objs = @get('objects')
+      objs.push object
+      @set 'objects', objs
+
       if !silent
         @dispatchEvent 'Canvas.ObjectAdded',
-          object: path
+          object: object
 
     addObjects: (objects, silent=false) =>
       for obj in objects
