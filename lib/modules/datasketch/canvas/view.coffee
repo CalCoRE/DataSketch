@@ -37,8 +37,13 @@ define (require) ->
 
     _onSelectionCreated: (evt) =>
       @dispatchEvent 'Selection.Created',
-        objects: evt.target.getObjects()
-        objectIds: (obj.get('id') for obj in evt.target.getObjects())
+        objects: @_fabric.getActiveGroup().getObjects()
+        objectIds: (obj.get('id') for obj in @_fabric.getActiveGroup().getObjects())
+        coordinates:
+          top: evt.target.top
+          left: evt.target.left
+          width: evt.target.width
+          height: evt.target.height
 
     _onSelectionCleared: (evt) =>
       @dispatchEvent 'Selection.Cleared', {}
@@ -72,8 +77,8 @@ define (require) ->
         when "selected"
           if evt.data.value?.length == 0
             @clearSelection()
-          else if !@_fabric.getActiveGroup()?
-            @_fabric.setActiveGroup new fabric.Group (obj.get('view') for obj in evt.data.value)
+          # else if !@_fabric.getActiveGroup()?
+          #   @_fabric.setActiveGroup new fabric.Group (obj.get('view') for obj in evt.data.value)
 
     _onChangeMode: (val) =>
       switch val
@@ -88,12 +93,26 @@ define (require) ->
 
     _onObjectAdded: (evt) =>
       if evt.data.object instanceof Group and !evt.data.object.get('view')?
-        objs = (obj.get('view') for obj in evt.data.object.getObjects())
-        grp = new fabric.Group objs
+        grp = new fabric.Group
+        grp.originX = "center"
+        grp.originY = "center"
+        center = null
+        for obj in evt.data.object.getObjects()
+          v = obj.get('view')
+          center = v.group.getCenterPoint()
+          grp.addWithUpdate v
+          @_fabric.remove v
         grp.set 'id', evt.data.object.get('id')
         evt.data.object.set 'view', grp
-        @_fabric.clear().renderAll()
-      @_fabric.add evt.data.object.get 'view'
+        @_fabric.setActiveGroup grp
+        @_fabric.add grp
+        @_fabric.renderAll()
+        setTimeout () =>
+          grp.set 'left', center.x
+          grp.set 'top', center.y
+          grp.setCoords()
+          @_fabric.renderAll()
+        , 10
 
     _onObjectsRemoved: (evt) =>
       for obj in evt.data.objects

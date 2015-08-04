@@ -15,3 +15,4 @@ define (require) ->
           id: DSObject._count
           view: pathData
         defaults: defaults
+        
