@@ -25,18 +25,19 @@ define (require) ->
 
     addObjects: (objects, silent=false) =>
       for obj in objects
-        addPath obj
+        @addObject obj
       if !silent
         @dispatchEvent 'Canvas.ObjectsAdded',
           objects: objects
 
     removeObject: (object, silent=false) =>
       objs = @get('objects')
-      objs.splice objs.indexOf(object), 1
-      @set 'objects', objs
-      if !silent
-        @dispatchEvent 'Canvas.ObjectRemoved',
-          object: object
+      if object in objs
+        objs.splice objs.indexOf(object), 1
+        @set 'objects', objs
+        if !silent
+          @dispatchEvent 'Canvas.ObjectRemoved',
+            object: object
 
     removeObjects: (objects, silent=false) =>
       for obj in objects

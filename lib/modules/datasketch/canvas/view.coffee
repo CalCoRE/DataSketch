@@ -36,14 +36,12 @@ define (require) ->
         path: path
 
     _onSelectionCreated: (evt) =>
+      # console.log evt, @_fabric.getActiveGroup()
       @dispatchEvent 'Selection.Created',
-        objects: @_fabric.getActiveGroup().getObjects()
-        objectIds: (obj.get('id') for obj in @_fabric.getActiveGroup().getObjects())
-        coordinates:
-          top: evt.target.top
-          left: evt.target.left
-          width: evt.target.width
-          height: evt.target.height
+        # objects: @_fabric.getActiveGroup().getObjects()
+        objects: evt.target.getObjects()
+        # objectIds: (obj.get('id') for obj in @_fabric.getActiveGroup().getObjects())
+        objectIds: (obj.get('id') for obj in evt.target.getObjects())
 
     _onSelectionCleared: (evt) =>
       @dispatchEvent 'Selection.Cleared', {}
@@ -64,7 +62,7 @@ define (require) ->
         height: $(window).height()
 
     clearSelection: () =>
-      @_fabric.deactivateAll().renderAll()
+      @_fabric.deactivateAllWithDispatch().renderAll()
 
     _onChange: (evt) =>
       switch evt.data.path
@@ -88,7 +86,16 @@ define (require) ->
           @_fabric.isDrawingMode = true
 
     _onObjectRemoved: (evt) =>
-      evt.data.object.get('view').remove()
+      if evt.data.object instanceof Group
+        fbgrp = evt.data.object.get('view')
+        fbgrp._restoreObjectsState()
+        items = fbgrp._objects.slice(0)
+        for itm in items
+          itm.hasControls = true
+        @_fabric.remove fbgrp
+      else
+        @_fabric.remove evt.data.object.get('view')
+      @_fabric.renderAll()
       @clearSelection()
 
     _onObjectAdded: (evt) =>
@@ -107,18 +114,23 @@ define (require) ->
         @_fabric.setActiveGroup grp
         @_fabric.add grp
         @_fabric.renderAll()
-        setTimeout () =>
+        # in order to avoid order of operation issues, we need to set position
+        # in a timeout
+        window.requestAnimationFrame () =>
           grp.set 'left', center.x
           grp.set 'top', center.y
           grp.setCoords()
           @_fabric.renderAll()
-        , 10
+      else
+        evt.data.object.get('view').setCoords()
 
     _onObjectsRemoved: (evt) =>
       for obj in evt.data.objects
-        obj.get('view').remove()
+        @_fabric.remove obj.get('view')
       @clearSelection()
 
     _onObjectsAdded: (evt) =>
       for obj in evt.data.objects
-        @_fabric.add obj
+        v = obj.get('view')
+        @_fabric.add v
+        v.setCoords()
