@@ -70,8 +70,10 @@ define (require) ->
           @_onChangeMode evt.data.value
         when "strokeWidth"
           @_fabric.freeDrawingBrush.width = evt.data.value
+          @_fabric.renderAll()
         when "strokeColor"
           @_fabric.freeDrawingBrush.color = evt.data.value
+          @_fabric.renderAll()
         when "selected"
           if evt.data.value?.length == 0
             @clearSelection()

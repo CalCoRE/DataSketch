@@ -30,12 +30,18 @@ define (require) ->
       @_model.get 'strokeWidth'
 
     setStrokeWidth: (width) =>
+      if @_model.get 'selected'
+        for obj in @_model.get 'selected'
+          obj.setStrokeWidth width
       @_model.set 'strokeWidth', width
 
     getStrokeColor: () =>
       @_model.get 'strokeColor'
 
     setStrokeColor: (color) =>
+      if @_model.get 'selected'
+        for obj in @_model.get 'selected'
+          obj.setStrokeColor color
       @_model.set 'strokeColor', color
 
     getSelectedObjects: () =>
