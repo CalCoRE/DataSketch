@@ -11,6 +11,12 @@ define (require) ->
     _onChange: (evt) =>
       if evt.data.path == "view"
         @_bindViewEvents()
+      if evt.data.path == "disabled"
+        v = @get('view')
+        v.selectable = !evt.data.value
+        v.hasControls = !evt.data.value
+        v.hasRotatingPoint = !evt.data.value
+        v.opacity = if evt.data.value then 0.5 else 1
 
     _bindViewEvents: () =>
       if @get('view')?
@@ -34,6 +40,12 @@ define (require) ->
 
     getHeight: () =>
       @get('view').getHeight()
+
+    disable: () =>
+      @set 'disabled', true
+
+    enable: () =>
+      @set 'disabled', false
 
   DSObject._count = 0
   DSObject

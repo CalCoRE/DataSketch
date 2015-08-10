@@ -7,6 +7,7 @@ define (require) ->
     strokeColor: "#000000"
     objects: []
     selected: []
+    isolated: null
 
   class DSCanvasModel extends Model
     constructor: (data) ->
@@ -49,3 +50,11 @@ define (require) ->
     removeSelected: () =>
       @removeObjects @get('selected')
       @set 'selected', []
+
+    isolate: (group) =>
+      for obj in @get('objects') when obj != group
+        if group?
+          obj.disable()
+        else
+          obj.enable()
+      @set 'isolated', group
