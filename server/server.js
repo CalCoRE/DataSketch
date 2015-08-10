@@ -5,6 +5,7 @@ var app = Express()
 var path = require("path")
 
 app.set("port", process.env.PORT || 3000);
+app.set("host", process.env.HOST || "127.0.0.1");
 
 // serve all static files by their name
 app.use(Express.static(path.join(__dirname + "/public")));
@@ -19,6 +20,6 @@ app.use(function(req, res, next) {
   }
 });
 
-app.listen(app.get("port"), function() {
+app.listen(app.get("port"), app.get("host"), function() {
   console.log("Express server listening on port " + app.get("port"));
 })

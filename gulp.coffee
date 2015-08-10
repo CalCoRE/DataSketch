@@ -42,9 +42,11 @@ options = minimist process.argv.slice(2),
   default:
     env: process.env.NODE_ENV || 'development'
     port: 3000
+    host: "0.0.0.0"
   string: ['env']
   alias:
     port: ['p']
+    host: ['h']
 
 gulp.task 'default', ['clean', 'coffee', 'sass', 'html', 'thirdparty', 'index', 'docs']
 
@@ -117,6 +119,7 @@ gulp.task 'up', () ->
     env: process.env
   opts.env.NODE_ENV = options.env
   opts.env.PORT = options.port
+  opts.env.HOST = options.host
   server.run ['./server/server.js'], opts, false
 
 gulp.task 'dev_start', ['watch', 'up']
