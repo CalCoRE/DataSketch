@@ -46,6 +46,12 @@ define (require) ->
 
     enable: () =>
       @set 'disabled', false
+    
+    setStrokeWidth: (width) =>
+      @get('view').setStrokeWidth width
+
+    setStrokeColor: (color) =>
+      @get('view').setStroke color
 
   DSObject._count = 0
   DSObject

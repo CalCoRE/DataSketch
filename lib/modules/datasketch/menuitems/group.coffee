@@ -4,6 +4,7 @@ define (require) ->
   Globals = require 'core/model/globals'
   GroupAction = require 'modules/datasketch/actions/group_objects'
   UngroupAction = require 'modules/datasketch/actions/ungroup_objects'
+  Group = require 'modules/datasketch/canvas/objects/group'
 
   class GroupMenuItemModule extends Module
     constructor: () ->
@@ -17,7 +18,7 @@ define (require) ->
         list.push
           label: "Group"
           action: new GroupAction Globals.get('Canvas'), meta.context.selection
-      else if meta.context.selection?.length == 1
+      else if meta.context.selection?.length == 1 and meta.context.selection[0] instanceof Group
         list.push
           label: "Ungroup"
           action: new UngroupAction Globals.get('Canvas'), meta.context.selection[0]

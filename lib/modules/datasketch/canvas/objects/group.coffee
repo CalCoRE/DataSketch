@@ -18,3 +18,11 @@ define (require) ->
 
     getObjects: () =>
       @get 'objects'
+    
+    setStrokeWidth: (width) =>
+      for obj in @get('objects')
+        obj.setStrokeWidth width
+
+    setStrokeColor: (color) =>
+      for obj in @get('objects')
+        obj.setStrokeColor color
