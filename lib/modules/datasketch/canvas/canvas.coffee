@@ -43,7 +43,10 @@ define (require) ->
 
     selectObjects: (objects) =>
       objectIds = (obj.get('id') for obj in objects)
-      @_model.set 'selected', (obj for obj in @_model.get('objects') when obj.get('id') in objectIds)
+      if @_model.get('isolated')?
+        @_model.set 'selected', (obj for obj in @_model.get('isolated').getObjects() when obj.get('id') in objectIds)
+      else
+        @_model.set 'selected', (obj for obj in @_model.get('objects') when obj.get('id') in objectIds)
 
     addObject: (object, silent = false) =>
       @_model.addObject object, silent
@@ -77,6 +80,12 @@ define (require) ->
       @addObjects group.getObjects()
       group.getObjects()
 
+    isolate: (group) =>
+      @_model.isolate group
+
+    getIsolation: () =>
+      @_model.get 'isolated'
+
     _onModelChange: (evt) =>
       switch evt.data.path
         when "strokeWidth"
@@ -88,13 +97,16 @@ define (require) ->
         when "strokeColor"
           @dispatchEvent "Canvas.StrokeColorChange",
             color: evt.data.value
+        when "isolated"
+          @_manageContextMenu()
         when "selected"
-          if evt.data.value?.length
-            Globals.get('Relay').dispatchEvent 'ContextMenu.RequestDisplay',
-              context:
-                selection: evt.data.value
-          else
-            Globals.get('Relay').dispatchEvent 'ContextMenu.RequestClose', {}
+          @_manageContextMenu()
+
+    _manageContextMenu: () =>
+      Globals.get('Relay').dispatchEvent 'ContextMenu.ContextChange',
+        context:
+          selection: @_model.get('selected')
+          isolation: @_model.get('isolated')
 
     _onPathCreated: (evt) =>
       @_model.addObject evt.data.path, true
