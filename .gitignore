@@ -1,0 +1,10 @@
+.DS_Store
+Gemfile.lock
+**/.sass-cache
+**/node_modules
+docs
+server/public/cslib/
+server/public/index.html
+
+*.sublime-project
+*.sublime-workspace
