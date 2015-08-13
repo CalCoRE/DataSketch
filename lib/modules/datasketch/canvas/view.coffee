@@ -18,6 +18,7 @@ define (require) ->
       model.addEventListener 'Canvas.ObjectAdded', @_onObjectAdded
       model.addEventListener 'Canvas.ObjectsRemoved', @_onObjectsRemoved
       model.addEventListener 'Canvas.ObjectsAdded', @_onObjectsAdded
+      @_isolated = []
 
     initCanvas: (model) =>
       @_fabric = new Fabric.Canvas @$el.find('.canvas-main')[0]
@@ -80,11 +81,10 @@ define (require) ->
           # else if !@_fabric.getActiveGroup()?
           #   @_fabric.setActiveGroup new fabric.Group (obj.get('view') for obj in evt.data.value)
         when "isolated"
-          if evt.data.value?
-            @_isolateGroup evt.data.value
-          else if evt.data.old?
-            @_reformGroup evt.data.old
-
+          if evt.data.value.length > @_isolated.length
+            @_isolateGroup evt.data.value[0]
+          else if evt.data.value.length < @_isolated.length
+            @_reformGroup @_isolated[0]
 
     _onChangeMode: (val) =>
       switch val
@@ -177,7 +177,9 @@ define (require) ->
         v = obj.get('view')
         @_fabric.add v
         v.setCoords()
+      @_isolated.unshift grp
 
     _reformGroup: (grp) =>
       @_generateGroupView grp
       @_fabric.renderAll()
+      @_isolated.shift()

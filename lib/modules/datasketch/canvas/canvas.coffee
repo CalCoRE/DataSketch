@@ -49,8 +49,8 @@ define (require) ->
 
     selectObjects: (objects) =>
       objectIds = (obj.get('id') for obj in objects)
-      if @_model.get('isolated')?
-        @_model.set 'selected', (obj for obj in @_model.get('isolated').getObjects() when obj.get('id') in objectIds)
+      if @_model.get('isolated').length
+        @_model.set 'selected', (obj for obj in @_model.get('isolated')[0].getObjects() when obj.get('id') in objectIds)
       else
         @_model.set 'selected', (obj for obj in @_model.get('objects') when obj.get('id') in objectIds)
 

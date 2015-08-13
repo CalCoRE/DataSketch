@@ -17,7 +17,7 @@ define (require) ->
         list.push
           label: "Isolate"
           action: new IsolateGroupAction Globals.get('Canvas'), meta.context.selection[0]
-      if meta.context.isolation?
+      if meta.context.isolation.length
         list.push
           label: "Exit Isolation"
           action: new IsolateGroupAction Globals.get('Canvas'), null

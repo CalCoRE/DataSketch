@@ -18,7 +18,18 @@ define (require) ->
 
     getObjects: () =>
       @get 'objects'
-    
+
+    addObject: (obj) =>
+      objects = @get 'objects'
+      objects.push obj
+      @set 'objects', objects
+
+    removeObject: (object) =>
+      objects = @get 'objects'
+      if object in objects
+        objects.splice objects.indexOf(obj), 1
+      @set 'objects', objects
+
     setStrokeWidth: (width) =>
       for obj in @get('objects')
         obj.setStrokeWidth width
