@@ -7,7 +7,7 @@ define (require) ->
     strokeColor: "#000000"
     objects: []
     selected: []
-    isolated: null
+    isolated: []
 
   class DSCanvasModel extends Model
     constructor: (data) ->
@@ -16,13 +16,17 @@ define (require) ->
         defaults: defaults
 
     addObject: (object, silent=false) =>
-      objs = @get('objects')
-      objs.push object
-      @set 'objects', objs
+      if @get('isolated').length
+        @get('isolated')[0].addObject object
+      else
+        objs = @get('objects')
+        objs.push object
+        @set 'objects', objs
 
       if !silent
         @dispatchEvent 'Canvas.ObjectAdded',
           object: object
+          container: @get('isolated')
 
     addObjects: (objects, silent=false) =>
       for obj in objects
@@ -30,15 +34,21 @@ define (require) ->
       if !silent
         @dispatchEvent 'Canvas.ObjectsAdded',
           objects: objects
+          container: @get('isolated')
 
     removeObject: (object, silent=false) =>
-      objs = @get('objects')
-      if object in objs
-        objs.splice objs.indexOf(object), 1
-        @set 'objects', objs
-        if !silent
-          @dispatchEvent 'Canvas.ObjectRemoved',
-            object: object
+      if @get('isolated').length
+        @get('isolated')[0].removeObject object
+      else
+        objs = @get('objects')
+        if object in objs
+          objs.splice objs.indexOf(object), 1
+          @set 'objects', objs
+
+      if !silent
+        @dispatchEvent 'Canvas.ObjectRemoved',
+          object: object
+          container: @get('isolated')
 
     removeObjects: (objects, silent=false) =>
       for obj in objects
@@ -46,15 +56,23 @@ define (require) ->
       if !silent
         @dispatchEvent 'Canvas.ObjectsRemoved',
           objects: objects
+          container: @get('isolated')
 
     removeSelected: () =>
       @removeObjects @get('selected')
       @set 'selected', []
 
     isolate: (group) =>
-      for obj in @get('objects') when obj != group
+      isoGroups = (grp.getObjects() for grp in @get('isolated'))
+      isoGroups.push @get('objects')
+      collection = if !group? then isoGroups[1] else isoGroups[0]
+      for obj in collection when obj != group
         if group?
           obj.disable()
         else
           obj.enable()
-      @set 'isolated', group
+      if group?
+        @get('isolated').unshift group
+      else
+        @get('isolated').shift()
+      @set 'isolated', @get('isolated')
