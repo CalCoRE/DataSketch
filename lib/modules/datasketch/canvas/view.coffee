@@ -4,8 +4,7 @@ define (require) ->
   Globals = require 'core/model/globals'
   Template = require 'text!./view.html'
 
-  Group = require './objects/group'
-  Path = require './objects/path'
+  Group = require './objects/group/object'
 
   Fabric = require 'thirdparty/fabric'
   require 'link!./style.css'
@@ -26,23 +25,58 @@ define (require) ->
       @_fabric.on 'path:created', @_onPathCreated
       @_fabric.on 'object:selected', @_onObjectSelected
       @_fabric.on 'selection:created', @_onSelectionCreated
+      @_fabric.on 'before:selection:cleared', @_beforeSelectionCleared
       @_fabric.on 'selection:cleared', @_onSelectionCleared
       Globals.get('Relay').addEventListener 'Window.Resize', @updateDimensions
       @updateDimensions()
 
+    render: (model) =>
+      if @_fabric?
+        @_fabric.clear()
+        for obj in model.get('objects')
+          @_fabric.discardActiveGroup()
+          if obj instanceof Group
+            @_fabric.setActiveGroup obj.view().getFabric()
+          # obj.enforcePosition()
+          obj.enforceTransform()
+          @_fabric.add obj.view().getFabric()
+        @_fabric.discardActiveGroup()
+        @_fabric.renderAll()
+
     _onPathCreated: (evt) =>
-      path = new Path evt.path
-      evt.path.set 'id', path.get('id')
       @dispatchEvent 'Path.Created',
-        path: path
+        path: evt.path
 
     _onSelectionCreated: (evt) =>
-      # console.log evt, @_fabric.getActiveGroup()
+      @_fabricSelection = evt.target
+      @_fabricSelectionMetaCache =
+        position:
+          x: @_fabricSelection.left
+          y: @_fabricSelection.top
+        rotation: @_fabricSelection.angle
+        scale:
+          x: @_fabricSelection.scaleX
+          y: @_fabricSelection.scaleY
+      @_fabricSelection.on 'modified', @_onSelectionModified
       @dispatchEvent 'Selection.Created',
-        # objects: @_fabric.getActiveGroup().getObjects()
-        objects: evt.target.getObjects()
-        # objectIds: (obj.get('id') for obj in @_fabric.getActiveGroup().getObjects())
         objectIds: (obj.get('id') for obj in evt.target.getObjects())
+
+    _beforeSelectionCleared: (evt) =>
+      @_fabricSelection?.off 'modified', @_onSelectionModified
+      @_fabricSelection = null
+
+    _onSelectionModified: (evt) =>
+      if @_fabricSelection?
+        delta =
+          position:
+            x: @_fabricSelection.left - @_fabricSelectionMetaCache.position.x
+            y: @_fabricSelection.top - @_fabricSelectionMetaCache.position.y
+          rotation: @_fabricSelection.angle - @_fabricSelectionMetaCache.rotation
+          scale:
+            x: @_fabricSelection.scaleX - @_fabricSelectionMetaCache.scale.x
+            y: @_fabricSelection.scaleY - @_fabricSelectionMetaCache.scale.y
+        @dispatchEvent 'Selection.Modified',
+          delta: delta
 
     _onSelectionCleared: (evt) =>
       @dispatchEvent 'Selection.Cleared', {}
@@ -94,85 +128,24 @@ define (require) ->
           @_fabric.isDrawingMode = true
 
     _onObjectRemoved: (evt) =>
-      if evt.data.object instanceof Group
-        fbgrp = evt.data.object.get('view')
-        @_breakGroup fbgrp
-      else
-        @_fabric.remove evt.data.object.get('view')
-      @_fabric.renderAll()
       @clearSelection()
 
     _onObjectAdded: (evt) =>
-      if evt.data.object instanceof Group and !evt.data.object.get('view')?
-        @_generateGroupView evt.data.object
-      else
-        evt.data.object.get('view').setCoords()
-
-    _generateGroupView: (group) =>
-      grp = new fabric.Group
-      grp.originX = "center"
-      grp.originY = "center"
-      center = null
-      dims =
-        left: null
-        right: null
-        top: null
-        bottom: null
-      for obj in group.getObjects()
-        v = obj.get('view')
-        if v.group?
-          center ?= v.group.getCenterPoint()
-        else
-          bb = v.getBoundingRect()
-          dims.left = if dims.left? then Math.min(bb.left, dims.left) else bb.left
-          dims.right = if dims.right? then Math.max(bb.left + bb.width, dims.right) else bb.left + bb.width
-          dims.top = if dims.top? then Math.min(bb.top, dims.top) else bb.top
-          dims.bottom = if dims.bottom? then Math.max(bb.top + bb.height, dims.bottom) else bb.top + bb.height
-        grp.addWithUpdate v
-        @_fabric.remove v
-      if !center?
-        center =
-          x: (dims.left + dims.right) / 2
-          y: (dims.top + dims.bottom) / 2
-        for obj in group.getObjects()
-          v = obj.get('view')
-          v.left -= center.x
-          v.top -= center.y
-          v.setCoords()
-      grp.set 'id', group.get('id')
-      group.set 'view', grp
-      @_fabric.setActiveGroup grp
-      @_fabric.add grp
-      @_fabric.renderAll()
-      # in order to avoid order of operation issues, we need to set position
-      # in a timeout
-      window.requestAnimationFrame () =>
-        grp.set 'left', center.x
-        grp.set 'top', center.y
-        grp.setCoords()
-        @_fabric.renderAll()
-      grp
 
     _breakGroup: (group) =>
-      group._restoreObjectsState()
-      items = group._objects.slice(0)
-      for itm in items
-        itm.hasControls = true
-      @_fabric.remove group
+      # group._restoreObjectsState()
+      # items = group._objects.slice(0)
+      # for itm in items
+      #   itm.hasControls = true
+      # @_fabric.remove group
 
     _onObjectsRemoved: (evt) =>
-      for obj in evt.data.objects
-        @_fabric.remove obj.get('view')
       @clearSelection()
 
     _onObjectsAdded: (evt) =>
-      for obj in evt.data.objects
-        v = obj.get('view')
-        @_fabric.add v
-        v.setCoords()
 
     _isolateGroup: (grp) =>
-      @_breakGroup grp.get('view')
+      @_breakGroup grp
       for obj in grp.getObjects()
         v = obj.get('view')
         @_fabric.add v
@@ -181,5 +154,5 @@ define (require) ->
 
     _reformGroup: (grp) =>
       @_generateGroupView grp
-      @_fabric.renderAll()
+      # @_fabric.renderAll()
       @_isolated.shift()

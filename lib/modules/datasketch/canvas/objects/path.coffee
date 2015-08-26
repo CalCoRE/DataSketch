@@ -15,3 +15,11 @@ define (require) ->
           id: DSObject._count
           view: pathData
         defaults: defaults
+
+    clone: () =>
+      new Promise (resolve, reject) =>
+        @get('view').clone resolve
+      .then (cloneView) =>
+        path = new Path cloneView
+        cloneView.set 'id', path.get('id')
+        path

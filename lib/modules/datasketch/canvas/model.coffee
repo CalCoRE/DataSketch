@@ -1,5 +1,6 @@
 define (require) ->
   Model = require 'core/model/model'
+  Utils = require 'core/util/utils'
   
   defaults =
     mode: 'draw'
@@ -10,10 +11,9 @@ define (require) ->
     isolated: []
 
   class DSCanvasModel extends Model
-    constructor: (data) ->
-      super
-        data: data
-        defaults: defaults
+    constructor: (config) ->
+      config.defaults = Utils.ensureDefaults config.defaults, defaults
+      super config
 
     addObject: (object, silent=false) =>
       if @get('isolated').length
@@ -30,7 +30,7 @@ define (require) ->
 
     addObjects: (objects, silent=false) =>
       for obj in objects
-        @addObject obj
+        @addObject obj, true
       if !silent
         @dispatchEvent 'Canvas.ObjectsAdded',
           objects: objects

@@ -3,7 +3,7 @@ define (require) ->
   HM = require 'core/event/hook_manager'
   Globals = require 'core/model/globals'
   IsolateGroupAction = require 'modules/datasketch/actions/isolate_group'
-  Group = require 'modules/datasketch/canvas/objects/group'
+  Group = require 'modules/datasketch/canvas/objects/group/object'
 
   class IsolateMenuItemModule extends Module
     constructor: () ->

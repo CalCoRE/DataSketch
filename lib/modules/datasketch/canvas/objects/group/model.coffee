@@ -1,12 +1,11 @@
 define (require) ->
-  Model = require 'core/model/model'
+  ObjectModel = require 'modules/datasketch/canvas/objects/base/model'
   Utils = require 'core/util/utils'
-
+  
   defaults =
-    id: ''
-    activeContext: null
+    children: []
 
-  class ToolModel extends Model
+  class GroupModel extends ObjectModel
     constructor: (config) ->
       config.defaults = Utils.ensureDefaults config.defaults, defaults
       super config

@@ -4,8 +4,8 @@ define (require) ->
   Model = require './model'
   Globals = require 'core/model/globals'
 
-  Path = require './objects/path'
-  Group = require './objects/group'
+  Path = require './objects/path/object'
+  Group = require './objects/group/object'
 
   class DSCanvas extends Controller
     constructor: (config) ->
@@ -17,8 +17,12 @@ define (require) ->
 
       @_model.addEventListener 'Model.Change', @_onModelChange
       @view().addEventListener 'Selection.Created', @_onSelectionCreated
+      @view().addEventListener 'Selection.Modified', @_onSelectionModified
       @view().addEventListener 'Selection.Cleared', @_onSelectionCleared
       @view().addEventListener 'Path.Created', @_onPathCreated
+
+      window.requestAnimationFrame () =>
+        @_view.render @_model
 
     getMode: () =>
       @_model.get 'mode'
@@ -48,11 +52,11 @@ define (require) ->
       @_model.get 'selected'
 
     selectObjects: (objects) =>
-      objectIds = (obj.get('id') for obj in objects)
+      objectIds = (obj.getId() for obj in objects)
       if @_model.get('isolated').length
-        @_model.set 'selected', (obj for obj in @_model.get('isolated')[0].getObjects() when obj.get('id') in objectIds)
+        @_model.set 'selected', (obj for obj in @_model.get('isolated')[0].getObjects() when obj.getId() in objectIds)
       else
-        @_model.set 'selected', (obj for obj in @_model.get('objects') when obj.get('id') in objectIds)
+        @_model.set 'selected', (obj for obj in @_model.get('objects') when obj.getId() in objectIds)
 
     addObject: (object, silent = false) =>
       @_model.addObject object, silent
@@ -70,20 +74,33 @@ define (require) ->
       @_model.removeSelected()
 
     createGroup: (objects) =>
+      @_view.clearSelection()
       if !objects?
         objects = @_model.get 'selected'
       if !objects?
         return null
 
-      group = new Group objects
+      for obj in objects
+        obj.extractTransform()
+
+      # group = new Group objects
+      group = Group.createFromObjects objects
       @addObject group
       @removeObjects objects
-      @selectObjects [group]
+      # @selectObjects [group]
       group
 
     breakGroup: (group) =>
+      objects = group.break()
       @removeObject group
-      @addObjects group.getObjects()
+      for obj in objects
+        @addObject obj
+        # obj.enforcePosition()
+        obj.enforceTransform()
+        obj.enableControls()
+      @_view.render @_model
+      # for obj in objects
+      #   obj.enforcePosition()
       group.getObjects()
 
     isolate: (group) =>
@@ -107,6 +124,8 @@ define (require) ->
           @_manageContextMenu()
         when "selected"
           @_manageContextMenu()
+        when "objects"
+          @_view.render @_model
 
     _manageContextMenu: () =>
       Globals.get('Relay').dispatchEvent 'ContextMenu.ContextChange',
@@ -115,10 +134,13 @@ define (require) ->
           isolation: @_model.get('isolated')
 
     _onPathCreated: (evt) =>
-      @_model.addObject evt.data.path, true
+      path = Path.createFromFabric evt.data.path
+      @_model.addObject path, true
 
     _onSelectionCreated: (evt) =>
-      @selectObjects evt.data.objects
+      @selectObjects (obj for obj in @_model.get('objects') when obj.getId() in evt.data.objectIds)
+
+    _onSelectionModified: (evt) =>
 
     _onSelectionCleared: (evt) =>
       @selectObjects []

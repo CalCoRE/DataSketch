@@ -37,3 +37,9 @@ define (require) ->
     setStrokeColor: (color) =>
       for obj in @get('objects')
         obj.setStrokeColor color
+
+    clone: () =>
+      Promise.all (obj.clone() for obj in @getObjects())
+        # .then (subclones) ->
+        #   new Group subclones
+      null

@@ -53,5 +53,8 @@ define (require) ->
     setStrokeColor: (color) =>
       @get('view').setStroke color
 
+    clone: () =>
+      
+
   DSObject._count = 0
   DSObject

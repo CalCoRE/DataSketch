@@ -4,7 +4,7 @@ define (require) ->
   Globals = require 'core/model/globals'
   GroupAction = require 'modules/datasketch/actions/group_objects'
   UngroupAction = require 'modules/datasketch/actions/ungroup_objects'
-  Group = require 'modules/datasketch/canvas/objects/group'
+  Group = require 'modules/datasketch/canvas/objects/group/object'
 
   class GroupMenuItemModule extends Module
     constructor: () ->
