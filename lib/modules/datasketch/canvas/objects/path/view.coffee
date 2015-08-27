@@ -6,6 +6,16 @@ define (require) ->
     constructor: (model) ->
       super model
 
+    _onChange: (evt) =>
+      super evt
+
+      switch evt.data.path
+        when "stroke.width"
+          console.log evt.data
+          @_fabric?.strokeWidth = evt.data.value
+        when "stroke.color"
+          @_fabric?.stroke = evt.data.value
+
     buildFabric: () =>
 
     cloneFabric: () =>

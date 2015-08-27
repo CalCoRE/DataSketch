@@ -118,6 +118,14 @@ define (require) ->
         child.disableControls()
       super()
 
+    setStrokeColor: (color) =>
+      for child in @_model.get 'children'
+        child.setStrokeColor color
+
+    setStrokeWidth: (width) =>
+      for child in @_model.get 'children'
+        child.setStrokeWidth width
+
   GroupObject.createFromObjects = (objects) ->
     group = new GroupObject
       modelData:
