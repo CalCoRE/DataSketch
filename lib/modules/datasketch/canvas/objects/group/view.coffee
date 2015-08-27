@@ -45,11 +45,3 @@ define (require) ->
       @dispatchEvent "CanvasObject.FabricGenerated",
         fabric: fabric
         old_fabric: old
-
-      window.requestAnimationFrame () =>
-        @_fabric.setCoords()
-        for obj in model.get('children')
-          # obj.enforcePosition()
-          obj.enforceTransform()
-
-        @_fabric.canvas.renderAll()

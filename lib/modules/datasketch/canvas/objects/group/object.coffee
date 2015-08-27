@@ -20,10 +20,10 @@ define (require) ->
       for obj in @_model.get 'children'
         objDims = obj.getBounds()
         dims.push
-          left: objDims.left + @_model.get('position.x')
-          right: objDims.right + @_model.get('position.x')
-          top: objDims.top + @_model.get('position.y')
-          bottom: objDims.bottom + @_model.get('position.y')
+          left: objDims.left
+          right: objDims.right
+          top: objDims.top
+          bottom: objDims.bottom
       bounds = null
       for dim in dims
         bounds ?= dim
@@ -36,6 +36,7 @@ define (require) ->
         x: (bounds.left + bounds.right) / 2
         y: (bounds.top + bounds.bottom) / 2
       @setPosition position
+
       groupTrans = @getTransform()
       for obj in @_model.get 'children'
         trans = obj.getTransform()
@@ -65,15 +66,26 @@ define (require) ->
       @_model.set 'children', []
       children
 
-    enforcePosition: () =>
-      for child in @_model.get('children')
-        child.enforcePosition()
-      super()
-
     enforceTransform: () =>
       for child in @_model.get('children')
         child.enforceTransform()
       super()
+
+    isolate: () =>
+      children = @_model.get 'children'
+      groupTrans = @getTransform()
+      for obj in children
+        currTrans = obj.getTransform()
+        obj.setTransform Matrix.multiplyTransformMatrices groupTrans, currTrans
+        obj.enable()
+      @_model.set 'isolated', true
+
+    reform: () =>
+      for child in @_model.get 'children'
+        child.disableControls()
+      @_calculatePosition()
+      @_view.buildFabric @_model
+      @_model.set 'isolated', false
 
   GroupObject.createFromObjects = (objects) ->
     group = new GroupObject

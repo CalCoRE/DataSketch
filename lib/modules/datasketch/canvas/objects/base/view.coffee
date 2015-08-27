@@ -19,6 +19,11 @@ define (require) ->
           @_fabric?.set 'top', evt.data.value.y
         when "controllable"
           @_fabric?.hasControls = evt.data.value
+        when "controllable"
+          @_fabric.hasControls = evt.data.value
+          @_fabric.hasBorders = evt.data.value
+        when "disabled"
+          @_fabric.opacity = if evt.data.value then 0.25 else 1
 
     buildFabric: () =>
 
@@ -35,7 +40,6 @@ define (require) ->
       @_fabric.on "rotating", @_onRotating
       @_fabric.on "scaling", @_onScaling
       @_fabric.on "moving", @_onMoving
-      @_fabric.on "modified", @_onModified
 
     enforceTransform: (model) =>
       @_fabric?.left = model.get('position.x')
@@ -43,11 +47,6 @@ define (require) ->
       @_fabric?.angle = model.get('rotation')
       @_fabric?.scaleX = model.get('scale.x')
       @_fabric?.scaleY = model.get('scale.y')
-      @_fabric.setCoords()
-      
-    enforcePosition: (model) =>
-      @_fabric?.left = model.get('position.x')
-      @_fabric?.top = model.get('position.y')
       @_fabric.setCoords()
 
     extractTransform: () =>
@@ -78,6 +77,3 @@ define (require) ->
         position:
           x: @_fabric.left
           y: @_fabric.top
-
-    _onModified: (e) =>
-      console.log e

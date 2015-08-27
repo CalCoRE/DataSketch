@@ -18,10 +18,6 @@ define (require) ->
       @_view.addEventListener "CanvasObject.Rotating", @_onRotating
       @_view.addEventListener "CanvasObject.Scaling", @_onScaling
       @_view.addEventListener "CanvasObject.Moving", @_onMoving
-      @_model.addEventListener "Model.Change", @_onModelChange
-
-    _onModelChange: (evt) =>
-      # console.log evt.data.path
 
     getId: () =>
       @_model.get('id')
@@ -47,9 +43,6 @@ define (require) ->
     setPosition: (position) =>
       @_model.set 'position', position
 
-    enforcePosition: () =>
-      @_view.enforcePosition @_model
-
     enforceTransform: () =>
       @_view.enforceTransform @_model
 
@@ -63,7 +56,6 @@ define (require) ->
       @_model.get 'rotation'
 
     setRotation: (rotation) =>
-      console.log rotation
       @_model.set 'rotation', rotation
 
     getScale: () =>

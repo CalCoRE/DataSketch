@@ -36,6 +36,12 @@ define (require) ->
           objects: objects
           container: @get('isolated')
 
+    getActiveObjects: () =>
+      if @get('isolated').length
+        @get('isolated')[0].getObjects()
+      else
+        @get 'objects'
+
     removeObject: (object, silent=false) =>
       if @get('isolated').length
         @get('isolated')[0].removeObject object
@@ -63,6 +69,11 @@ define (require) ->
       @set 'selected', []
 
     isolate: (group) =>
+      isolated = @get('isolated')
+      if group?
+        group.isolate()
+      else if isolated.length
+        isolated[0].reform()
       isoGroups = (grp.getObjects() for grp in @get('isolated'))
       isoGroups.push @get('objects')
       collection = if !group? then isoGroups[1] else isoGroups[0]

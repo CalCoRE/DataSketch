@@ -27,6 +27,8 @@ define (require) ->
 
     disable: () =>
       @set 'disabled', true
+      @set 'controllable', false
 
     enable: () =>
       @set 'disabled', false
+      @set 'controllable', true

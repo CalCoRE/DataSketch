@@ -21,9 +21,6 @@ define (require) ->
       @view().addEventListener 'Selection.Cleared', @_onSelectionCleared
       @view().addEventListener 'Path.Created', @_onPathCreated
 
-      window.requestAnimationFrame () =>
-        @_view.render @_model
-
     getMode: () =>
       @_model.get 'mode'
 
@@ -53,10 +50,7 @@ define (require) ->
 
     selectObjects: (objects) =>
       objectIds = (obj.getId() for obj in objects)
-      if @_model.get('isolated').length
-        @_model.set 'selected', (obj for obj in @_model.get('isolated')[0].getObjects() when obj.getId() in objectIds)
-      else
-        @_model.set 'selected', (obj for obj in @_model.get('objects') when obj.getId() in objectIds)
+      @_model.set 'selected', (obj for obj in @_model.getActiveObjects() when obj.getId() in objectIds)
 
     addObject: (object, silent = false) =>
       @_model.addObject object, silent
@@ -83,7 +77,6 @@ define (require) ->
       for obj in objects
         obj.extractTransform()
 
-      # group = new Group objects
       group = Group.createFromObjects objects
       @addObject group
       @removeObjects objects
@@ -95,12 +88,9 @@ define (require) ->
       @removeObject group
       for obj in objects
         @addObject obj
-        # obj.enforcePosition()
         obj.enforceTransform()
         obj.enableControls()
       @_view.render @_model
-      # for obj in objects
-      #   obj.enforcePosition()
       group.getObjects()
 
     isolate: (group) =>
@@ -138,7 +128,7 @@ define (require) ->
       @_model.addObject path, true
 
     _onSelectionCreated: (evt) =>
-      @selectObjects (obj for obj in @_model.get('objects') when obj.getId() in evt.data.objectIds)
+      @selectObjects (obj for obj in @_model.getActiveObjects() when obj.getId() in evt.data.objectIds)
 
     _onSelectionModified: (evt) =>
 
