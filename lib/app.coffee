@@ -14,6 +14,7 @@ define (require) ->
 
   ContextMenu = require 'modules/datasketch/contextmenu/module'
   GroupMenuItem = require 'modules/datasketch/menuitems/group'
+  DuplicateMenuItem = require 'modules/datasketch/menuitems/duplicate'
   DeleteMenuItem = require 'modules/datasketch/menuitems/delete'
   IsolateMenuItem = require 'modules/datasketch/menuitems/isolate'
 
@@ -36,4 +37,5 @@ define (require) ->
 
         set.add GroupMenuItem
         set.add IsolateMenuItem
+        set.add DuplicateMenuItem
         set.add DeleteMenuItem

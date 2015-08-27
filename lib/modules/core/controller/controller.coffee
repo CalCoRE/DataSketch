@@ -11,7 +11,8 @@ define (require) ->
     constructor: (settings) ->
       config = Utils.ensureDefaults settings, defaults
       if config.modelClass?
-        @_model = new config.modelClass config.modelData
+        @_model = new config.modelClass
+          data: config.modelData
       if config.viewClass?
         @_view = new config.viewClass @_model
 

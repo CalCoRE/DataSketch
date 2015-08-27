@@ -1,5 +1,6 @@
 define (require) ->
   Model = require 'core/model/model'
+  Utils = require 'core/util/utils'
 
   defaults =
     items: []
@@ -7,7 +8,6 @@ define (require) ->
     action: null
 
   class MenuModel extends Model
-    constructor: (data) ->
-      super
-        data: data
-        defaults: defaults
+    constructor: (config) ->
+      config.defaults = Utils.ensureDefaults config.defaults, defaults
+      super config

@@ -58,7 +58,7 @@ define (require) ->
 # Sets the value to the provided dot-separated path. If elements of the path do
 # not currently exist, they are created as objects.
     
-    set: (path, value) =>
+    set: (path, value, forceEvent = false) =>
       if value != @get(path)
         paths = path.split('.')
         target = @_data
@@ -85,7 +85,7 @@ define (require) ->
               if !target[part]?
                 target[part] = {}
               target = target[part]
-      else if value instanceof Array
+      else if forceEvent or value instanceof Array
         @dispatchEvent 'Model.Change', { path: path, value: value }, true 
 
     

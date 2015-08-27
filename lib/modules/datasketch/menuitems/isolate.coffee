@@ -3,7 +3,7 @@ define (require) ->
   HM = require 'core/event/hook_manager'
   Globals = require 'core/model/globals'
   IsolateGroupAction = require 'modules/datasketch/actions/isolate_group'
-  Group = require 'modules/datasketch/canvas/objects/group'
+  Group = require 'modules/datasketch/canvas/objects/group/object'
 
   class IsolateMenuItemModule extends Module
     constructor: () ->
@@ -17,7 +17,7 @@ define (require) ->
         list.push
           label: "Isolate"
           action: new IsolateGroupAction Globals.get('Canvas'), meta.context.selection[0]
-      if meta.context.isolation?
+      if meta.context.isolation.length
         list.push
           label: "Exit Isolation"
           action: new IsolateGroupAction Globals.get('Canvas'), null
