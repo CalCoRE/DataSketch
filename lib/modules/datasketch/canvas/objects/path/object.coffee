@@ -22,6 +22,12 @@ define (require) ->
           clone.setTransform @getTransform()
           clone
 
+    setStrokeColor: (color) =>
+      @_model.set 'stroke.color', color
+
+    setStrokeWidth: (width) =>
+      @_model.set 'stroke.width', width
+
   PathObject.createFromFabric = (fabric) ->
     fabric.setCoords()
     path = new PathObject
