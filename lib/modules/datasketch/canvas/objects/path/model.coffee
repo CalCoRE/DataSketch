@@ -23,3 +23,5 @@ define (require) ->
       @set 'scale',
         x: fabric.scaleX
         y: fabric.scaleY
+      @set 'stroke.width', fabric.strokeWidth
+      @set 'stroke.color', fabric.stroke
