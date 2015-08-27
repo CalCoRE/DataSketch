@@ -15,6 +15,13 @@ define (require) ->
       @_view.setFabric fabric, @_model
       fabric.set 'id', @_model.get('id')
 
+    clone: () =>
+      @_view.cloneFabric()
+        .then (fabClone) =>
+          clone = PathObject.createFromFabric fabClone
+          clone.setTransform @getTransform()
+          clone
+
   PathObject.createFromFabric = (fabric) ->
     fabric.setCoords()
     path = new PathObject

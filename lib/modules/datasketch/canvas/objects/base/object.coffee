@@ -32,10 +32,10 @@ define (require) ->
       @_model.disable()
 
     enableControls: () =>
-      @_model.set 'controllable', true
+      @_model.set 'controllable', true, true
 
     disableControls: () =>
-      @_model.set 'controllable', false
+      @_model.set 'controllable', false, true
 
     getPosition: () =>
       @_model.get 'position'
@@ -114,7 +114,7 @@ define (require) ->
         top: rect.top
         bottom: rect.top + rect.height
 
-    getAbsoluteBounds: () =>
+    clone: () =>
 
     _onRotating: (evt) =>
       @setRotation evt.data.rotation

@@ -9,4 +9,4 @@ define (require) ->
       @canvas.isolate @_group
 
     undo: () =>
-      @canvas.isolate @_last
+      @canvas.setIsolation @_last

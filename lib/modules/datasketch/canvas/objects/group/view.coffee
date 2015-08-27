@@ -19,20 +19,15 @@ define (require) ->
         top: null
         bottom: null
 
-      positions = {}
       for obj in model.get 'children'
         v = obj.getFabric()
-        positions[obj.getId()] = obj.getPosition()
-        if v.group?
-          center ?= v.group.getCenterPoint()
-        else
-          bb = v.getBoundingRect()
-          dims.left = if dims.left? then Math.min(bb.left, dims.left) else bb.left
-          dims.right = if dims.right? then Math.max(bb.left + bb.width, dims.right) else bb.left + bb.width
-          dims.top = if dims.top? then Math.min(bb.top, dims.top) else bb.top
-          dims.bottom = if dims.bottom? then Math.max(bb.top + bb.height, dims.bottom) else bb.top + bb.height
+        bb = v.getBoundingRect()
+        dims.left = if dims.left? then Math.min(bb.left, dims.left) else bb.left
+        dims.right = if dims.right? then Math.max(bb.left + bb.width, dims.right) else bb.left + bb.width
+        dims.top = if dims.top? then Math.min(bb.top, dims.top) else bb.top
+        dims.bottom = if dims.bottom? then Math.max(bb.top + bb.height, dims.bottom) else bb.top + bb.height
         fabric.addWithUpdate v
-        v.remove()
+        v.remove() if v.canvas?
       if !center?
         center =
           x: (dims.left + dims.right) / 2

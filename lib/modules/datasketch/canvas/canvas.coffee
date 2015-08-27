@@ -21,6 +21,9 @@ define (require) ->
       @view().addEventListener 'Selection.Cleared', @_onSelectionCleared
       @view().addEventListener 'Path.Created', @_onPathCreated
 
+    render: () =>
+      @_view.render @_model
+
     getMode: () =>
       @_model.get 'mode'
 
@@ -90,14 +93,18 @@ define (require) ->
         @addObject obj
         obj.enforceTransform()
         obj.enableControls()
-      @_view.render @_model
+      @render()
       group.getObjects()
 
     isolate: (group) =>
       @_model.isolate group
+      @render()
 
     getIsolation: () =>
       @_model.get 'isolated'
+
+    setIsolation: (isolation) =>
+      @_model.set 'isolated', isolation
 
     _onModelChange: (evt) =>
       switch evt.data.path
@@ -115,7 +122,7 @@ define (require) ->
         when "selected"
           @_manageContextMenu()
         when "objects"
-          @_view.render @_model
+          @render()
 
     _manageContextMenu: () =>
       Globals.get('Relay').dispatchEvent 'ContextMenu.ContextChange',

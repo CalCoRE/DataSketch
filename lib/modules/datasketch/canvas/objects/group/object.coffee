@@ -18,6 +18,7 @@ define (require) ->
     _calculatePosition: () =>
       dims = []
       for obj in @_model.get 'children'
+        obj.enforceTransform()
         objDims = obj.getBounds()
         dims.push
           left: objDims.left
@@ -41,6 +42,7 @@ define (require) ->
       for obj in @_model.get 'children'
         trans = obj.getTransform()
         obj.setTransform Matrix.multiplyTransformMatrices Matrix.invert(groupTrans), trans
+        obj.enforceTransform()
 
     getObjects: () =>
       @_model.get('children')
@@ -48,7 +50,8 @@ define (require) ->
     addObject: (obj) =>
       children = @_model.get("children")
       children.push obj
-      obj.disableControls()
+      if !@_model.get 'isolated'
+        obj.disableControls()
       @_model.set('children', children)
 
     removeObject: (obj) =>
@@ -63,6 +66,7 @@ define (require) ->
       for obj in children
         currTrans = obj.getTransform()
         obj.setTransform Matrix.multiplyTransformMatrices groupTrans, currTrans
+        obj.enableControls()
       @_model.set 'children', []
       children
 
@@ -77,7 +81,7 @@ define (require) ->
       for obj in children
         currTrans = obj.getTransform()
         obj.setTransform Matrix.multiplyTransformMatrices groupTrans, currTrans
-        obj.enable()
+        obj.enableControls()
       @_model.set 'isolated', true
 
     reform: () =>
@@ -86,6 +90,33 @@ define (require) ->
       @_calculatePosition()
       @_view.buildFabric @_model
       @_model.set 'isolated', false
+
+    clone: () =>
+      Promise.all (child.clone() for child in @_model.get('children'))
+        .then (childClones) =>
+          clone = GroupObject.createFromObjects childClones
+          clone.setTransform @getTransform()
+          clone
+
+    disable: () =>
+      for child in @_model.get 'children'
+        child.disable()
+      super()
+
+    enable: () =>
+      for child in @_model.get 'children'
+        child.enable()
+      super()
+
+    enableControls: () =>
+      for child in @_model.get 'children'
+        child.enableControls()
+      super()
+
+    disableControls: () =>
+      for child in @_model.get 'children'
+        child.disableControls()
+      super()
 
   GroupObject.createFromObjects = (objects) ->
     group = new GroupObject

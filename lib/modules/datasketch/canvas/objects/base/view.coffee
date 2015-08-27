@@ -19,9 +19,9 @@ define (require) ->
           @_fabric?.set 'top', evt.data.value.y
         when "controllable"
           @_fabric?.hasControls = evt.data.value
-        when "controllable"
-          @_fabric.hasControls = evt.data.value
-          @_fabric.hasBorders = evt.data.value
+          @_fabric?.hasBorders = evt.data.value
+          @_fabric?.selectable = evt.data.value
+          @_fabric.setCoords()
         when "disabled"
           @_fabric.opacity = if evt.data.value then 0.25 else 1
 

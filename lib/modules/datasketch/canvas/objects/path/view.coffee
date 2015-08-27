@@ -8,3 +8,6 @@ define (require) ->
 
     buildFabric: () =>
 
+    cloneFabric: () =>
+      new Promise (resolve, reject) =>
+        @_fabric.clone resolve

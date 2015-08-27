@@ -9,11 +9,12 @@ define (require) ->
       Promise.all (obj.clone() for obj in @_objects)
         .then (clones) =>
           @_clones = clones
-          for clone in clones when clone?.get('view')?
-            clone.get('view').set 'top', $(window).height() / 2
-            clone.get('view').set 'left', $(window).width() / 2
+          for clone in clones
+            clone.setPosition
+              x: $(window).width() / 2
+              y: $(window).height() / 2
             @canvas.addObject clone
-          # @canvas.addObjects clones
+          @canvas.render()
 
     undo: () =>
       @canvas.removeObjects @_clones
