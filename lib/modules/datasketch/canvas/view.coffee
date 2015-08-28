@@ -119,13 +119,16 @@ define (require) ->
           #   @_fabric.setActiveGroup new fabric.Group (obj.get('view') for obj in evt.data.value)
         when "isolated"
           @render evt.currentTarget
+        when "disabled"
+          @_fabric.selection = !evt.data.value
+          @render evt.currentTarget
 
     _onChangeMode: (val) =>
       switch val
-        when "select"
-          @_fabric.isDrawingMode = false
         when "draw"
           @_fabric.isDrawingMode = true
+        else
+          @_fabric.isDrawingMode = false
 
     _onObjectRemoved: (evt) =>
       @clearSelection()

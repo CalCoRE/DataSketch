@@ -18,6 +18,8 @@ define (require) ->
   DeleteMenuItem = require 'modules/datasketch/menuitems/delete'
   IsolateMenuItem = require 'modules/datasketch/menuitems/isolate'
 
+  DSData = require 'modules/datasketch/data/module'
+
   require 'link!./style.css'
 
   class Main extends Application
@@ -39,3 +41,5 @@ define (require) ->
         set.add IsolateMenuItem
         set.add DuplicateMenuItem
         set.add DeleteMenuItem
+
+        set.add DSData
