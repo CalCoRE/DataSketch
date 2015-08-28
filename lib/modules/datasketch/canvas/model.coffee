@@ -9,6 +9,7 @@ define (require) ->
     objects: []
     selected: []
     isolated: []
+    disabled: false
 
   class DSCanvasModel extends Model
     constructor: (config) ->
@@ -87,3 +88,13 @@ define (require) ->
       else
         @get('isolated').shift()
       @set 'isolated', @get('isolated')
+
+    disable: () =>
+      for obj in @getActiveObjects()
+        obj.disable()
+      @set 'disabled', true
+
+    enable: () =>
+      for obj in @getActiveObjects()
+        obj.enable()
+      @set 'disabled', false

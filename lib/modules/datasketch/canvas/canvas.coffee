@@ -144,3 +144,9 @@ define (require) ->
 
     initCanvas: () =>
       @_view.initCanvas @_model
+
+    disable: () =>
+      @_model.disable()
+
+    enable: () =>
+      @_model.enable()

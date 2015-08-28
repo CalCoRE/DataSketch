@@ -5,6 +5,11 @@ define (require) ->
 
   DataStore = require './models/datastore'
   DataTableView = require './views/table'
+  ModeSelectTool = require 'modules/datasketch/tools/mode/tool'
+  # DataModeSelectTool = require './tool/tool'
+  HM = require 'core/event/hook_manager'
+
+  require 'link!./style.css'
 
   class DSCanvas extends Module
     constuctor: () ->
@@ -26,7 +31,23 @@ define (require) ->
       Globals.set 'DataStore', ds
 
     init: () =>
+      HM.hook 'Toolbar.Tools', @_toolbarTools
+
+    _toolbarTools: (list, meta) =>
+      if meta.id is "mode"
+        list.push new ModeSelectTool "data"
+      list
 
     run: () =>
-      dt = new DataTableView Globals.get('DataStore')
-      Globals.get('App.view').addChild dt
+      @_view = new DataTableView Globals.get('DataStore')
+      Globals.get('App.view').addChild @_view
+
+      Globals.get('Canvas').addEventListener 'Canvas.ModeChange', @_onModeChange
+
+    _onModeChange: (evt) =>
+      if evt.currentTarget.getMode() == "data"
+        @_view.show()
+        Globals.get('Canvas').disable()
+      else
+        @_view.hide()
+        Globals.get('Canvas').enable()

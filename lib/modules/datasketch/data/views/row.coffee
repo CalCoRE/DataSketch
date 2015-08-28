@@ -9,4 +9,4 @@ define (require) ->
       @_cells = {}
 
       for val in model.get 'values'
-        @$el.append "<div class='table-cell'>#{val.value}</div>"
+        @$el.append "<div class='table-cell'>#{if val.value != '' then val.value else "&nbsp;"}</div>"

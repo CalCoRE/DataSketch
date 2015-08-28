@@ -4,6 +4,8 @@ define (require) ->
 
   RowView = require './row'
 
+  require 'link!./style.css'
+
   class DataTableView extends DomView
     constructor: (model) ->
       super Template
