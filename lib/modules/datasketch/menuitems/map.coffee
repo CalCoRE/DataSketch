@@ -18,7 +18,6 @@ define (require) ->
         dataProps = HM.invoke 'DataMapping.DataProperties', []
 
         items = []
-        console.log objectProps
         for op in objectProps
           subitems = []
           for dp in dataProps
