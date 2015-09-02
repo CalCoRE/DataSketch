@@ -17,8 +17,10 @@ define (require) ->
   DuplicateMenuItem = require 'modules/datasketch/menuitems/duplicate'
   DeleteMenuItem = require 'modules/datasketch/menuitems/delete'
   IsolateMenuItem = require 'modules/datasketch/menuitems/isolate'
+  MapMenuItem = require 'modules/datasketch/menuitems/map'
 
   DSData = require 'modules/datasketch/data/module'
+  Animation = require 'modules/datasketch/animation/module'
 
   require 'link!./style.css'
 
@@ -40,6 +42,8 @@ define (require) ->
         set.add GroupMenuItem
         set.add IsolateMenuItem
         set.add DuplicateMenuItem
+        set.add MapMenuItem
         set.add DeleteMenuItem
 
         set.add DSData
+        set.add Animation

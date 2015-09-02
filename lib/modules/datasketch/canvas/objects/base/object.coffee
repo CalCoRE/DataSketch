@@ -116,6 +116,15 @@ define (require) ->
 
     clone: () =>
 
+    addPropertyMapping: (objectProperty, dataProperty) =>
+      @_model.addPropertyMapping objectProperty, dataProperty
+
+    removePropertyMapping: (objectProperty, dataProperty) =>
+      @_model.removePropertyMapping objectProperty, dataProperty
+
+    getPropertyMappings: () =>
+      @_model.get 'propertyMappings'
+
     _onRotating: (evt) =>
       @setRotation evt.data.rotation
 

@@ -13,6 +13,7 @@ define (require) ->
       y: 1
     controllable: true
     disabled: false
+    propertyMappings: []
 
   class CanvasObjectModel extends Model
     constructor: (config) ->
@@ -32,3 +33,27 @@ define (require) ->
     enable: () =>
       @set 'disabled', false
       @set 'controllable', true
+
+    addPropertyMapping: (objectProperty, dataProperty) =>
+      map = @get 'propertyMappings'
+      newMap = true
+      for m in map when m.objectProperty == objectProperty
+        if m.dataProperty == dataProperty
+          return
+        else
+          m.dataProperty = dataProperty
+          newMap = false
+      if newMap
+        map.push
+          objectProperty: objectProperty
+          dataProperty: dataProperty
+      @set 'propertyMappings', map, true
+
+    removePropertyMapping: (objectProperty, dataProperty) =>
+      map = @get 'propertyMappings'
+      ind = null
+      for m, i in map when m.objectProperty == objectProperty and m.dataProperty == dataProperty
+        ind = i
+        break
+      map.splice i, 1
+      @set 'propertyMappings', map

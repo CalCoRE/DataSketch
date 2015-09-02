@@ -6,12 +6,11 @@ define (require) ->
   DataStore = require './models/datastore'
   DataTableView = require './views/table'
   ModeSelectTool = require 'modules/datasketch/tools/mode/tool'
-  # DataModeSelectTool = require './tool/tool'
   HM = require 'core/event/hook_manager'
 
   require 'link!./style.css'
 
-  class DSCanvas extends Module
+  class DSData extends Module
     constuctor: () ->
 
     listPreload: () =>
@@ -26,12 +25,13 @@ define (require) ->
 
       ds = new DataStore
         rows: d.data
-        headers: d.meta.fields
+        properties: d.meta.fields
 
       Globals.set 'DataStore', ds
 
     init: () =>
       HM.hook 'Toolbar.Tools', @_toolbarTools
+      HM.hook 'DataMapping.DataProperties', @_listMappingProperties
 
     _toolbarTools: (list, meta) =>
       if meta.id is "mode"
@@ -51,3 +51,7 @@ define (require) ->
       else
         @_view.hide()
         Globals.get('Canvas').enable()
+
+    _listMappingProperties: (list, meta) =>
+      list = list.concat Globals.get 'DataStore.properties'
+      list

@@ -9,6 +9,11 @@ define (require) ->
       @_render model
       model.addEventListener 'Model.Change', @_onModelChange
       @$el.find(".menu-label").on 'click', @_requestAction
+      @$el.attr 'id', model.get 'id'
+      if model.get('action')?
+        @$el.addClass 'actionable'
+      if model.get('items').length
+        @$el.addClass 'parent'
 
     _onModelChange: (evt) =>
       @_render evt.currentTarget

@@ -16,10 +16,12 @@ define (require) ->
     _hookMenuItems: (list, meta) =>
       if meta.context.selection?.length > 1
         list.push
+          id: 'group-objects'
           label: "Group"
           action: new GroupAction Globals.get('Canvas'), meta.context.selection
       else if meta.context.selection?.length == 1 and meta.context.selection[0] instanceof Group
         list.push
+          id: 'ungroup-objects'
           label: "Ungroup"
           action: new UngroupAction Globals.get('Canvas'), meta.context.selection[0]
       list
