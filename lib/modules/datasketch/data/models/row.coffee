@@ -7,8 +7,8 @@ define (require) ->
         values: []
       for h in headers
         data.values.push
-          key: h
-          value: rowData[h]
+          key: h.getId()
+          value: rowData[h.getName()]
       super
         data: data
         defaults: {}

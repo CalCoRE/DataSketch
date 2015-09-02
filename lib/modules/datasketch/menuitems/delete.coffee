@@ -14,6 +14,7 @@ define (require) ->
     _hookMenuItems: (list, meta) =>
       if meta.context.selection?.length
         list.push
+          id: 'delete-object'
           label: "Delete"
           action: new DeleteAction Globals.get('Canvas'), meta.context.selection
       list

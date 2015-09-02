@@ -3,6 +3,7 @@ define (require) ->
   Utils = require 'core/util/utils'
 
   defaults =
+    id: ""
     items: []
     label: ""
     action: null

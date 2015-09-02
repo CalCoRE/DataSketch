@@ -14,6 +14,7 @@ define (require) ->
     _hookMenuItems: (list, meta) =>
       if meta.context.selection?.length
         list.push
+          id: 'duplicate-object'
           label: "Duplicate"
           action: new DuplicateAction Globals.get('Canvas'), meta.context.selection
       list

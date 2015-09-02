@@ -10,8 +10,8 @@ define (require) ->
     constructor: (model) ->
       super Template
 
-      for header in model.get('headers')
-        @addChild new DomView("<div class='table-header property table-cell'>#{header}</div>"), ".properties"
+      for property in model.get('properties')
+        @addChild new DomView("<div class='table-header property table-cell'>#{property.getName()}</div>"), ".properties"
 
       for row, ind in model.get('rows')
         rv = new RowView row
