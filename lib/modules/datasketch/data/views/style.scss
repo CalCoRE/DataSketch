@@ -17,12 +17,24 @@ $cell-width: 100px;
   line-height: 1.5em;
   padding: 0.5em;
   background: $white;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.rows, .row-headers {
+  white-space: nowrap;
+}
+
+.rows-wrap {
+  overflow-x: scroll;
+  border-right: 1px solid black;
 }
 
 .table-row {
   width: $cell-width;
   display: inline-block;
   border-bottom: 1px solid $black;
+  white-space: normal;
 
   &:last-child {
     .table-cell {
@@ -37,6 +49,9 @@ $cell-width: 100px;
 
   &.property {
     border-right: 1px solid $black;
+    display: block;
+    width: auto;
+
     &:first-child {
       border-bottom: 1px solid $black;
     }
@@ -53,7 +68,7 @@ $cell-width: 100px;
 }
 
 .properties {
-  width: $cell-width;
+  // width: $cell-width;
   position: absolute;
   top: 0;
   left: 0;

@@ -34,20 +34,19 @@ define (require) ->
       @set 'disabled', false
       @set 'controllable', true
 
-    addPropertyMapping: (objectProperty, dataProperty) =>
+    addPropertyMapping: (objectProperty, dataProperty, calibration) =>
       map = @get 'propertyMappings'
       newMap = true
       for m in map when m.objectProperty == objectProperty
-        if m.dataProperty == dataProperty
-          return
-        else
-          m.dataProperty = dataProperty
-          newMap = false
+        m.dataProperty = dataProperty
+        m.calibration = calibration
+        newMap = false
       if newMap
         map.push
           objectProperty: objectProperty
           dataProperty: dataProperty
-      @set 'propertyMappings', map, true
+          calibration: calibration
+      @set 'propertyMappings', map
 
     removePropertyMapping: (objectProperty, dataProperty) =>
       map = @get 'propertyMappings'

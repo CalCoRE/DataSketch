@@ -116,11 +116,11 @@ define (require) ->
 
     clone: () =>
 
-    addPropertyMapping: (objectProperty, dataProperty) =>
-      @_model.addPropertyMapping objectProperty, dataProperty
+    addPropertyMapping: (objectProperty, dataProperty, calibration) =>
+      @_model.addPropertyMapping objectProperty, dataProperty, calibration
 
-    removePropertyMapping: (objectProperty, dataProperty) =>
-      @_model.removePropertyMapping objectProperty, dataProperty
+    removePropertyMapping: (objectProperty, dataProperty, calibration) =>
+      @_model.removePropertyMapping objectProperty, dataProperty, calibration
 
     getPropertyMappings: () =>
       @_model.get 'propertyMappings'
