@@ -1,5 +1,6 @@
 define (require) ->
-  AnimationProperty = require './property'
+  AnimationProperty = require '../base/module'
+  CalibrationForm = require './calibration/form'
 
   class TransparencyProperty extends AnimationProperty
     constructor: () ->
@@ -7,4 +8,5 @@ define (require) ->
         id: 'transparency'
         name: 'Transparency'
 
-    
+    getCalibrationForm: () =>
+      new CalibrationForm    

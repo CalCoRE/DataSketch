@@ -10,6 +10,8 @@ define (require) ->
         viewClass: View
         modelData: {}
 
+      @view().addEventListener "Modal.CloseRequest", @_onCloseRequest
+
     open: () =>
       @_model.open()
 
@@ -18,5 +20,8 @@ define (require) ->
 
     display: (content) =>
       @_model.display content
+
+    _onCloseRequest: (evt) =>
+      @close()
 
   new Modal

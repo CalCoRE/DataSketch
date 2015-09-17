@@ -10,6 +10,7 @@ define (require) ->
 
       @_pages = []
       model.addEventListener 'Model.Change', @_onChange
+      @$el.find(".close").click @_onCloseClick
 
     _onChange: (evt) =>
       if evt.data.path == "pages"
@@ -19,6 +20,9 @@ define (require) ->
           @$el.fadeIn()
         else
           @$el.fadeOut()
+
+    _onCloseClick: (jqevt) =>
+      @dispatchEvent "Modal.CloseRequest", {}
 
     render: (model) =>
       while @_pages.length

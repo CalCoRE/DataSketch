@@ -1,0 +1,22 @@
+.form-calibration {
+  font-size: 14px;
+  line-height: 20px;
+  
+  .fields .field {
+    display: inline-block;
+    margin: 10px;
+
+    input {
+      width: 100px;
+    }
+  }
+  .buttons .field {
+    display: inline-block;
+  }
+  .field-button .button {
+    &.btn-cancel {
+      border: none;
+      background: transparent;
+    }
+  }
+}

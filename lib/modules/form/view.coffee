@@ -7,6 +7,8 @@ define (require) ->
       super Template
 
       @$el.attr 'id', model.get 'id'
+      for cls in model.get 'classes'
+        @$el.addClass cls
       @fieldViews = []
       @buttonViews = []
 

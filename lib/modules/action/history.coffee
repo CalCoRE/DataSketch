@@ -7,7 +7,14 @@ define (require) ->
 
     execute: (action) =>
       action.execute()
-      @_history.push action
+        .then () =>
+          @_history.push action
+          @dispatchEvent 'ActionHistory.ActionAdded',
+            action: action
 
     undo: () =>
-      @_history.pop().undo()
+      action = @_history.pop()
+      action.undo()
+        .then () =>
+          @dispatchEvent 'ActionHistory.ActionUndone',
+            action: action

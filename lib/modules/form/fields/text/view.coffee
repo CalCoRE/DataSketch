@@ -6,17 +6,17 @@ define (require) ->
     constructor: (model, tmpl) ->
       super model, if tmpl? then tmpl else Template
 
-      @$el.find(".field-prefix").text model.get('prefix')
-      @$el.find(".field-postfix").text model.get('postfix')
+      @$el.find(".field-prefix").html model.get('prefix')
+      @$el.find(".field-postfix").html model.get('postfix')
 
-      @$el.find("input.field").on 'change', @_onFieldChange
+      @$el.find("input.textfield").on 'change', @_onFieldChange
 
     disable: () =>
-      @$el.find('input.field').prop 'disabled', true
+      @$el.find('input.textfield').prop 'disabled', true
 
     enable: () =>
-      @$el.find('input.field').prop 'disabled', false
+      @$el.find('input.textfield').prop 'disabled', false
 
     _onFieldChange: (jqevt) =>
       @dispatchEvent 'TextField.RequestValueChange',
-        value: @$el.find("input.field").val()
+        value: @$el.find("input.textfield").val()

@@ -3,14 +3,14 @@ define (require) ->
   HM = require 'core/event/hook_manager'
   Globals = require 'core/model/globals'
 
-  VerticalPositionProperty = require './properties/vertical_position'
-  HorizontalPositionProperty = require './properties/horizontal_position'
-  WidthProperty = require './properties/width'
-  HeightProperty = require './properties/height'
-  RotationProperty = require './properties/rotation'
-  ColorProperty = require './properties/color'
-  ScaleProperty = require './properties/scale'
-  TransparencyProperty = require './properties/transparency'
+  VerticalPositionProperty = require './properties/y/module'
+  HorizontalPositionProperty = require './properties/x/module'
+  WidthProperty = require './properties/width/module'
+  HeightProperty = require './properties/height/module'
+  RotationProperty = require './properties/rotation/module'
+  ColorProperty = require './properties/color/module'
+  ScaleProperty = require './properties/scale/module'
+  TransparencyProperty = require './properties/transparency/module'
 
   class AnimationModule extends Module
     constructor: () ->

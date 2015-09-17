@@ -2,6 +2,8 @@ define (require) ->
   FieldView = require 'modules/form/fields/base/view'
   Template = require 'text!./button.html'
 
+  require 'link!./style.css'
+
   class ButtonFieldView extends FieldView
     constructor: (model, tmpl) ->
       super model, if tmpl? then tmpl else Template

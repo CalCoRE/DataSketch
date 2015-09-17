@@ -6,6 +6,7 @@ define (require) ->
     id: ''
     fields: []
     buttons: []
+    classes: []
 
   class FormModel extends Model
     constructor: (config) ->

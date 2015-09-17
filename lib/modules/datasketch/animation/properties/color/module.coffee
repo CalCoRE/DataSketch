@@ -1,5 +1,5 @@
 define (require) ->
-  AnimationProperty = require './property'
+  AnimationProperty = require '../base/module'
 
   class ColorProperty extends AnimationProperty
     constructor: () ->

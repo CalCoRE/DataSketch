@@ -119,8 +119,8 @@ define (require) ->
     addPropertyMapping: (objectProperty, dataProperty, calibration) =>
       @_model.addPropertyMapping objectProperty, dataProperty, calibration
 
-    removePropertyMapping: (objectProperty, dataProperty, calibration) =>
-      @_model.removePropertyMapping objectProperty, dataProperty, calibration
+    removePropertyMapping: (objectProperty) =>
+      @_model.removePropertyMapping objectProperty
 
     getPropertyMappings: () =>
       @_model.get 'propertyMappings'

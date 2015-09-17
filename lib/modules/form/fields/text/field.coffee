@@ -12,6 +12,7 @@ define (require) ->
       @_view.addEventListener 'TextField.RequestValueChange', @_onValueChangeRequest
 
     _onValueChangeRequest: (evt) =>
+      console.log evt.data.value
       if !@_model.get('disabled')
         @_model.set 'value', evt.data.value
 

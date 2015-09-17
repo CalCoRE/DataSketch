@@ -5,8 +5,12 @@ define (require) ->
     constructor: (@canvas, @_targetMode) ->
 
     execute: () =>
-      @_currentMode = @canvas.getMode()
-      @canvas.setMode @_targetMode
+      Promise.resolve (() =>
+        @_currentMode = @canvas.getMode()
+        @canvas.setMode @_targetMode
+      )()
 
     undo: () =>
-      @canvas.setMode @_currentMode
+      Promise.resolve (() =>
+        @canvas.setMode @_currentMode
+      )()

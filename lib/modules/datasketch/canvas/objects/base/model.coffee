@@ -48,10 +48,10 @@ define (require) ->
           calibration: calibration
       @set 'propertyMappings', map
 
-    removePropertyMapping: (objectProperty, dataProperty) =>
+    removePropertyMapping: (objectProperty) =>
       map = @get 'propertyMappings'
       ind = null
-      for m, i in map when m.objectProperty == objectProperty and m.dataProperty == dataProperty
+      for m, i in map when m.objectProperty == objectProperty
         ind = i
         break
       map.splice i, 1

@@ -32,6 +32,7 @@ define (require) ->
       if @_model.get 'action'
         Globals.get('Relay').dispatchEvent 'Action.RequestAction',
           action: @_model.get 'action'
+        @dispatchEvent 'Menu.ActionRequested', {}
 
   Menu.wrapMenu = (item) =>
     if item instanceof Menu

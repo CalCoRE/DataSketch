@@ -1,5 +1,5 @@
 define (require) ->
-  AnimationProperty = require './property'
+  AnimationProperty = require '../base/module'
 
   class VerticalPositionProperty extends AnimationProperty
     constructor: () ->
