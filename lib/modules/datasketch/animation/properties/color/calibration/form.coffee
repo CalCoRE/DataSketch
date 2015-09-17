@@ -37,7 +37,6 @@ define (require) ->
 
     value: () =>
       val = super()
-      console.log val
       val = val.color.split "-"
       val =
         min: val[0]
