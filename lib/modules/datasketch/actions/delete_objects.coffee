@@ -5,9 +5,13 @@ define (require) ->
     constructor: (@canvas, @_objects) ->
 
     execute: () =>
-      @canvas.removeObjects(@_objects)
-      @canvas.selectObjects []
+      Promise.resolve (() =>
+        @canvas.removeObjects(@_objects)
+        @canvas.selectObjects []
+      )()
 
     undo: () =>
-      @canvas.addObjects @_objects
-      @canvas.selectObjects @_objects
+      Promise.resolve (() =>
+        @canvas.addObjects @_objects
+        @canvas.selectObjects @_objects
+      )()

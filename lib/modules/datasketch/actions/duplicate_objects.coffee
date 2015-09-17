@@ -17,4 +17,6 @@ define (require) ->
           @canvas.render()
 
     undo: () =>
-      @canvas.removeObjects @_clones
+      Promise.resolve (() =>
+        @canvas.removeObjects @_clones
+      )()

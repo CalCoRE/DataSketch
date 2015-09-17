@@ -18,19 +18,25 @@ define (require) ->
         dataProps = HM.invoke 'DataMapping.DataProperties', []
 
         items = []
-        console.log objectProps
+        mappings = meta.context.selection[0].getPropertyMappings()
+        mappedProps = (m.objectProperty for m in mappings)
         for op in objectProps
           subitems = []
-          for dp in dataProps
+          if op in mappedProps
             subitems.push
-              id: "#{op.getId()}-#{dp.getId()}"
-              label: dp.getName()
-              action: new MappingAssignmentAction meta.context.selection[0], op, dp
+              id: "#{op.getId()}-clear"
+              label: "(Clear)"
+              action: new MappingAssignmentAction meta.context.selection[0], op, null
+          else
+            for dp in dataProps
+              subitems.push
+                id: "#{op.getId()}-#{dp.getId()}"
+                label: dp.getName()
+                action: new MappingAssignmentAction meta.context.selection[0], op, dp
           items.push
             id: op.getId()
             label: op.getName()
             items: subitems
-
 
         list.push
           id: 'map'

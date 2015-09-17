@@ -5,8 +5,12 @@ define (require) ->
     constructor: (@canvas, @_strokeColor) ->
 
     execute: () =>
-      @_currentStrokeColor = @canvas.getStrokeColor()
-      @canvas.setStrokeColor @_strokeColor
+      Promise.resolve (() =>
+        @_currentStrokeColor = @canvas.getStrokeColor()
+        @canvas.setStrokeColor @_strokeColor
+      )()
 
     undo: () =>
-      @canvas.setStrokeColor @_currentStrokeColor
+      Promise.resolve (() =>
+        @canvas.setStrokeColor @_currentStrokeColor
+      )()
