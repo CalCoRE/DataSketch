@@ -22,6 +22,7 @@ define (require) ->
   DSData = require 'modules/datasketch/data/module'
   Animation = require 'modules/datasketch/animation/module'
   Modal = require 'modules/modal/module'
+  AnimationTools = require 'modules/datasketch/tools/animate/module'
 
   require 'link!./style.css'
 
@@ -49,3 +50,4 @@ define (require) ->
         set.add DSData
         set.add Animation
         set.add Modal
+        set.add AnimationTools

@@ -12,3 +12,9 @@ define (require) ->
       super
         data: data
         defaults: {}
+
+    getValue: (key) =>
+      for value in @get('values')
+        if value.key == key
+          return value.value
+      null

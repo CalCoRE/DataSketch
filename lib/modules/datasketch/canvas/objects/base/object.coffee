@@ -64,6 +64,12 @@ define (require) ->
     setScale: (scale) =>
       @_model.set 'scale', scale
 
+    getOpacity: () =>
+      @_model.get 'opacity'
+
+    setOpacity: (val) =>
+      @_model.set 'opacity', val
+
     getTransform: () =>
       transform =
         position: @getPosition()
@@ -134,6 +140,10 @@ define (require) ->
 
     _onMoving: (evt) =>
       @setPosition evt.data.position
+
+    animate: (playhead, timeDelta, datastore) =>
+      for map in @_model.get 'propertyMappings'
+        map.applyMapping @, playhead, timeDelta, datastore
 
   CanvasObject._count = 0
   CanvasObject

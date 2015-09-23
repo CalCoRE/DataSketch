@@ -24,3 +24,14 @@ define (require) ->
       super
         data: data
         defaults: defaults
+
+    getMinMax: (property) =>
+      bounds =
+        min: null
+        max: null
+      for row in @get 'rows'
+        bounds.min ?= row.getValue(property.getId())
+        bounds.max ?= row.getValue(property.getId())
+        bounds.min = Math.min bounds.min, row.getValue(property.getId())
+        bounds.max = Math.max bounds.max, row.getValue(property.getId())
+      bounds

@@ -10,4 +10,7 @@ define (require) ->
 
     getCalibrationForm: () =>
       new CalibrationForm
-    
+
+    setPropertyValue: (object, calibration, percent) =>
+      val = calibration.min + (calibration.max - calibration.min) * percent
+      object.setRotation val

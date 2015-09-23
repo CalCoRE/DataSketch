@@ -16,7 +16,7 @@ define (require) ->
     _onKeyUp: (evt) =>
       if evt.keyCode in (v for k, v of shortcuts)
         evt.preventDefault()
-      switch evt.keyCode
-        when 8 # delete
-          Globals.get('Relay').dispatchEvent 'Action.RequestAction',
-            action: new DeleteAction Globals.get('Canvas'), Globals.get('Canvas').getSelectedObjects()
+      # switch evt.keyCode
+      #   when 8 # delete
+      #     Globals.get('Relay').dispatchEvent 'Action.RequestAction',
+      #       action: new DeleteAction Globals.get('Canvas'), Globals.get('Canvas').getSelectedObjects()

@@ -13,6 +13,7 @@ define (require) ->
       y: 1
     controllable: true
     disabled: false
+    opacity: 1
     propertyMappings: []
 
   class CanvasObjectModel extends Model
@@ -34,19 +35,16 @@ define (require) ->
       @set 'disabled', false
       @set 'controllable', true
 
-    addPropertyMapping: (objectProperty, dataProperty, calibration) =>
-      map = @get 'propertyMappings'
+    addPropertyMapping: (map) =>
+      maps = @get 'propertyMappings'
       newMap = true
-      for m in map when m.objectProperty == objectProperty
-        m.dataProperty = dataProperty
-        m.calibration = calibration
+      for m in maps when m.objectProperty == map.objectProperty
+        m.dataProperty = map.dataProperty
+        m.calibration = map.calibration
         newMap = false
       if newMap
-        map.push
-          objectProperty: objectProperty
-          dataProperty: dataProperty
-          calibration: calibration
-      @set 'propertyMappings', map
+        maps.push map
+      @set 'propertyMappings', maps
 
     removePropertyMapping: (objectProperty) =>
       map = @get 'propertyMappings'

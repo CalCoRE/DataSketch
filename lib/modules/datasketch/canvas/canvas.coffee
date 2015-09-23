@@ -24,6 +24,12 @@ define (require) ->
     render: () =>
       @_view.render @_model
 
+    dryRender: () =>
+      @_view.dryRender()
+
+    getObjects: () =>
+      @_model.get 'objects'
+
     getMode: () =>
       @_model.get 'mode'
 

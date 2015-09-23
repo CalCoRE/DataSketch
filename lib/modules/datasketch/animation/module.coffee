@@ -12,11 +12,18 @@ define (require) ->
   ScaleProperty = require './properties/scale/module'
   TransparencyProperty = require './properties/transparency/module'
 
+  Animator = require './animator'
+
   class AnimationModule extends Module
     constructor: () ->
       super
 
     init: () =>
+      animator = new Animator
+        canvas: Globals.get 'Canvas'
+        datastore: Globals.get 'DataStore'
+
+      Globals.get('Canvas').animator = animator
 
   AnimationModule.requires = [
     HorizontalPositionProperty

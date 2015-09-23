@@ -36,6 +36,9 @@ define (require) ->
         @_fabric.discardActiveGroup()
         @_fabric.renderAll()
 
+    dryRender: () =>
+      @_fabric.renderAll()
+
     _renderObjects: (objects, isolations) =>
       for obj in objects
         @_fabric.discardActiveGroup()

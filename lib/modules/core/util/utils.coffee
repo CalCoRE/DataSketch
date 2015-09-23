@@ -146,4 +146,9 @@ define (require) ->
         b = b.replace(/^((the)|a)\s+/i, "")
       Utils.sortValue a, b, ascending
 
+    zeropad: (str, size) =>
+      s = str + ""
+      while s.length < size
+        s = "0" + s
+      s
   }

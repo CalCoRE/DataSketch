@@ -38,3 +38,6 @@ define (require) ->
 
     getCalibrationForm: () =>
       new CalibrationForm
+
+    setPropertyValue: (object, calibration, percent) =>
+      

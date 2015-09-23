@@ -7,4 +7,10 @@ define (require) ->
         id: 'scale'
         name: 'Scale'
 
-    
+
+    setPropertyValue: (object, calibration, percent) =>
+      val = calibration.min + (calibration.max - calibration.min) * percent
+      object.setScale
+        x: val
+        y: val
+        
