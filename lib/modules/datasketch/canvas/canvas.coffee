@@ -24,6 +24,12 @@ define (require) ->
     render: () =>
       @_view.render @_model
 
+    dryRender: () =>
+      @_view.dryRender()
+
+    getObjects: () =>
+      @_model.get 'objects'
+
     getMode: () =>
       @_model.get 'mode'
 
@@ -114,6 +120,7 @@ define (require) ->
         when "mode"
           @dispatchEvent "Canvas.ModeChange",
             mode: evt.data.value
+            last: evt.data.old
         when "strokeColor"
           @dispatchEvent "Canvas.StrokeColorChange",
             color: evt.data.value
@@ -150,3 +157,9 @@ define (require) ->
 
     enable: () =>
       @_model.enable()
+
+    disableControls: () =>
+      @_model.disableControls()
+
+    enableControls: () =>
+      @_model.enableControls()

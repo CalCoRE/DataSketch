@@ -26,6 +26,8 @@ define (require) ->
       for item in model.get('items')
         @addChild item.view(), ".menu-items"
 
+      @$el.toggleClass "disabled", model.get('disabled')
+
     _requestAction: (jqevt) =>
       @dispatchEvent "Menu.ActionRequest", {}
       jqevt.stopPropagation()

@@ -7,6 +7,7 @@ define (require) ->
     items: []
     label: ""
     action: null
+    disabled: false
 
   class MenuModel extends Model
     constructor: (config) ->

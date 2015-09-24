@@ -7,4 +7,8 @@ define (require) ->
         id: 'height'
         name: 'Height'
 
+    setPropertyValue: (object, calibration, percent) =>
+      currScale = object.getScale()
+      currScale.y = calibration.min + (calibration.max - calibration.min) * percent
+      object.setScale currScale
     

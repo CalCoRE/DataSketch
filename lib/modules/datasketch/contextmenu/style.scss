@@ -23,6 +23,10 @@
     &.actionable {
       cursor: pointer;
     }
+
+    &.disabled {
+      color: $medium-gray;
+    }
   }
   &>.menu-item {
     padding: 0;
@@ -51,7 +55,7 @@
             border-bottom: none;
           }
 
-          &.parent {
+          &.parent:not(.disabled) {
             &:hover:after,
             &.open:after {
               position: absolute;
@@ -65,8 +69,8 @@
             }
           }
 
-          &:hover>.menu-items,
-          &.open>.menu-items {
+          &:not(.disabled):hover>.menu-items,
+          &:not(.disabled).open>.menu-items {
             display: block;
           }
         }
@@ -78,8 +82,8 @@
           bottom: 0;
         }
       }
-      &:hover>.menu-items,
-      &.open>.menu-items {
+      &:not(.disabled):hover>.menu-items,
+      &:not(.disabled).open>.menu-items {
         display: block;
       }
     }

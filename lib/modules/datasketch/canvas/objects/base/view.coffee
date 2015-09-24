@@ -24,6 +24,8 @@ define (require) ->
           @_fabric.setCoords()
         when "disabled"
           @_fabric.opacity = if evt.data.value then 0.25 else 1
+        when "opacity"
+          @_fabric?.set 'opacity', evt.data.value
 
     buildFabric: () =>
 

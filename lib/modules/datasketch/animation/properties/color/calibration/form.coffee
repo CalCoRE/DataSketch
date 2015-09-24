@@ -14,8 +14,14 @@ define (require) ->
           id: "color"
           label: "Color"
           options: [
-            value: "#000000-#FFFFFF"
+            value: "#f7f7f7-#252525"
             label: "Grayscale"
+          ,
+            value: "#b2182b-#2166ac"
+            label: "Red to Blue"
+          ,
+            value: "#8c510a-#01665e"
+            label: "Orange to Turquoise"
           ]
       ]
       settings.modelData.buttons ?= [

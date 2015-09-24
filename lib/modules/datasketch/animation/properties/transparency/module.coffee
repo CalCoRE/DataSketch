@@ -9,4 +9,8 @@ define (require) ->
         name: 'Transparency'
 
     getCalibrationForm: () =>
-      new CalibrationForm    
+      new CalibrationForm
+
+    setPropertyValue: (object, calibration, percent) =>
+      val = calibration.min + (calibration.max - calibration.min) * percent
+      object.setOpacity val
