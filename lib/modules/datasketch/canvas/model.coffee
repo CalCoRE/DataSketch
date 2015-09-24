@@ -10,6 +10,7 @@ define (require) ->
     selected: []
     isolated: []
     disabled: false
+    controllable: true
 
   class DSCanvasModel extends Model
     constructor: (config) ->
@@ -98,3 +99,14 @@ define (require) ->
       for obj in @getActiveObjects()
         obj.enable()
       @set 'disabled', false
+
+
+    disableControls: () =>
+      for obj in @getActiveObjects()
+        obj.disableControls()
+      @set 'controllable', true
+
+    enableControls: () =>
+      for obj in @getActiveObjects()
+        obj.enableControls()
+      @set 'controllable', false

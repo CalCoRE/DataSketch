@@ -38,10 +38,12 @@ define (require) ->
 
     _onModeChange: (evt) =>
       if evt.currentTarget.getMode() == "animate"
+        Globals.get('Canvas').selectObjects []
+        Globals.get('Canvas').disableControls()
         @_animator.cache()
         @_animator.reset()
         @_animator.play()
-      else
+      else if evt.data.last == "animate"
         @_animator.pause()
         @_animator.reset()
         @_animator.restore()

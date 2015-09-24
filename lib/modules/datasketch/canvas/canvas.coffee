@@ -157,3 +157,9 @@ define (require) ->
 
     enable: () =>
       @_model.enable()
+
+    disableControls: () =>
+      @_model.disableControls()
+
+    enableControls: () =>
+      @_model.enableControls()
