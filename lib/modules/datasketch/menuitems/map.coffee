@@ -19,10 +19,10 @@ define (require) ->
 
         items = []
         mappings = meta.context.selection[0].getPropertyMappings()
-        mappedProps = (m.objectProperty for m in mappings)
+        mappedProps = (m.objectProperty.getId() for m in mappings)
         for op in objectProps
           subitems = []
-          if op in mappedProps
+          if op.getId() in mappedProps
             subitems.push
               id: "#{op.getId()}-clear"
               label: "(Clear)"
@@ -33,10 +33,16 @@ define (require) ->
                 id: "#{op.getId()}-#{dp.getId()}"
                 label: dp.getName()
                 action: new MappingAssignmentAction meta.context.selection[0], op, dp
+
+          disabled = false
+          if (op.getId() == "scale" and ("height" in mappedProps or "width" in mappedProps)) or (op.getId() in ["height", "width"] and "scale" in mappedProps)
+            disabled = true
+
           items.push
             id: op.getId()
             label: op.getName()
             items: subitems
+            disabled: disabled
 
         list.push
           id: 'map'

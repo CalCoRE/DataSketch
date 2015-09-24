@@ -50,4 +50,3 @@ define (require) ->
         set.add DSData
         set.add Animation
         set.add Modal
-        set.add AnimationTools

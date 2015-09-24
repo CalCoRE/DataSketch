@@ -54,3 +54,17 @@ define (require) ->
         break
       map.splice i, 1
       @set 'propertyMappings', map
+
+    cacheState: () =>
+      @_cache =
+        position: Utils.ensureDefaults @get('position'), {}
+        rotation: @get 'rotation'
+        scale: Utils.ensureDefaults @get('scale'), {}
+        opacity: @get 'opacity'
+
+    restoreState: () =>
+      if @_cache?
+        @set 'position', @_cache.position
+        @set 'rotation', @_cache.rotation
+        @set 'scale', @_cache.scale
+        @set 'opacity', @_cache.opacity

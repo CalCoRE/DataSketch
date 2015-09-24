@@ -145,5 +145,11 @@ define (require) ->
       for map in @_model.get 'propertyMappings'
         map.applyMapping @, playhead, timeDelta, datastore
 
+    cacheState: () =>
+      @_model.cacheState()
+
+    restoreState: () =>
+      @_model.restoreState()
+
   CanvasObject._count = 0
   CanvasObject

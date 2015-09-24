@@ -120,6 +120,7 @@ define (require) ->
         when "mode"
           @dispatchEvent "Canvas.ModeChange",
             mode: evt.data.value
+            last: evt.data.old
         when "strokeColor"
           @dispatchEvent "Canvas.StrokeColorChange",
             color: evt.data.value

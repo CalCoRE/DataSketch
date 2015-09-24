@@ -13,17 +13,38 @@ define (require) ->
   TransparencyProperty = require './properties/transparency/module'
 
   Animator = require './animator'
+  ModeSelectTool = require 'modules/datasketch/tools/mode/tool'
+
+  require 'link!./style.css'
 
   class AnimationModule extends Module
     constructor: () ->
       super
 
     init: () =>
-      animator = new Animator
+      @_animator = new Animator
         canvas: Globals.get 'Canvas'
         datastore: Globals.get 'DataStore'
 
-      Globals.get('Canvas').animator = animator
+      HM.hook 'Toolbar.Tools', @_toolbarTools
+
+    run: () =>
+      Globals.get('Canvas').addEventListener 'Canvas.ModeChange', @_onModeChange
+
+    _toolbarTools: (list, meta) =>
+      if meta.id is "mode"
+        list.push new ModeSelectTool "animate"
+      list
+
+    _onModeChange: (evt) =>
+      if evt.currentTarget.getMode() == "animate"
+        @_animator.cache()
+        @_animator.reset()
+        @_animator.play()
+      else
+        @_animator.pause()
+        @_animator.reset()
+        @_animator.restore()
 
   AnimationModule.requires = [
     HorizontalPositionProperty
