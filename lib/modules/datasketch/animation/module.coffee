@@ -14,6 +14,7 @@ define (require) ->
 
   Animator = require './animator'
   ModeSelectTool = require 'modules/datasketch/tools/mode/tool'
+  ScrubBar = require './scrubbar/scrubbar'
 
   require 'link!./style.css'
 
@@ -25,11 +26,13 @@ define (require) ->
       @_animator = new Animator
         canvas: Globals.get 'Canvas'
         datastore: Globals.get 'DataStore'
+      @_scrubbar = new ScrubBar @_animator
 
       HM.hook 'Toolbar.Tools', @_toolbarTools
 
     run: () =>
       Globals.get('Canvas').addEventListener 'Canvas.ModeChange', @_onModeChange
+      Globals.get('App.view').addChild @_scrubbar
 
     _toolbarTools: (list, meta) =>
       if meta.id is "mode"
@@ -43,10 +46,12 @@ define (require) ->
         @_animator.cache()
         @_animator.reset()
         @_animator.play()
+        @_scrubbar.show()
       else if evt.data.last == "animate"
         @_animator.pause()
         @_animator.reset()
         @_animator.restore()
+        @_scrubbar.hide()
 
   AnimationModule.requires = [
     HorizontalPositionProperty
