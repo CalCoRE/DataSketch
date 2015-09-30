@@ -48,3 +48,11 @@ html {
     display: block;
   }
 }
+
+.scrubbar {
+  width: 100%;
+  position: absolute;
+  bottom: 50px;
+  margin: 0 auto;
+  display: none;
+}

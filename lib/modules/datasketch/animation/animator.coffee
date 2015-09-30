@@ -28,14 +28,19 @@ define (require) ->
     _animate: () =>
       if @_isPlaying
         currTime = (new Date).getTime()
+        total = @settings.datastore.get('rows').length * window.DataSketchConfig.timePerRow * 1000
         delta = currTime - @_lastTime
-        @_playhead += delta
+        @_playhead = Math.min(total, @_playhead + delta)
         for obj in @settings.canvas.getObjects()
           obj.animate @_playhead, delta, @settings.datastore
         @settings.canvas.dryRender()
         @_lastTime = currTime
 
-        if @_playhead / 1000 > @settings.datastore.get('rows').length * window.DataSketchConfig.timePerRow
+        @dispatchEvent 'Animator.Tick',
+          playhead: @_playhead
+          total: total
+
+        if @_playhead >= total
           # @_isPlaying = false
           @_playhead = 0
 

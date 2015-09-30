@@ -1,0 +1,22 @@
+@import "../../../../scss_includes/variables";
+
+.scrubbar {
+  padding: 0 10%;
+
+  .nub {
+    position: absolute;
+    top: -50%;
+    left: calc(10% - 10px);
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    background: $light-gray;
+    border: 2px solid $dark-gray;
+  }
+  .rail {
+    width: 100%;
+    background: $medium-gray;
+    height: 10px;
+    border-radius: 5px;
+  }
+}

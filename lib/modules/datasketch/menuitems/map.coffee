@@ -23,9 +23,17 @@ define (require) ->
         for op in objectProps
           subitems = []
           if op.getId() in mappedProps
+            dp = null
+            for m in mappings
+              if m.objectProperty.getId() == op.getId()
+                dp = m.dataProperty
+            if dp?
+              label = "Clear: #{dp.getName()}"
+            else
+              label = "Clear"
             subitems.push
               id: "#{op.getId()}-clear"
-              label: "(Clear)"
+              label: label
               action: new MappingAssignmentAction meta.context.selection[0], op, null
           else
             for dp in dataProps
