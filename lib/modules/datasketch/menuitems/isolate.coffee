@@ -15,10 +15,12 @@ define (require) ->
     _hookMenuItems: (list, meta) =>
       if meta.context.selection?.length == 1 and meta.context.selection[0] instanceof Group
         list.push
+          id: 'isolate'
           label: "Isolate"
           action: new IsolateGroupAction Globals.get('Canvas'), meta.context.selection[0]
       if meta.context.isolation.length
         list.push
+          id: 'exit-isolation'
           label: "Exit Isolation"
           action: new IsolateGroupAction Globals.get('Canvas'), null
       list

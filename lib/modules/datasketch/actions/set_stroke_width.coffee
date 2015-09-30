@@ -5,8 +5,12 @@ define (require) ->
     constructor: (@canvas, @_strokeWidth) ->
 
     execute: () =>
-      @_currentStrokeWidth = @canvas.getStrokeWidth()
-      @canvas.setStrokeWidth @_strokeWidth
+      Promise.resolve (() =>
+        @_currentStrokeWidth = @canvas.getStrokeWidth()
+        @canvas.setStrokeWidth @_strokeWidth
+      )()
 
     undo: () =>
-      @canvas.setStrokeWidth @_currentStrokeWidth
+      Promise.resolve (() =>
+        @canvas.setStrokeWidth @_currentStrokeWidth
+      )()

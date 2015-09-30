@@ -5,8 +5,12 @@ define (require) ->
     constructor: (@canvas, @_group) ->
 
     execute: () =>
-      @_last = @canvas.getIsolation()
-      @canvas.isolate @_group
+      Promise.resolve (() =>
+        @_last = @canvas.getIsolation()
+        @canvas.isolate @_group
+      )()
 
     undo: () =>
-      @canvas.setIsolation @_last
+      Promise.resolve (() =>
+        @canvas.setIsolation @_last
+      )()

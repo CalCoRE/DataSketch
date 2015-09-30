@@ -3,9 +3,11 @@ define (require) ->
   Utils = require 'core/util/utils'
 
   defaults =
+    id: ""
     items: []
     label: ""
     action: null
+    disabled: false
 
   class MenuModel extends Model
     constructor: (config) ->

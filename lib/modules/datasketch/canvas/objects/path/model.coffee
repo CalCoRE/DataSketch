@@ -25,3 +25,13 @@ define (require) ->
         y: fabric.scaleY
       @set 'stroke.width', fabric.strokeWidth
       @set 'stroke.color', fabric.stroke
+
+    cacheState: () =>
+      super()
+      @_cache.stroke = Utils.ensureDefaults @get('stroke'), {}
+
+    restoreState: () =>
+      if @_cache?
+        @set 'stroke.color', @_cache.stroke.color
+        @set 'stroke.width', @_cache.stroke.width
+      super()

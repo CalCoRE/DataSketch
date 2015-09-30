@@ -5,7 +5,11 @@ define (require) ->
     constructor: (@canvas, @_group) ->
 
     execute: () =>
-      @_objects = @canvas.breakGroup @_group
+      Promise.resolve (() =>
+        @_objects = @canvas.breakGroup @_group
+      )()
 
     undo: () =>
-      @canvas.createGroup @_objects
+      Promise.resolve (() =>
+        @canvas.createGroup @_objects
+      )()

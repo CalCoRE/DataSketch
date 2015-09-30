@@ -126,6 +126,11 @@ define (require) ->
       for child in @_model.get 'children'
         child.setStrokeWidth width
 
+    animate: (playhead, timeDelta, datastore) =>
+      for child in @_model.get('children')
+        child.animate playhead, timeDelta, datastore
+      super playhead, timeDelta, datastore
+
   GroupObject.createFromObjects = (objects) ->
     group = new GroupObject
       modelData:

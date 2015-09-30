@@ -9,6 +9,11 @@ define (require) ->
       @_render model
       model.addEventListener 'Model.Change', @_onModelChange
       @$el.find(".menu-label").on 'click', @_requestAction
+      @$el.attr 'id', model.get 'id'
+      if model.get('action')?
+        @$el.addClass 'actionable'
+      if model.get('items').length
+        @$el.addClass 'parent'
 
     _onModelChange: (evt) =>
       @_render evt.currentTarget
@@ -20,6 +25,8 @@ define (require) ->
       @$el.find(".menu-label").html model.get('label')
       for item in model.get('items')
         @addChild item.view(), ".menu-items"
+
+      @$el.toggleClass "disabled", model.get('disabled')
 
     _requestAction: (jqevt) =>
       @dispatchEvent "Menu.ActionRequest", {}

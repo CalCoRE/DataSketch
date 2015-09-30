@@ -9,3 +9,13 @@ define (require) ->
     constructor: (config) ->
       config.defaults = Utils.ensureDefaults config.defaults, defaults
       super config
+
+    cacheState: () =>
+      super()
+      for child in @get 'children'
+        child.cacheState()
+
+    restoreState: () =>
+      for child in @get 'children'
+        child.restoreState()
+      super()

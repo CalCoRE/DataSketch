@@ -64,6 +64,12 @@ define (require) ->
     setScale: (scale) =>
       @_model.set 'scale', scale
 
+    getOpacity: () =>
+      @_model.get 'opacity'
+
+    setOpacity: (val) =>
+      @_model.set 'opacity', val
+
     getTransform: () =>
       transform =
         position: @getPosition()
@@ -116,6 +122,15 @@ define (require) ->
 
     clone: () =>
 
+    addPropertyMapping: (objectProperty, dataProperty, calibration) =>
+      @_model.addPropertyMapping objectProperty, dataProperty, calibration
+
+    removePropertyMapping: (objectProperty) =>
+      @_model.removePropertyMapping objectProperty
+
+    getPropertyMappings: () =>
+      @_model.get 'propertyMappings'
+
     _onRotating: (evt) =>
       @setRotation evt.data.rotation
 
@@ -125,6 +140,16 @@ define (require) ->
 
     _onMoving: (evt) =>
       @setPosition evt.data.position
+
+    animate: (playhead, timeDelta, datastore) =>
+      for map in @_model.get 'propertyMappings'
+        map.applyMapping @, playhead, timeDelta, datastore
+
+    cacheState: () =>
+      @_model.cacheState()
+
+    restoreState: () =>
+      @_model.restoreState()
 
   CanvasObject._count = 0
   CanvasObject
