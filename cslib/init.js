@@ -1,6 +1,6 @@
 (function() {
   require.config({
-    baseUrl: "/cslib",
+    baseUrl: "./cslib",
     paths: {
       core: "modules/core",
       text: "thirdparty/require-plugins/text-2.0.14",
