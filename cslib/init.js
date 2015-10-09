@@ -5,7 +5,7 @@
       core: "modules/core",
       text: "thirdparty/require-plugins/text-2.0.14",
       link: "thirdparty/require-plugins/link",
-      jquery: "thirdparty/jquery-2.1.4.min"
+      jquery: "thirdparty/jquery-2.1.4.min",
       data: "../data"
     },
     shim: {
