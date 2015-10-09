@@ -14,7 +14,7 @@
 # For the current purpose, we will only point out items of interest.
 #
 require.config
-  baseUrl: "/cslib"
+  baseUrl: "./cslib"
 # paths
 # -----
   paths:
@@ -36,6 +36,7 @@ require.config
 #   The name `jquery` (all lower case) is mandated by jQuery itself, as it
 #   provides its own AMD wrapping.
     jquery: "thirdparty/jquery-2.1.4.min"
+    data: "../data"
   shim:
     "thirdparty/modernizr-2.8.3":
       exports: "Modernizr"
