@@ -9,6 +9,7 @@ define (require) ->
 
     setPropertyValue: (object, calibration, percent) =>
       currScale = object.getScale()
-      currScale.y = calibration.min + (calibration.max - calibration.min) * percent
-      object.setScale currScale
+      object.setScale
+        x: currScale.x
+        y: calibration.min + (calibration.max - calibration.min) * percent
     
