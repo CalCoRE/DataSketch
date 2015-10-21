@@ -41,7 +41,9 @@ define (require) ->
       @_model.get 'position'
 
     setPosition: (position) =>
-      @_model.set 'position', position
+      @_model.set 'position',
+        x: position.x
+        y: position.y
 
     enforceTransform: () =>
       @_view.enforceTransform @_model
@@ -62,7 +64,9 @@ define (require) ->
       @_model.get 'scale'
 
     setScale: (scale) =>
-      @_model.set 'scale', scale
+      @_model.set 'scale',
+        x: scale.x
+        y: scale.y
 
     getOpacity: () =>
       @_model.get 'opacity'
