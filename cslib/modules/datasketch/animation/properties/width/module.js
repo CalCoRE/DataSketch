@@ -20,8 +20,10 @@
       WidthProperty.prototype.setPropertyValue = function(object, calibration, percent) {
         var currScale;
         currScale = object.getScale();
-        currScale.x = calibration.min + (calibration.max - calibration.min) * percent;
-        return object.setScale(currScale);
+        return object.setScale({
+          x: calibration.min + (calibration.max - calibration.min) * percent,
+          y: currScale.y
+        });
       };
 
       return WidthProperty;

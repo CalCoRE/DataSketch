@@ -91,7 +91,10 @@
       };
 
       CanvasObject.prototype.setPosition = function(position) {
-        return this._model.set('position', position);
+        return this._model.set('position', {
+          x: position.x,
+          y: position.y
+        });
       };
 
       CanvasObject.prototype.enforceTransform = function() {
@@ -119,7 +122,10 @@
       };
 
       CanvasObject.prototype.setScale = function(scale) {
-        return this._model.set('scale', scale);
+        return this._model.set('scale', {
+          x: scale.x,
+          y: scale.y
+        });
       };
 
       CanvasObject.prototype.getOpacity = function() {

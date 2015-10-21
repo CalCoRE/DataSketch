@@ -20,8 +20,10 @@
       HeightProperty.prototype.setPropertyValue = function(object, calibration, percent) {
         var currScale;
         currScale = object.getScale();
-        currScale.y = calibration.min + (calibration.max - calibration.min) * percent;
-        return object.setScale(currScale);
+        return object.setScale({
+          x: currScale.x,
+          y: calibration.min + (calibration.max - calibration.min) * percent
+        });
       };
 
       return HeightProperty;
