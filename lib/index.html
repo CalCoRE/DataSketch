@@ -11,8 +11,27 @@
   </head>
   <body>
     <script type="text/javascript">
+	    
+			var $_GET = {};
+			datasource = "data/population.csv";
+			
+			document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+				function decode(s) {
+					return decodeURIComponent(s.split("+").join(" "));
+				}
+				$_GET[decode(arguments[1])] = decode(arguments[2]);
+			});
+			
+			if( $_GET["csv"] != null ) {
+				datasource = "data/" + $_GET["csv"];
+			}
+			
+			if( $_GET["gid"] != null ) {
+				datasource = "http://docs.google.com/feeds/download/spreadsheets/Export?key=" + $_GET["gid"] + "&exportFormat=csv"
+			}
+	    
       window.DataSketchConfig = {
-        dataSource: "data/population.csv",
+        dataSource: datasource,
         timePerRow: 1/12
       };
     </script>
