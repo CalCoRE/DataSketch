@@ -11,23 +11,28 @@
   </head>
   <body>
     <script type="text/javascript">
-    
-      var query = window.location.search.substring(1); 
-      var vars = query.split("&"); 
-      for (var i=0;i<vars.length;i++)
-      { 
-        var pair = vars[i].split("="); 
-        if (pair[0] == "data")
-        { 
-          datasource = "data/" + pair[1];
-        } else {
-          datasource = "data/oakweather.csv";
-        }
-      }
-    
+	    
+			var $_GET = {};
+			datasource = "data/population.csv";
+			
+			document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+				function decode(s) {
+					return decodeURIComponent(s.split("+").join(" "));
+				}
+				$_GET[decode(arguments[1])] = decode(arguments[2]);
+			});
+			
+			if( $_GET["csv"] != null ) {
+				datasource = "data/" + $_GET["csv"];
+			}
+			
+			if( $_GET["gid"] != null ) {
+				datasource = "http://docs.google.com/feeds/download/spreadsheets/Export?key=" + $_GET["gid"] + "&exportFormat=csv"
+			}
+	    
       window.DataSketchConfig = {
         dataSource: datasource,
-        timePerRow: 1/3
+        timePerRow: 1/10
       };
     </script>
     <script data-main="./cslib/init" src="./cslib/thirdparty/require-2.1.18.js"></script>
