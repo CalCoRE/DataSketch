@@ -11,3 +11,6 @@ define (require) ->
       super model
       @$el.find('.palette-well').css
         "background-color": model.get('color')
+       @$el.find('#valueInput').on 'change' ,(evt) =>
+         model.set('color',"##{evt.target.value}")
+         @dispatchEvent 'Tool.GenerateActionRequest', {}

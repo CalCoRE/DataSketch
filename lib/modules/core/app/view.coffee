@@ -11,3 +11,4 @@ define (require) ->
     constructor: (tmpl) ->
       tmpl ?= Template
       super tmpl
+      require 'jscolor'
