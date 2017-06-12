@@ -8,6 +8,15 @@ html, body, .app {
   height: 100%;
   font-family: Arial;
   overflow: hidden;
+  background-color: white;
+}
+#codap {
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  height: 30px;
+  width: 100px;
+  background-color: lightyellow;
 }
 html {
   box-sizing: border-box;

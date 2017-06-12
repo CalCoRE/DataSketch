@@ -19,6 +19,12 @@ define (require) ->
       list
 
     handlePreload: (csv) =>
+      codapHelper.dsGlobals = Globals
+
+      codapHelper.dsDataStore = DataStore
+
+      codapHelper.dsPapaParse = PapaParse
+
       d = PapaParse.parse csv,
         header: true
         dynamicTyping: true
