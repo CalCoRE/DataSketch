@@ -70,4 +70,5 @@ define (require) ->
     run: () =>
       for pi in @_modules
         pi.run()
+      codapHelper.init()
       @dispatchEvent 'Application.Run', {}
