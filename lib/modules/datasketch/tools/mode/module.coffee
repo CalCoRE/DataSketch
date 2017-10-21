@@ -15,9 +15,10 @@ define (require) ->
     _toolbarTools: (list, meta) =>
       if meta.id is "mode"
         list.push new ModeSelectTool 'draw'
+        list.push new ModeSelectTool 'erase'
         list.push new ModeSelectTool 'select'
       list
 
     _onModeChange: (evt) =>
-      if evt.data.mode in ['draw', 'select']
+      if evt.data.mode in ['draw','erase' ,'select']
         Globals.get('Canvas').enableControls()

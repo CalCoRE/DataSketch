@@ -1,5 +1,6 @@
 define (require) ->
   EventDispatcher = require 'core/event/dispatcher'
+  Globals = require 'core/model/globals'
 
   class Animator extends EventDispatcher
     constructor: (@settings) ->
@@ -27,12 +28,13 @@ define (require) ->
 
     _animate: () =>
       if @_isPlaying
+        dataStore = Globals.get 'DataStore'
         currTime = (new Date).getTime()
-        total = @settings.datastore.get('rows').length * window.DataSketchConfig.timePerRow * 1000
+        total = dataStore.get('rows').length * window.DataSketchConfig.timePerRow * 1000
         delta = currTime - @_lastTime
         @_playhead = Math.min(total, @_playhead + delta)
         for obj in @settings.canvas.getObjects()
-          obj.animate @_playhead, delta, @settings.datastore
+          obj.animate @_playhead, delta, dataStore
         @settings.canvas.dryRender()
         @_lastTime = currTime
 

@@ -25,7 +25,7 @@ define (require) ->
     init: () =>
       @_animator = new Animator
         canvas: Globals.get 'Canvas'
-        datastore: Globals.get 'DataStore'
+        # datastore: Globals.get 'DataStore'
       @_scrubbar = new ScrubBar @_animator
 
       HM.hook 'Toolbar.Tools', @_toolbarTools
