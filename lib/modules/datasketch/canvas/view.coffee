@@ -7,6 +7,7 @@ define (require) ->
   Group = require './objects/group/object'
 
   Fabric = require 'thirdparty/fabric'
+  Model = ''
   require 'link!./style.css'
 
   class DSCanvasView extends DomView
@@ -17,6 +18,7 @@ define (require) ->
       model.addEventListener 'Canvas.ObjectAdded', @_onObjectAdded
       model.addEventListener 'Canvas.ObjectsRemoved', @_onObjectsRemoved
       model.addEventListener 'Canvas.ObjectsAdded', @_onObjectsAdded
+      Model = model
 
     initCanvas: (model) =>
       @_fabric = new Fabric.Canvas @$el.find('.canvas-main')[0]
@@ -130,6 +132,14 @@ define (require) ->
       switch val
         when "draw"
           @_fabric.isDrawingMode = true
+          @_fabric.freeDrawingBrush.globalCompositeOperation = 'source-over';
+          @_fabric.freeDrawingBrush.width = Model.get('strokeWidth')
+          @_fabric.freeDrawingBrush.color = Model.get('strokeColor')
+        when "erase"
+          @_fabric.isDrawingMode = true
+          @_fabric.freeDrawingBrush.globalCompositeOperation = 'destination-out';
+          @_fabric.freeDrawingBrush.width = 20;
+          @_fabric.freeDrawingBrush.color = "rgb(255,255,255)";
         else
           @_fabric.isDrawingMode = false
 
@@ -140,5 +150,6 @@ define (require) ->
 
     _onObjectsRemoved: (evt) =>
       @clearSelection()
+
 
     _onObjectsAdded: (evt) =>

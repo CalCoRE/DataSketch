@@ -19,6 +19,14 @@ define (require) ->
       list
 
     handlePreload: (csv) =>
+      codapHelper.dsData = this
+
+      codapHelper.dsGlobals = Globals
+
+      codapHelper.dsDataStore = DataStore
+
+      codapHelper.dsPapaParse = PapaParse
+
       d = PapaParse.parse csv,
         header: true
         dynamicTyping: true
@@ -44,7 +52,10 @@ define (require) ->
 
       Globals.get('Canvas').addEventListener 'Canvas.ModeChange', @_onModeChange
 
+      codapHelper.dataTableView = @_view
+
     _onModeChange: (evt) =>
+      
       if evt.currentTarget.getMode() == "data"
         @_view.show()
         Globals.get('Canvas').disable()
@@ -55,3 +66,5 @@ define (require) ->
     _listMappingProperties: (list, meta) =>
       list = list.concat Globals.get 'DataStore.properties'
       list
+    
+    reload: ()=>
