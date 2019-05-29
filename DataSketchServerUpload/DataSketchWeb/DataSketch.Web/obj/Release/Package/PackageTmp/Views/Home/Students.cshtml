@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Students";
+    Layout = "~/Views/Shared/BasicLayout.cshtml";
+}
+<div id="divLoader" hidden>
+    <img src="~/Content/patterns/ajax-loader.gif" alt="Loader" />
+</div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <a class="btn btn-info" href="~/Home/AddEditStudent"><i class="fa fa-plus-circle"></i>&nbsp;Add Student</a>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover student-list" id="studentTable">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>User Name</th>
+                                        <th>Class</th>
+                                        <th>Standard</th>
+                                        <th>School</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Item2)
+                                    {
+                                        <tr>
+                                            <td>@item.FirstName</td>
+                                            <td>@item.LastName</td>
+                                            <td>@item.UserName</td>
+                                            <td>@item.ClassName</td>
+                                            <td>@item.StandardName</td>
+                                            <td>@item.SchoolName</td>
+                                            <td class="text-center">
+                                                @{
+                                        int Active = item.IsActive ? 1 : 0;
+                                                }
+                                                <a onclick='ActiveInactiveStudent(@item.StudentId,@Active)'>
+                                                    <i class='@(@item.IsActive == true ? "fa fa-check fa-x text-navy" : "fa fa-x fa-times-circle-o text-danger")'></i>
+                                                </a>
+                                                <a href="~/Home/AddEditStudent?id=@item.StudentId">
+                                                    <i class="fa fa-edit text-success fa-x "></i>
+                                                </a>
+                                                <a onclick='DeleteUser(@item.StudentId)'>
+                                                    <i class="fa fa-trash text-danger fa-x"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @{
+        var message = TempData.Peek("Message");
+        var type = TempData.Peek("Type");
+    }
+
+    @section Scripts {
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                localStorage.clear();
+                InitDataTable('studentTable');
+                debugger
+                var Message = '@Model.Item1.Message';
+                if (Message != "") {
+                    toastr['success'](Message);
+                }
+            })
+
+            function ActiveInactiveStudent(studentId, isActive) {
+                
+                if (confirm("Are you sure you want to make this student " + (isActive == 1 ? "inactive" : "active") + " ?")) {
+                    blockUI()
+                    $.ajax({
+                        url: '@Url.Action("ManageStudent", "Home")',
+                        type: "POST",
+                        dataType: "html",
+                        data: { StudentId: studentId, Operation: "ActiveInactive" },
+                        success: function (result) {
+                            debugger
+                            unBlockUI()
+                            toastr['success']("Student " + (isActive == 1 ? "inactive" : "activated") + " successfully.");
+                            $('#studentTable').html(result)
+                            InitDataTable('studentTable');
+                        },
+                        error: function (errormessage) {
+                            unBlockUI()
+                            toastr['error']("Something went wrong please try again.");
+                        }
+                    })
+                }
+            }
+
+            function DeleteUser(studentId) {
+                if (confirm("Are you sure you want to delete it?")) {
+                    $.ajax({
+                        url: '@Url.Action("ManageStudent", "Home")',
+                        type: "POST",
+                        dataType: "html",
+                        data: { StudentId: studentId, Operation: "Delete" },
+                        success: function (result) {
+                            unBlockUI()
+                            toastr['success']('Student deleted successfully.');
+                            $('#studentTable').html(result);
+                            InitDataTable('studentTable');
+                        },
+                        error: function (errormessage) {
+                            unBlockUI()
+                            toastr['error']("Something went wrong please try again.");
+                        }
+                    })
+                }
+            }
+        </script>
+    }

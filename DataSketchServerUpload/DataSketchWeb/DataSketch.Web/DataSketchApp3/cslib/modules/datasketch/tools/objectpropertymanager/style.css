@@ -1,0 +1,22 @@
+#objectpropertymanager {
+  top: 1px;
+  left: 100px; }
+
+.tool.Object-X::after {
+  content: "X"; }
+
+.tool.Object-Y::after {
+  content: "Y"; }
+
+.tool.Object-Width::after {
+  content: "Width"; }
+
+.tool.Object-Height::after {
+  content: "Height"; }
+
+div#objectpropertymanager div.tool {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 15px; }
+
+/*# sourceMappingURL=../../../../maps/modules/datasketch/tools/objectpropertymanager/style.css.map */

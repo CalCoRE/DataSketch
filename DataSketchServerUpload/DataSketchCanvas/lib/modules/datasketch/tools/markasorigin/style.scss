@@ -1,0 +1,113 @@
+#markAsOrigin{
+   top: 365px;
+   right: 20px;
+}
+.tool.markAsOrigin-1 {
+  background: url('icons/markasorigin.png') center center no-repeat;  
+  background-size:35px;
+}
+.markasorigin-tool
+{
+margin:0px 1px;
+}
+#markasorigin.modal-body{
+padding:5px 0px 0px 5px !important;
+}
+#markasorigin.modal-dialog
+{
+top: 368px;
+right: 70px;
+}
+.tool.markAsOrigin-1 .form_body:before
+{    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: -11px;
+    top: 50%;
+    border-left: 11px solid #a2a2a2;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 9;
+}
+.tool.markAsOrigin-1 .modal-body.form_body:after 
+{
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    border-left: 10px solid #ffffff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 99;
+}
+
+#RightBottom{
+  background: url('icons/rightbottom.jpg') center center no-repeat;  
+    height:32px;
+  width:32px;
+  display: inline-block; 
+  border:1px solid;
+}
+#CenterBottom{
+  background: url('icons/centerbottom.jpg') center center no-repeat;  
+    height:32px;
+  width:32px;
+  display: inline-block; 
+  border:1px solid;
+}
+#LeftBottom{
+  background: url('icons/leftbottom.jpg') center center no-repeat;  
+    height:32px;
+  width:32px;
+  display: inline-block; 
+  border:1px solid;
+  }
+#RightCenter{
+  background: url('icons/rightcenter.jpg') center center no-repeat;  
+    height:32px;
+  width:32px;
+  display: inline-block; 
+  border:1px solid;
+}
+#CenterCenter{
+  background: url('icons/centercenter.jpg') center center no-repeat;  
+  height:32px;
+  width:32px;
+  border:1px solid;
+  display: inline-block; 
+}
+#LeftCenter{
+  background: url('icons/leftcenter.jpg') center center no-repeat;  
+    height:32px;
+  width:32px;
+  display: inline-block; 
+  border:1px solid;
+}
+#RightTop{
+  background: url('icons/righttop.jpg') center center no-repeat;  
+    height:32px;
+  width:32px;
+  display: inline-block; 
+  border:1px solid;
+}
+#CenterTop{
+  background: url('icons/centertop.jpg') center center no-repeat;  
+    height:32px;
+  width:32px;
+  display: inline-block; 
+  border:1px solid;
+}
+#LeftTop{
+  background: url('icons/lefttop.jpg') center center no-repeat;  
+    height:32px;
+  width:32px;
+  display: inline-block; 
+  border:1px solid;
+}

@@ -1,0 +1,29 @@
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.dll.config
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.pdb
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\obj\Debug\DataSketch.DAL.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.DAL\obj\Debug\DataSketch.DAL.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.dll.config
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\obj\Debug\DataSketch.DAL.csprojResolveAssemblyReference.cache
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\obj\Debug\DataSketch.DAL.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.DAL\obj\Debug\DataSketch.DAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.dll.config
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\DataSketch.DAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\obj\Debug\DataSketch.DAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\obj\Debug\DataSketch.DAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.DAL\obj\Debug\DataSketch.DAL.csprojResolveAssemblyReference.cache

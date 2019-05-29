@@ -1,0 +1,60 @@
+﻿@model DataSketch.Models.StudentMasterModel
+<script>
+    $(document).ready(function () {
+        $('#SelectDeselectAll').change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        })
+        if ('@Model.lstStudentList.Count' > 0)
+        {
+            var height = eval('@Model.lstStudentList.Count' / 3)
+            $("#ShareDetails").css({ 'height': eval(Math.abs($('#ShareDetails').height())) + eval((parseInt(height) + 1) * 25) });
+            
+        }
+        $('.chklstStudent').change(function () {
+            
+            if ($('.chklstStudent').length == $('.chklstStudent:checked').length)
+            {
+                $('#SelectDeselectAll').prop('checked', true);
+            }
+            else
+            {
+                $('#SelectDeselectAll').prop('checked', false);
+            }
+        })
+    });
+</script>
+@if (Model.lstStudentList.Count > 0)
+{
+    <div class=" checkbox checkbox-inline">
+        <input type="checkbox" id="SelectDeselectAll" />
+        <label for=SelectDeselectAll>
+            Select / Deselect All
+        </label>
+    </div><br />
+    @Html.HiddenFor(m => m.SketchId)
+    foreach (DataSketch.Models.StudentMasterModel check in Model.lstStudentList)
+    {
+        <div id="lstCheckBox">
+            <div class="col-md-4 checkbox checkbox-inline">
+                @if (Model.lstCheckedStudent != null)
+                {
+                    if (Model.lstCheckedStudent.Exists(x => x.UserId == check.UserId))
+                    {
+                        <input id="@check.UserId" class="chklstStudent" name="chklstStudent" value="@check.UserId" type="checkbox" checked>
+                    }
+                    else
+                    {
+                        <input class="chklstStudent" id="@check.UserId" name="chklstStudent" value="@check.UserId" type="checkbox">
+                    }
+                }
+                <label for=@check.UserId>
+                    @check.FirstName @check.LastName
+                </label>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div style="color:green">Currently there are no students available in your class.</div>
+}

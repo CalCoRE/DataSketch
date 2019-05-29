@@ -1,0 +1,33 @@
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.BAL.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.BAL.pdb
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.DAL.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.DAL.pdb
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.csprojResolveAssemblyReference.cache
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.BAL.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.BAL.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.DAL.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.DAL.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.csprojResolveAssemblyReference.cache
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.BAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.BAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.DAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\DataSketch.DAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.csprojResolveAssemblyReference.cache
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Debug\DataSketch.BAL.pdb

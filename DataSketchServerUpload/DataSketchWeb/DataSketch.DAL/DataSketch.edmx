@@ -1,0 +1,1688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataSketchModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClassMaster">
+          <Key>
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="ClassId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmailerService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="SendBy" Type="bigint" Nullable="false" />
+          <Property Name="SendTo" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DataSketch.dbo.Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Exception" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RoleAcronym" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SchoolMaster">
+          <Key>
+            <PropertyRef Name="SchoolId" />
+          </Key>
+          <Property Name="SchoolId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SketchMaster">
+          <Key>
+            <PropertyRef Name="SketchId" />
+          </Key>
+          <Property Name="SketchId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SketchName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SketchPath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SketchShareMapping">
+          <Key>
+            <PropertyRef Name="SketchShareId" />
+          </Key>
+          <Property Name="SketchShareId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SketchId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StandardClassMapping">
+          <Key>
+            <PropertyRef Name="StandardClassId" />
+          </Key>
+          <Property Name="StandardClassId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StandardId" Type="bigint" Nullable="false" />
+          <Property Name="ClassId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StandardMaster">
+          <Key>
+            <PropertyRef Name="StandardId" />
+          </Key>
+          <Property Name="StandardId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Standard" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StudentMaster">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TeacherId" Type="bigint" Nullable="false" />
+          <Property Name="SchoolId" Type="bigint" Nullable="false" />
+          <Property Name="StandardId" Type="bigint" Nullable="false" />
+          <Property Name="ClassId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UserId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TeacherMaster">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="TeacherId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SchoolId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdateBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeacherStandardMapping">
+          <Key>
+            <PropertyRef Name="TeacherStandardId" />
+          </Key>
+          <Property Name="TeacherStandardId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeacherId" Type="bigint" Nullable="false" />
+          <Property Name="StandardId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserClass">
+          <Key>
+            <PropertyRef Name="UserClassId" />
+          </Key>
+          <Property Name="UserClassId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="ClassId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="bigint" Nullable="false" />
+          <Property Name="Token" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_ClassMaster_ClassMaster">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="ClassMaster1" Type="Self.ClassMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="ClassMaster1">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SketchMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="SketchMaster" Type="Self.SketchMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SketchMaster">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SketchShareMapping_SketchMaster">
+          <End Role="SketchMaster" Type="Self.SketchMaster" Multiplicity="1" />
+          <End Role="SketchShareMapping" Type="Self.SketchShareMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SketchMaster">
+              <PropertyRef Name="SketchId" />
+            </Principal>
+            <Dependent Role="SketchShareMapping">
+              <PropertyRef Name="SketchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SketchShareMapping_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="SketchShareMapping" Type="Self.SketchShareMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SketchShareMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StandardClassMapping_ClassMaster">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="StandardClassMapping" Type="Self.StandardClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="StandardClassMapping">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StandardClassMapping_StandardMaster">
+          <End Role="StandardMaster" Type="Self.StandardMaster" Multiplicity="1" />
+          <End Role="StandardClassMapping" Type="Self.StandardClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StandardMaster">
+              <PropertyRef Name="StandardId" />
+            </Principal>
+            <Dependent Role="StandardClassMapping">
+              <PropertyRef Name="StandardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMaster_ClassMaster">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="StudentMaster">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMaster_SchoolMaster">
+          <End Role="SchoolMaster" Type="Self.SchoolMaster" Multiplicity="1" />
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolMaster">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="StudentMaster">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMaster_StandardMaster">
+          <End Role="StandardMaster" Type="Self.StandardMaster" Multiplicity="1" />
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StandardMaster">
+              <PropertyRef Name="StandardId" />
+            </Principal>
+            <Dependent Role="StudentMaster">
+              <PropertyRef Name="StandardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMaster_TeacherMaster">
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="1" />
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherMaster">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="StudentMaster">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherMaster_SchoolMaster">
+          <End Role="SchoolMaster" Type="Self.SchoolMaster" Multiplicity="1" />
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolMaster">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TeacherMaster">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TeacherMaster">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherStandardMapping_StandardMaster">
+          <End Role="StandardMaster" Type="Self.StandardMaster" Multiplicity="1" />
+          <End Role="TeacherStandardMapping" Type="Self.TeacherStandardMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StandardMaster">
+              <PropertyRef Name="StandardId" />
+            </Principal>
+            <Dependent Role="TeacherStandardMapping">
+              <PropertyRef Name="StandardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherStandardMapping_TeacherMaster">
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="1" />
+          <End Role="TeacherStandardMapping" Type="Self.TeacherStandardMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherMaster">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="TeacherStandardMapping">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClass_ClassMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="UserClass" Type="Self.UserClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserClass">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClass_ClassMaster1">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="UserClass" Type="Self.UserClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="UserClass">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GenerateAPIClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GenerateBALClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GenerateMVCModelClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Namespace" Type="nvarchar" Mode="In" />
+          <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllSketch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetClassListStandardWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StandardId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetFullNameByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetSharedSketchList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetSketchShareStudents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SketchId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetStudentList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetStudentListOfTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ValidateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="DataSketchModelStoreContainer">
+          <EntitySet Name="ClassMaster" EntityType="Self.ClassMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailerService" EntityType="Self.EmailerService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolMaster" EntityType="Self.SchoolMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SketchMaster" EntityType="Self.SketchMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SketchShareMapping" EntityType="Self.SketchShareMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StandardClassMapping" EntityType="Self.StandardClassMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StandardMaster" EntityType="Self.StandardMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentMaster" EntityType="Self.StudentMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherMaster" EntityType="Self.TeacherMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherStandardMapping" EntityType="Self.TeacherStandardMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserClass" EntityType="Self.UserClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Log].[Id] AS [Id], 
+    [Log].[Date] AS [Date], 
+    [Log].[Thread] AS [Thread], 
+    [Log].[Level] AS [Level], 
+    [Log].[Logger] AS [Logger], 
+    [Log].[Message] AS [Message], 
+    [Log].[Exception] AS [Exception]
+    FROM [dbo].[Log] AS [Log]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ClassMaster_ClassMaster" Association="Self.FK_ClassMaster_ClassMaster">
+            <End Role="ClassMaster" EntitySet="ClassMaster" />
+            <End Role="ClassMaster1" EntitySet="ClassMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SketchMaster_UserMaster" Association="Self.FK_SketchMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="SketchMaster" EntitySet="SketchMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SketchShareMapping_SketchMaster" Association="Self.FK_SketchShareMapping_SketchMaster">
+            <End Role="SketchMaster" EntitySet="SketchMaster" />
+            <End Role="SketchShareMapping" EntitySet="SketchShareMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SketchShareMapping_UserMaster" Association="Self.FK_SketchShareMapping_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="SketchShareMapping" EntitySet="SketchShareMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StandardClassMapping_ClassMaster" Association="Self.FK_StandardClassMapping_ClassMaster">
+            <End Role="ClassMaster" EntitySet="ClassMaster" />
+            <End Role="StandardClassMapping" EntitySet="StandardClassMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StandardClassMapping_StandardMaster" Association="Self.FK_StandardClassMapping_StandardMaster">
+            <End Role="StandardMaster" EntitySet="StandardMaster" />
+            <End Role="StandardClassMapping" EntitySet="StandardClassMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMaster_ClassMaster" Association="Self.FK_StudentMaster_ClassMaster">
+            <End Role="ClassMaster" EntitySet="ClassMaster" />
+            <End Role="StudentMaster" EntitySet="StudentMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMaster_SchoolMaster" Association="Self.FK_StudentMaster_SchoolMaster">
+            <End Role="SchoolMaster" EntitySet="SchoolMaster" />
+            <End Role="StudentMaster" EntitySet="StudentMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMaster_StandardMaster" Association="Self.FK_StudentMaster_StandardMaster">
+            <End Role="StandardMaster" EntitySet="StandardMaster" />
+            <End Role="StudentMaster" EntitySet="StudentMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMaster_TeacherMaster" Association="Self.FK_StudentMaster_TeacherMaster">
+            <End Role="TeacherMaster" EntitySet="TeacherMaster" />
+            <End Role="StudentMaster" EntitySet="StudentMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherMaster_SchoolMaster" Association="Self.FK_TeacherMaster_SchoolMaster">
+            <End Role="SchoolMaster" EntitySet="SchoolMaster" />
+            <End Role="TeacherMaster" EntitySet="TeacherMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherMaster_UserMaster" Association="Self.FK_TeacherMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="TeacherMaster" EntitySet="TeacherMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherStandardMapping_StandardMaster" Association="Self.FK_TeacherStandardMapping_StandardMaster">
+            <End Role="StandardMaster" EntitySet="StandardMaster" />
+            <End Role="TeacherStandardMapping" EntitySet="TeacherStandardMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherStandardMapping_TeacherMaster" Association="Self.FK_TeacherStandardMapping_TeacherMaster">
+            <End Role="TeacherMaster" EntitySet="TeacherMaster" />
+            <End Role="TeacherStandardMapping" EntitySet="TeacherStandardMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClass_ClassMaster" Association="Self.FK_UserClass_ClassMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="UserClass" EntitySet="UserClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClass_ClassMaster1" Association="Self.FK_UserClass_ClassMaster1">
+            <End Role="ClassMaster" EntitySet="ClassMaster" />
+            <End Role="UserClass" EntitySet="UserClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Role" Association="Self.FK_UserMaster_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataSketchModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClassMaster">
+          <Key>
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="ClassId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ClassMaster1" Relationship="Self.FK_ClassMaster_ClassMaster" FromRole="ClassMaster" ToRole="ClassMaster1" />
+          <NavigationProperty Name="ClassMaster2" Relationship="Self.FK_ClassMaster_ClassMaster" FromRole="ClassMaster1" ToRole="ClassMaster" />
+          <NavigationProperty Name="StandardClassMappings" Relationship="Self.FK_StandardClassMapping_ClassMaster" FromRole="ClassMaster" ToRole="StandardClassMapping" />
+          <NavigationProperty Name="StudentMasters" Relationship="Self.FK_StudentMaster_ClassMaster" FromRole="ClassMaster" ToRole="StudentMaster" />
+          <NavigationProperty Name="UserClasses" Relationship="Self.FK_UserClass_ClassMaster1" FromRole="ClassMaster" ToRole="UserClass" />
+        </EntityType>
+        <EntityType Name="EmailerService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SendBy" Type="Int64" Nullable="false" />
+          <Property Name="SendTo" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleAcronym" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_Role" FromRole="Role" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="SchoolMaster">
+          <Key>
+            <PropertyRef Name="SchoolId" />
+          </Key>
+          <Property Name="SchoolId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="StudentMasters" Relationship="Self.FK_StudentMaster_SchoolMaster" FromRole="SchoolMaster" ToRole="StudentMaster" />
+          <NavigationProperty Name="TeacherMasters" Relationship="Self.FK_TeacherMaster_SchoolMaster" FromRole="SchoolMaster" ToRole="TeacherMaster" />
+        </EntityType>
+        <EntityType Name="SketchMaster">
+          <Key>
+            <PropertyRef Name="SketchId" />
+          </Key>
+          <Property Name="SketchId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SketchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SketchPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_SketchMaster_UserMaster" FromRole="SketchMaster" ToRole="UserMaster" />
+          <NavigationProperty Name="SketchShareMappings" Relationship="Self.FK_SketchShareMapping_SketchMaster" FromRole="SketchMaster" ToRole="SketchShareMapping" />
+        </EntityType>
+        <EntityType Name="SketchShareMapping">
+          <Key>
+            <PropertyRef Name="SketchShareId" />
+          </Key>
+          <Property Name="SketchShareId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SketchId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SketchMaster" Relationship="Self.FK_SketchShareMapping_SketchMaster" FromRole="SketchShareMapping" ToRole="SketchMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_SketchShareMapping_UserMaster" FromRole="SketchShareMapping" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="StandardClassMapping">
+          <Key>
+            <PropertyRef Name="StandardClassId" />
+          </Key>
+          <Property Name="StandardClassId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StandardId" Type="Int64" Nullable="false" />
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ClassMaster" Relationship="Self.FK_StandardClassMapping_ClassMaster" FromRole="StandardClassMapping" ToRole="ClassMaster" />
+          <NavigationProperty Name="StandardMaster" Relationship="Self.FK_StandardClassMapping_StandardMaster" FromRole="StandardClassMapping" ToRole="StandardMaster" />
+        </EntityType>
+        <EntityType Name="StandardMaster">
+          <Key>
+            <PropertyRef Name="StandardId" />
+          </Key>
+          <Property Name="StandardId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Standard" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="StandardClassMappings" Relationship="Self.FK_StandardClassMapping_StandardMaster" FromRole="StandardMaster" ToRole="StandardClassMapping" />
+          <NavigationProperty Name="StudentMasters" Relationship="Self.FK_StudentMaster_StandardMaster" FromRole="StandardMaster" ToRole="StudentMaster" />
+          <NavigationProperty Name="TeacherStandardMappings" Relationship="Self.FK_TeacherStandardMapping_StandardMaster" FromRole="StandardMaster" ToRole="TeacherStandardMapping" />
+        </EntityType>
+        <EntityType Name="StudentMaster">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TeacherId" Type="Int64" Nullable="false" />
+          <Property Name="SchoolId" Type="Int64" Nullable="false" />
+          <Property Name="StandardId" Type="Int64" Nullable="false" />
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Int64" />
+          <NavigationProperty Name="ClassMaster" Relationship="Self.FK_StudentMaster_ClassMaster" FromRole="StudentMaster" ToRole="ClassMaster" />
+          <NavigationProperty Name="SchoolMaster" Relationship="Self.FK_StudentMaster_SchoolMaster" FromRole="StudentMaster" ToRole="SchoolMaster" />
+          <NavigationProperty Name="StandardMaster" Relationship="Self.FK_StudentMaster_StandardMaster" FromRole="StudentMaster" ToRole="StandardMaster" />
+          <NavigationProperty Name="TeacherMaster" Relationship="Self.FK_StudentMaster_TeacherMaster" FromRole="StudentMaster" ToRole="TeacherMaster" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TeacherMaster">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="TeacherId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SchoolId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="SchoolMaster" Relationship="Self.FK_TeacherMaster_SchoolMaster" FromRole="TeacherMaster" ToRole="SchoolMaster" />
+          <NavigationProperty Name="StudentMasters" Relationship="Self.FK_StudentMaster_TeacherMaster" FromRole="TeacherMaster" ToRole="StudentMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_TeacherMaster_UserMaster" FromRole="TeacherMaster" ToRole="UserMaster" />
+          <NavigationProperty Name="TeacherStandardMappings" Relationship="Self.FK_TeacherStandardMapping_TeacherMaster" FromRole="TeacherMaster" ToRole="TeacherStandardMapping" />
+        </EntityType>
+        <EntityType Name="TeacherStandardMapping">
+          <Key>
+            <PropertyRef Name="TeacherStandardId" />
+          </Key>
+          <Property Name="TeacherStandardId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeacherId" Type="Int64" Nullable="false" />
+          <Property Name="StandardId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="StandardMaster" Relationship="Self.FK_TeacherStandardMapping_StandardMaster" FromRole="TeacherStandardMapping" ToRole="StandardMaster" />
+          <NavigationProperty Name="TeacherMaster" Relationship="Self.FK_TeacherStandardMapping_TeacherMaster" FromRole="TeacherStandardMapping" ToRole="TeacherMaster" />
+        </EntityType>
+        <EntityType Name="UserClass">
+          <Key>
+            <PropertyRef Name="UserClassId" />
+          </Key>
+          <Property Name="UserClassId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ClassMaster" Relationship="Self.FK_UserClass_ClassMaster1" FromRole="UserClass" ToRole="ClassMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_UserClass_ClassMaster" FromRole="UserClass" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int64" Nullable="false" />
+          <Property Name="Token" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserMaster_Role" FromRole="UserMaster" ToRole="Role" />
+          <NavigationProperty Name="SketchMasters" Relationship="Self.FK_SketchMaster_UserMaster" FromRole="UserMaster" ToRole="SketchMaster" />
+          <NavigationProperty Name="SketchShareMappings" Relationship="Self.FK_SketchShareMapping_UserMaster" FromRole="UserMaster" ToRole="SketchShareMapping" />
+          <NavigationProperty Name="TeacherMasters" Relationship="Self.FK_TeacherMaster_UserMaster" FromRole="UserMaster" ToRole="TeacherMaster" />
+          <NavigationProperty Name="UserClasses" Relationship="Self.FK_UserClass_ClassMaster" FromRole="UserMaster" ToRole="UserClass" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logger" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ClassMaster_ClassMaster">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="ClassMaster1" Type="Self.ClassMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="ClassMaster1">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StandardClassMapping_ClassMaster">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="StandardClassMapping" Type="Self.StandardClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="StandardClassMapping">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMaster_ClassMaster">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="StudentMaster">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClass_ClassMaster1">
+          <End Role="ClassMaster" Type="Self.ClassMaster" Multiplicity="1" />
+          <End Role="UserClass" Type="Self.UserClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassMaster">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="UserClass">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMaster_SchoolMaster">
+          <End Role="SchoolMaster" Type="Self.SchoolMaster" Multiplicity="1" />
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolMaster">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="StudentMaster">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherMaster_SchoolMaster">
+          <End Role="SchoolMaster" Type="Self.SchoolMaster" Multiplicity="1" />
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolMaster">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TeacherMaster">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SketchMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="SketchMaster" Type="Self.SketchMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SketchMaster">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SketchShareMapping_SketchMaster">
+          <End Role="SketchMaster" Type="Self.SketchMaster" Multiplicity="1" />
+          <End Role="SketchShareMapping" Type="Self.SketchShareMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SketchMaster">
+              <PropertyRef Name="SketchId" />
+            </Principal>
+            <Dependent Role="SketchShareMapping">
+              <PropertyRef Name="SketchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SketchShareMapping_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="SketchShareMapping" Type="Self.SketchShareMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SketchShareMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StandardClassMapping_StandardMaster">
+          <End Role="StandardMaster" Type="Self.StandardMaster" Multiplicity="1" />
+          <End Role="StandardClassMapping" Type="Self.StandardClassMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StandardMaster">
+              <PropertyRef Name="StandardId" />
+            </Principal>
+            <Dependent Role="StandardClassMapping">
+              <PropertyRef Name="StandardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMaster_StandardMaster">
+          <End Role="StandardMaster" Type="Self.StandardMaster" Multiplicity="1" />
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StandardMaster">
+              <PropertyRef Name="StandardId" />
+            </Principal>
+            <Dependent Role="StudentMaster">
+              <PropertyRef Name="StandardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherStandardMapping_StandardMaster">
+          <End Role="StandardMaster" Type="Self.StandardMaster" Multiplicity="1" />
+          <End Role="TeacherStandardMapping" Type="Self.TeacherStandardMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StandardMaster">
+              <PropertyRef Name="StandardId" />
+            </Principal>
+            <Dependent Role="TeacherStandardMapping">
+              <PropertyRef Name="StandardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMaster_TeacherMaster">
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="1" />
+          <End Role="StudentMaster" Type="Self.StudentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherMaster">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="StudentMaster">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TeacherMaster">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherStandardMapping_TeacherMaster">
+          <End Role="TeacherMaster" Type="Self.TeacherMaster" Multiplicity="1" />
+          <End Role="TeacherStandardMapping" Type="Self.TeacherStandardMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherMaster">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="TeacherStandardMapping">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClass_ClassMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="UserClass" Type="Self.UserClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserClass">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataSketchEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClassMasters" EntityType="Self.ClassMaster" />
+          <EntitySet Name="EmailerServices" EntityType="Self.EmailerService" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="SchoolMasters" EntityType="Self.SchoolMaster" />
+          <EntitySet Name="SketchMasters" EntityType="Self.SketchMaster" />
+          <EntitySet Name="SketchShareMappings" EntityType="Self.SketchShareMapping" />
+          <EntitySet Name="StandardClassMappings" EntityType="Self.StandardClassMapping" />
+          <EntitySet Name="StandardMasters" EntityType="Self.StandardMaster" />
+          <EntitySet Name="StudentMasters" EntityType="Self.StudentMaster" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TeacherMasters" EntityType="Self.TeacherMaster" />
+          <EntitySet Name="TeacherStandardMappings" EntityType="Self.TeacherStandardMapping" />
+          <EntitySet Name="UserClasses" EntityType="Self.UserClass" />
+          <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <AssociationSet Name="FK_ClassMaster_ClassMaster" Association="Self.FK_ClassMaster_ClassMaster">
+            <End Role="ClassMaster" EntitySet="ClassMasters" />
+            <End Role="ClassMaster1" EntitySet="ClassMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StandardClassMapping_ClassMaster" Association="Self.FK_StandardClassMapping_ClassMaster">
+            <End Role="ClassMaster" EntitySet="ClassMasters" />
+            <End Role="StandardClassMapping" EntitySet="StandardClassMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMaster_ClassMaster" Association="Self.FK_StudentMaster_ClassMaster">
+            <End Role="ClassMaster" EntitySet="ClassMasters" />
+            <End Role="StudentMaster" EntitySet="StudentMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClass_ClassMaster1" Association="Self.FK_UserClass_ClassMaster1">
+            <End Role="ClassMaster" EntitySet="ClassMasters" />
+            <End Role="UserClass" EntitySet="UserClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Role" Association="Self.FK_UserMaster_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMaster_SchoolMaster" Association="Self.FK_StudentMaster_SchoolMaster">
+            <End Role="SchoolMaster" EntitySet="SchoolMasters" />
+            <End Role="StudentMaster" EntitySet="StudentMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherMaster_SchoolMaster" Association="Self.FK_TeacherMaster_SchoolMaster">
+            <End Role="SchoolMaster" EntitySet="SchoolMasters" />
+            <End Role="TeacherMaster" EntitySet="TeacherMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SketchMaster_UserMaster" Association="Self.FK_SketchMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="SketchMaster" EntitySet="SketchMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SketchShareMapping_SketchMaster" Association="Self.FK_SketchShareMapping_SketchMaster">
+            <End Role="SketchMaster" EntitySet="SketchMasters" />
+            <End Role="SketchShareMapping" EntitySet="SketchShareMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SketchShareMapping_UserMaster" Association="Self.FK_SketchShareMapping_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="SketchShareMapping" EntitySet="SketchShareMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StandardClassMapping_StandardMaster" Association="Self.FK_StandardClassMapping_StandardMaster">
+            <End Role="StandardMaster" EntitySet="StandardMasters" />
+            <End Role="StandardClassMapping" EntitySet="StandardClassMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMaster_StandardMaster" Association="Self.FK_StudentMaster_StandardMaster">
+            <End Role="StandardMaster" EntitySet="StandardMasters" />
+            <End Role="StudentMaster" EntitySet="StudentMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherStandardMapping_StandardMaster" Association="Self.FK_TeacherStandardMapping_StandardMaster">
+            <End Role="StandardMaster" EntitySet="StandardMasters" />
+            <End Role="TeacherStandardMapping" EntitySet="TeacherStandardMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMaster_TeacherMaster" Association="Self.FK_StudentMaster_TeacherMaster">
+            <End Role="TeacherMaster" EntitySet="TeacherMasters" />
+            <End Role="StudentMaster" EntitySet="StudentMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherMaster_UserMaster" Association="Self.FK_TeacherMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="TeacherMaster" EntitySet="TeacherMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherStandardMapping_TeacherMaster" Association="Self.FK_TeacherStandardMapping_TeacherMaster">
+            <End Role="TeacherMaster" EntitySet="TeacherMasters" />
+            <End Role="TeacherStandardMapping" EntitySet="TeacherStandardMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClass_ClassMaster" Association="Self.FK_UserClass_ClassMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="UserClass" EntitySet="UserClasses" />
+          </AssociationSet>
+          <FunctionImport Name="GenerateAPIClass" ReturnType="Collection(String)">
+            <Parameter Name="ProjectName" Mode="In" Type="String" />
+            <Parameter Name="TableName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateBALClass" ReturnType="Collection(String)">
+            <Parameter Name="ProjectName" Mode="In" Type="String" />
+            <Parameter Name="TableName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateMVCModelClass" ReturnType="Collection(String)">
+            <Parameter Name="Namespace" Mode="In" Type="String" />
+            <Parameter Name="TableName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetClassListStandardWise" ReturnType="Collection(DataSketchModel.GetClassListStandardWise_Result)">
+          <Parameter Name="StandardId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetSharedSketchList" ReturnType="Collection(DataSketchModel.GetSharedSketchList_Result)">
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetSketchShareStudents" ReturnType="Collection(DataSketchModel.GetSketchShareStudents_Result)">
+          <Parameter Name="SketchId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentList" ReturnType="Collection(DataSketchModel.GetStudentList_Result)" />
+          <FunctionImport Name="GetStudentListOfTeacher" ReturnType="Collection(DataSketchModel.GetStudentListOfTeacher_Result)">
+          <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DataSketchModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DataSketchModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="ValidateUser" ReturnType="Collection(DataSketchModel.ValidateUser_Result)">
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSketch" ReturnType="Collection(DataSketchModel.GetAllSketch_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetClassListStandardWise_Result">
+          <Property Type="Int64" Name="ClassId" Nullable="false" />
+          <Property Type="String" Name="ClassName" Nullable="false" MaxLength="30" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetSharedSketchList_Result">
+          <Property Type="Int64" Name="SketchId" Nullable="false" />
+          <Property Type="String" Name="SketchName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SketchPath" Nullable="false" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="GetSketchShareStudents_Result">
+          <Property Type="Int64" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="TeacherId" Nullable="false" />
+          <Property Type="Int64" Name="SchoolId" Nullable="false" />
+          <Property Type="Int64" Name="StandardId" Nullable="false" />
+          <Property Type="Int64" Name="ClassId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="UserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetStudentList_Result">
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="StudentId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="SchoolName" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="ClassName" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="StandardName" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="GetStudentListOfTeacher_Result">
+          <Property Type="Int64" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="TeacherId" Nullable="false" />
+          <Property Type="Int64" Name="SchoolId" Nullable="false" />
+          <Property Type="Int64" Name="StandardId" Nullable="false" />
+          <Property Type="Int64" Name="ClassId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="UserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ValidateUser_Result">
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="RoleId" Nullable="false" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GetAllSketch_Result">
+          <Property Type="String" Name="SketchName" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int64" Name="SketchId" Nullable="false" />
+          <Property Type="Int64" Name="StandardId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataSketchModelStoreContainer" CdmEntityContainer="DataSketchEntities">
+          <EntitySetMapping Name="ClassMasters">
+            <EntityTypeMapping TypeName="DataSketchModel.ClassMaster">
+              <MappingFragment StoreEntitySet="ClassMaster">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailerServices">
+            <EntityTypeMapping TypeName="DataSketchModel.EmailerService">
+              <MappingFragment StoreEntitySet="EmailerService">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SendBy" ColumnName="SendBy" />
+                <ScalarProperty Name="SendTo" ColumnName="SendTo" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DataSketchModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleAcronym" ColumnName="RoleAcronym" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolMasters">
+            <EntityTypeMapping TypeName="DataSketchModel.SchoolMaster">
+              <MappingFragment StoreEntitySet="SchoolMaster">
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SketchMasters">
+            <EntityTypeMapping TypeName="DataSketchModel.SketchMaster">
+              <MappingFragment StoreEntitySet="SketchMaster">
+                <ScalarProperty Name="SketchId" ColumnName="SketchId" />
+                <ScalarProperty Name="SketchName" ColumnName="SketchName" />
+                <ScalarProperty Name="SketchPath" ColumnName="SketchPath" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SketchShareMappings">
+            <EntityTypeMapping TypeName="DataSketchModel.SketchShareMapping">
+              <MappingFragment StoreEntitySet="SketchShareMapping">
+                <ScalarProperty Name="SketchShareId" ColumnName="SketchShareId" />
+                <ScalarProperty Name="SketchId" ColumnName="SketchId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StandardClassMappings">
+            <EntityTypeMapping TypeName="DataSketchModel.StandardClassMapping">
+              <MappingFragment StoreEntitySet="StandardClassMapping">
+                <ScalarProperty Name="StandardClassId" ColumnName="StandardClassId" />
+                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StandardMasters">
+            <EntityTypeMapping TypeName="DataSketchModel.StandardMaster">
+              <MappingFragment StoreEntitySet="StandardMaster">
+                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+                <ScalarProperty Name="Standard" ColumnName="Standard" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentMasters">
+            <EntityTypeMapping TypeName="DataSketchModel.StudentMaster">
+              <MappingFragment StoreEntitySet="StudentMaster">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DataSketchModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherMasters">
+            <EntityTypeMapping TypeName="DataSketchModel.TeacherMaster">
+              <MappingFragment StoreEntitySet="TeacherMaster">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherStandardMappings">
+            <EntityTypeMapping TypeName="DataSketchModel.TeacherStandardMapping">
+              <MappingFragment StoreEntitySet="TeacherStandardMapping">
+                <ScalarProperty Name="TeacherStandardId" ColumnName="TeacherStandardId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserClasses">
+            <EntityTypeMapping TypeName="DataSketchModel.UserClass">
+              <MappingFragment StoreEntitySet="UserClass">
+                <ScalarProperty Name="UserClassId" ColumnName="UserClassId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="DataSketchModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="DataSketchModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GenerateAPIClass" FunctionName="DataSketchModel.Store.GenerateAPIClass" />
+          <FunctionImportMapping FunctionImportName="GenerateBALClass" FunctionName="DataSketchModel.Store.GenerateBALClass" />
+          <FunctionImportMapping FunctionImportName="GenerateMVCModelClass" FunctionName="DataSketchModel.Store.GenerateMVCModelClass" />
+          <FunctionImportMapping FunctionImportName="GetClassListStandardWise" FunctionName="DataSketchModel.Store.GetClassListStandardWise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.GetClassListStandardWise_Result">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSharedSketchList" FunctionName="DataSketchModel.Store.GetSharedSketchList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.GetSharedSketchList_Result">
+                <ScalarProperty Name="SketchId" ColumnName="SketchId" />
+                <ScalarProperty Name="SketchName" ColumnName="SketchName" />
+                <ScalarProperty Name="SketchPath" ColumnName="SketchPath" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSketchShareStudents" FunctionName="DataSketchModel.Store.GetSketchShareStudents">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.GetSketchShareStudents_Result">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudentList" FunctionName="DataSketchModel.Store.GetStudentList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.GetStudentList_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="StandardName" ColumnName="StandardName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudentListOfTeacher" FunctionName="DataSketchModel.Store.GetStudentListOfTeacher">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.GetStudentListOfTeacher_Result">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DataSketchModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DataSketchModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DataSketchModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DataSketchModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DataSketchModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DataSketchModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DataSketchModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="DataSketchModel.Store.ValidateUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.ValidateUser_Result">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSketch" FunctionName="DataSketchModel.Store.GetAllSketch">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DataSketchModel.GetAllSketch_Result">
+                <ScalarProperty Name="SketchName" ColumnName="SketchName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SketchId" ColumnName="SketchId" />
+                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

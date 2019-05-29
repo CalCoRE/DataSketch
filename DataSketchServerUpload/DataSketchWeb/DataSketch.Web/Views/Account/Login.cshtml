@@ -1,0 +1,91 @@
+﻿@model DataSketch.Models.LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div id="showLoader">
+        <div>
+
+            <h1 class="logo-name">
+            @*#DS<span class="fa fa-paint-brush" style="float:right; font-size:90px; vertical-align:middle;"></span>*@
+                <img src="~/Content/landing/icon_1.png" style="width: 250px; margin-bottom: 10px; " alt="Mountain View">
+            </h1>
+        </div>
+        <h3>Welcome to DataSketch</h3>
+        <p>
+            Exploring computational data visualization in the middle grades.
+            <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
+        </p>
+        <p>Login in. To see it in action.</p>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "m-t", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.returnUrl);
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Email" ,@id="EmailAddress"})
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            @Html.ValidationSummary(true)
+            <div id="validationMessage" class="form-group"></div>
+    <button type="submit" class="btn btn-primary block full-width m-b" onclick="showLoader()">Login</button>
+
+                <a onclick="ForgotPassword()"><small>Forgot password?</small></a>
+        }
+        <p class="m-t"> <small>DataSketch 1.0.0 &copy; 2018</small> </p>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#validationMessage').html("")
+        if ('@Model.toasterObject.Message' != null)
+            {
+            var Message = '@Model.toasterObject.Message';
+              if (Message != "") {
+                  $('#validationMessage').html("Password reset link is not valid.")
+                  $('#validationMessage').css('color', 'red');
+                }
+             }
+        
+    });
+    function ForgotPassword()
+    {
+        var EmailAddress=$("#EmailAddress").val();
+        $.ajax({
+            url: '@Url.Action("ForgotPassword", "Account")',
+            type: "POST",
+            dataType: "html",
+            data: { EmailId: EmailAddress },
+            success: function (result) {
+                debugger
+                if (result == 1) {
+                    $('#validationMessage').html("A message with your username and a link to reset your password has been sent to your email.");
+                    $('#validationMessage').css('color', 'green');
+                }
+                else if(result == 2)
+                {
+                    $('#validationMessage').html("Please contact your teacher for password.");
+                    $('#validationMessage').css('color', 'green');
+                }
+                else if(result == "false")
+                {
+                    $('#validationMessage').html("User is not register please register first.");
+                    $('#validationMessage').css('color', 'red');
+                }
+            },
+            error: function (errormessage) {
+                if (errormessage.status == 200) {
+                    toastr['error']("Something went wrong please try again.");
+                }
+            }
+        });
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

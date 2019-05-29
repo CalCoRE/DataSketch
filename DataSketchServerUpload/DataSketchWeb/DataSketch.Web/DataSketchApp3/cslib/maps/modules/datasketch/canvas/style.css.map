@@ -1,0 +1,1 @@
+{"version":3,"file":"../../../../modules/datasketch/canvas/style.css","sources":["modules/datasketch/canvas/style.scss"],"sourcesContent":[".dscanvas {\n  width: 100%;\n  height: 100%;\n}\n\n.activeMenu {\n\tbackground-color: #ffffff;\n}"],"mappings":"AAAA,AAAA,SAAS,CAAC;EACR,KAAK,EAAE,IAAK;EACZ,MAAM,EAAE,IAAK,GACd;;AAED,AAAA,WAAW,CAAC;EACX,gBAAgB,EAAE,OAAQ,GAC1B","names":[]}

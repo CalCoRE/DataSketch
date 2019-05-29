@@ -1,0 +1,20 @@
+.tool.shape-1 {
+  background: url("icons/circle.png") center center no-repeat; }
+
+.tool.shape-2 {
+  background: url("icons/square.png") center center no-repeat; }
+
+.tool.shape-3 {
+  background: url("icons/triangle.png") center center no-repeat; }
+
+.tool.shape-4 {
+  background: url("icons/line.png") center center no-repeat; }
+
+.tool.shape-5 {
+  background: url("icons/line.png") center center no-repeat;
+  transform: rotate(90deg); }
+
+.tool.shape-6 {
+  background: url("icons/addText.png") center center no-repeat; }
+
+/*# sourceMappingURL=../../../../maps/modules/datasketch/tools/shapes/style.css.map */

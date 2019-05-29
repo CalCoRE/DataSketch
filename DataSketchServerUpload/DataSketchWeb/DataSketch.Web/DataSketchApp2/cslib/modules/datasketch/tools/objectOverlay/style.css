@@ -1,0 +1,74 @@
+#markAsOrigin {
+  top: 365px;
+  right: 20px; }
+
+.tool.objectoverlay {
+  background: url("icons/bringtofront.png") center center no-repeat; }
+
+.markasorigin-tool {
+  margin: 0px 1px; }
+
+#ObjectOverlay.modal-body {
+  padding: 5px 0px 0px 5px !important; }
+
+#ObjectOverlay.modal-dialog {
+  top: 485px;
+  right: 70px; }
+
+.tool.ObjectOverlay-1 .form_body:before {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  border-left: 11px solid #a2a2a2;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 9; }
+
+.tool.ObjectOverlay-1 .modal-body.form_body:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  border-left: 10px solid #ffffff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 99; }
+
+#SendBackwards {
+  background: url("icons/sendbackwards.png") center center no-repeat;
+  margin-left: 5px;
+  height: 32px;
+  width: 32px;
+  display: inline-block; }
+
+#SendToBack {
+  background: url("icons/sendtoback.png") center center no-repeat;
+  margin-left: 5px;
+  height: 32px;
+  width: 32px;
+  display: inline-block; }
+
+#BringToFront {
+  background: url("icons/bringtofront.png") center center no-repeat;
+  margin-left: 5px;
+  height: 32px;
+  width: 32px;
+  display: inline-block; }
+
+#BringForward {
+  background: url("icons/bringforward.png") center center no-repeat;
+  margin-left: 5px;
+  height: 32px;
+  width: 32px;
+  display: inline-block; }
+
+/*# sourceMappingURL=../../../../maps/modules/datasketch/tools/objectoverlay/style.css.map */

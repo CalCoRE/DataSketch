@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Manage CSV Files";
+    Layout = "~/Views/Shared/BasicLayout.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" id="ManageCSV">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <h2>CSV List</h2>
+                    <div class="table-responsive">
+                        @using (Html.BeginForm("ManageCSV", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="col-lg-4 fileinput fileinput-new input-group" data-provides="fileinput" style="float:left;">
+                                <div class="form-control" data-trigger="fileinput">
+                                    <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                    <span class="fileinput-filename"></span>
+                                </div>
+                                <span class="input-group-addon btn btn-default btn-file">
+                                    <span class="fileinput-new">Select file</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="uploadedfile" />
+                                </span>
+                                <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                            </div>
+                            <div class="col-lg-2" style="float:left;">
+                                <button class="btn btn-primary" type="submit" style="float:left;">Submit</button>
+                            </div>
+                        }
+                        <table id="tblCSVList" class="text-center table table-striped table-bordered table-hover datatables-example">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">File Name</th>
+                                    <th class="text-center">Created On</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.FileName</td>
+                                        <td>
+                                            @if (@item.CreatedOn != null)
+                                            {
+                                                @item.CreatedOn.ToString("dd/MM/yyyy")
+                                            }
+                                        </td>
+                                        <td>
+                                            <a onclick="Delete('@item.FileName')">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Styles.Render("~/plugins/jasnyBootstrapStyles")
+@Scripts.Render("~/plugins/jasnyBootstrap")
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            InitDataTable('tblCSVList');
+        });
+        function Delete(fileName) {
+            if (confirm("Are you sure you want to delete CSV file?")) {
+                blockUI()
+                $.ajax({
+                    url: '@Url.Action("DeleteCSV", "Home")',
+                    type: "POST",
+                    dataType: "html",
+                    data: { FileName: fileName },
+                    success: function (result) {
+                        toastr['success']("CSV deleted successfully.");
+                        $('#ManageCSV').html(result);
+                        InitDataTable('tblCSVList');
+                        unBlockUI()
+                    },
+                    error: function (errormessage) {
+                        unBlockUI()
+                        console.log(errormessage);
+                    }
+                })
+            }
+        }
+    </script>
+}

@@ -1,0 +1,15 @@
+.form-calibration {
+  font-size: 14px;
+  line-height: 20px; }
+  .form-calibration .fields .field {
+    display: inline-block;
+    margin: 10px; }
+    .form-calibration .fields .field input {
+      width: 100px; }
+  .form-calibration .buttons .field {
+    display: inline-block; }
+  .form-calibration .field-button .button.btn-cancel {
+    border: none;
+    background: transparent; }
+
+/*# sourceMappingURL=../../../../../../maps/modules/datasketch/animation/properties/base/calibration/style.css.map */

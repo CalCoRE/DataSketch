@@ -1,0 +1,136 @@
+﻿@{
+    var message = TempData["message"];
+    ViewBag.IsLogin = (HttpContext.Current.Session != null && HttpContext.Current.Session["UserId"] != null && Convert.ToInt64(HttpContext.Current.Session["UserId"]) > 0);
+    //TempData["message"] = string.Empty;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/plugins/awesomeCheckboxStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/plugins/toastrStyles")
+    @Styles.Render("~/Content/autocomplete")
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/switcheryStyles")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/bundles/blockUI")
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/toastr")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/bundles/inspinia")
+    @*@Scripts.Render("~/plugins/validate")*@
+
+    @RenderSection("Scripts", required: false)
+    <style>
+        #passwordInputAddon {
+            cursor: pointer;
+        }
+
+        #confirmPasswordInputAddon {
+            cursor: pointer;
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120657113-1"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-120657113-1');
+    
+        function showLoader() {
+            blockUI()
+        }
+        function blockUI() {
+            $('div.wrapper-content').block({
+                message: $('#loader'),
+                css: {
+                    border: 'none',
+                    backgroundColor: 'transparent'
+                }, overlayCSS: { backgroundColor: '#FFF', position: 'fixed' }
+            })
+        }
+        function unBlockUI() {
+            $('div.wrapper-content').unblock();
+        }
+    </script>
+</head>
+<body>
+    <div id="loader" hidden>
+        <div class="spiner-example">
+            <div class="sk-spinner sk-spinner-cube-grid">
+                <div class="sk-cube"></div>
+                <div class="sk-cube"></div>
+                <div class="sk-cube"></div>
+                <div class="sk-cube"></div>
+                <div class="sk-cube"></div>
+                <div class="sk-cube"></div>
+                <div class="sk-cube"></div>
+                <div class="sk-cube"></div>
+                <div class="sk-cube"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wrapper-->
+    <div id="wrapper">
+        <!-- Left navigation bar -->
+        @if (ViewBag.IsLogin)
+        {
+            @Html.Partial("_NavigationPartial")
+        }
+        <!-- Main page wrapper -->
+        <div id="@(ViewBag.IsLogin ? "page-wrapper" : string.Empty)" class="gray-bg">
+            <!-- Top navigation -->
+            @if (ViewBag.IsLogin)
+            {
+                @Html.Partial("_TopNavigationPartial")
+
+            <!-- Main view/routes wrapper-->
+                if (!ViewContext.RouteData.Values["controller"].ToString().Contains("DataSketch"))
+                {
+                    <div class="row wrapper border-bottom white-bg page-heading">
+                        <div class="col-lg-10">
+                            <h2>@ViewBag.Title</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="~/Home/Dashboard">Home</a>
+                                </li>
+                                @if (@ViewBag.Parent != null)
+                                {
+                                    <li>
+                                        <a href="~/Home/@ViewBag.Parent">@ViewBag.Parent</a>
+                                    </li>
+                                }
+                                <li class="active">
+                                    <strong>@ViewBag.Title</strong>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                }
+            }
+            <input type="hidden" value="@message" id="hdnMessage" />
+            @RenderBody()
+            <!-- Footer -->
+            @if (!ViewContext.RouteData.Values["controller"].ToString().Contains("DataSketch"))
+            {
+                @Html.Partial("_FooterPartial")
+            }
+        </div>
+        <!-- End page wrapper-->
+    </div>
+    @*<input type="hidden" id="Status" data-success='@TempData["Success"]'>*@
+    <!-- End wrapper-->
+</body>
+</html>

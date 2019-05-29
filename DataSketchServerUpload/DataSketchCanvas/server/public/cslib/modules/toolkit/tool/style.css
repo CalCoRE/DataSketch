@@ -1,0 +1,13 @@
+.tool {
+  width: 40px;
+  height: 40px;
+  /*padding: 5px;
+  margin: 5px;*/
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer; }
+  .tool.active {
+    border: 1px solid #282828;
+    background-color: #d9d9d9; }
+
+/*# sourceMappingURL=../../../maps/modules/toolkit/tool/style.css.map */

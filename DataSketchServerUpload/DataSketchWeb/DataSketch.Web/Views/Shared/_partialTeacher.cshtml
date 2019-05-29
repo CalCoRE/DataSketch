@@ -1,0 +1,39 @@
+﻿<thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email Address</th>
+        <th>School</th>
+        <th>Standards</th>
+        <th class="text-center">Action</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (DataSketch.Models.TeacherMasterModel item in Model)
+    {
+    <tr>
+        <td>@item.FirstName</td>
+        <td>@item.LastName</td>
+        <td>@item.EmailAddress</td>
+        <td>@item.SchoolName</td>
+        <td>
+            @string.Join(", ", item.lstStandard.Select(x => x.Standard).ToArray())
+        </td>
+        <td class="text-center">
+            @{
+            int Active = item.IsActive ? 1 : 0;
+            }
+            <a onclick='ActiveInactiveTeacher(@item.TeacherId,@Active)'>
+                <i class='@(@item.IsActive == true ? "fa fa-check fa-x text-navy" : "fa fa-x fa-times-circle-o text-danger")'></i>
+            </a>
+
+            <a href="~/Home/AddEditTeacher?id=@item.TeacherId">
+                <i class="fa fa-edit text-success "></i>
+            </a>
+            <a onclick="DeleteTeacher(@item.TeacherId)">
+                <i class="fa fa-trash text-danger"></i>
+            </a>
+        </td>
+    </tr>
+    }
+</tbody>

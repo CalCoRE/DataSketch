@@ -1,0 +1,96 @@
+@import "../../../scss_includes/variables";
+
+.objectproperty-menu {  
+  margin: auto;  
+  left:0;
+  right:0;
+  align-content:center;
+  height: 40px;
+  position: absolute;
+  top: -40px;  
+  transition: bottom linear 0.3s;
+  background: $light-gray;
+  width: 575px;
+
+  &.objectproperty-menu-open {
+    top: 5px;
+  }
+
+ .menu-item {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 30px;
+    padding: 5px 10px;
+    cursor: default;
+    position: relative;	
+	margin: auto;
+
+    &.actionable {
+      cursor: pointer;
+    }
+
+    &.disabled {
+      color: $medium-gray;
+    }
+  }
+  &>.menu-item {
+    padding: 0;
+    &>.menu-items>.menu-item {
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+
+      .menu-items {
+        background: $light-gray;
+        box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        position: relative;
+      }
+
+      &>.menu-items {
+        position: absolute;
+        left: 0px;
+        top: 40px;
+        display: none;
+
+        .menu-item {
+          white-space: nowrap;
+          padding-right: 30px;
+          border-bottom: 1px solid $medium-gray;
+          &:last-child {
+            border-bottom: none;
+          }
+
+          &.parent:not(.disabled) {
+            &:hover:after,
+            &.open:after {
+              position: absolute;
+              top: 10px;
+              right: 5px;
+              width: 20px;
+              content: "»";
+              text-align: center;
+              font-size: 24px;
+              line-height: 20px;
+            }
+          }
+
+          &:not(.disabled):hover>.menu-items,
+          &:not(.disabled).open>.menu-items {
+            display: block;			
+          }
+        }
+
+        .menu-items {
+          display:none;
+          position: absolute;
+          left: 100%;
+          bottom: 0;
+        }
+      }
+      /*&:not(.disabled):hover>.menu-items,
+      &:not(.disabled).open>.menu-items {
+        display: block;
+      }*/
+    }
+  }
+}

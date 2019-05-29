@@ -1,0 +1,1 @@
+{"version":3,"file":"../../../../../modules/datasketch/tools/trash/style.css","sources":["modules/datasketch/tools/trash/style.scss"],"sourcesContent":[".trash {\n  background: url(\"icons/trash.png\") center center no-repeat;\n  background-size:35px;\n}\n"],"mappings":"AAAA,AAAA,MAAM,CAAC;EACL,UAAU,EAAE,sBAAG,CAAoB,MAAM,CAAC,MAAM,CAAC,SAAS;EAC1D,eAAe,EAAC,IAAK,GACtB","names":[]}

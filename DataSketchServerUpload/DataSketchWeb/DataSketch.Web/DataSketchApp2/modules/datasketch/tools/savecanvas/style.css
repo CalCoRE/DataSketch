@@ -1,0 +1,21 @@
+.savecanvas {
+  margin-top: 400px;
+  left: 200px; }
+  .savecanvas .palette-well {
+    width: 100%;
+    height: 100%;
+    font-size: 12px; }
+
+#savecanvas.toolbar {
+  border: none !important;
+  padding: 0px; }
+
+#modalvalue {
+  height: 25px; }
+
+#savecanvas {
+  margin-top: -316px;
+  margin-left: 587px;
+  background-color: white; }
+
+/*# sourceMappingURL=../../../../maps/modules/datasketch/tools/savecanvas/style.css.map */

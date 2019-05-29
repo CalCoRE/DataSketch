@@ -1,0 +1,85 @@
+<div class="modal fade" id="CalibrationAndManipulationModal" data-backdrop="static" role="dialog" style="overflow:hidden;" data-keyboard="false">
+    <div id="manipulationandcalibrationproperty" hidden>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content canvas-tool" style="border-radius:0px;width: 678px; left: -39px; margin-top: 44px;border-top:none;box-shadow:none;" id="calibrationandmanipulation">
+                <input type="hidden" />
+                <div class="modal-body form_body" style=" padding: 20px 20px 4px 20px !important;">
+                    <div class="row">
+                        <div style="float: left; margin-right: 5px;">
+                            <select id="csvProperty" class="form-control" style="width:165px !important;"></select>
+                        </div>
+                        <div>
+                            <div class="radio radio-primary radio-inline" style="float: left;width:85px;margin-right:10px;">
+                                <input type="radio" name="minMaxValue" id="minValue" checked="checked" value="minValue" />
+                                <label for="minValue" style="font-size:13px">Min&nbsp;&nbsp;(<span id="propertyMinValue"></span>)</label>
+                            </div>
+                            <div>
+                                <input style="width:365px;float:left;margin-right:5px;" value="0" name="rangeInput" id="minRangeInput" oninput="$('#minRangeInput').click()" type="range">
+                                <label class="sliderlabel" id="minInput">0</label>
+                            </div>
+
+                            <div class="radio radio-primary radio-inline" style="float:left;margin-right:10px;width: 85px;">
+                                <input type="radio" name="minMaxValue" id="maxValue" value="maxValue" />
+                                <label for="maxValue" style="font-size:13px">Max (<span id="propertyMaxValue"></span>)</label>
+                            </div>
+                            <div>
+                                <input style="width:365px;float:left;margin-right:5px;" value="0" type="range" name="rangeInput" id="maxRangeInput" min="0" max="100" oninput="$('#maxRangeInput').click()">
+                                <label for="maxRangeInput" class="sliderlabel" id="maxInput">0</label>
+                            </div>
+
+                        </div>
+                        <button type="button" id="CloseButton" style="margin-top:15px;margin-bottom:5px !important;" class="btn btn-default buttonproperty" data-dismiss="modal">Cancel</button>
+                        <button id="calibrationRemoveButton" type="submit" style="margin-top: 15px; margin-bottom: 5px !important;" class="btn btn-primary buttonproperty">Reset</button>
+                        <button id="calibrationApplyButton" style="margin-top: 15px; margin-bottom: 5px !important;" type="submit" class="btn btn-primary buttonproperty">Apply</button>
+                        <button type="button" style="display:none" id="generateAction"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="calibrationandmanipulationcolor" hidden>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content canvas-tool" style="border-radius:0px;width: 678px; left: -39px; margin-top: 44px;border-top:none;box-shadow:none;" id=" calibrationandmanipulationforcolor">
+                <input type="hidden" />
+                <div class="modal-body form_body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div style="display:inline-block;">
+                                <select id="csvPropertyColor" class="form-control" style="width:165px !important;"></select>
+                            </div>
+                            <div style="display:inline-block">
+                                <select id="colorProperty" class="form-control" style="width:240px !important;">
+                                    <option value="#f7f7f7-#252525">Grayscale</option>
+                                    <option value="#b2182b-#2166ac">Red to Blue</option>
+                                    <option value="#8c510a-#01665e">Orange to Turquoise</option>
+                                </select>
+                            </div>
+                            <div style="display:inline-block;float:right;">
+                                <button id="calibrationApplyButton" type="submit" class="btn btn-primary colorpropertymodal">Apply</button>
+                                <button id="calibrationRemoveButton" type="submit" class="btn btn-primary colorpropertymodal">Reset</button>
+                                <button type="button" id="CloseButton" class="btn btn-default colorpropertymodal" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="manipulationandcalibrationpropertystamping" hidden>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content canvas-tool" style="border-radius:0px;width: 678px; left: -39px;height:110px; margin-top: 44px;border-top:none;box-shadow:none;" id="calibrationandmanipulation">
+                <input type="hidden" />
+                <div class="modal-body form_body" style=" padding: 20px 20px 4px 20px !important;">
+                    <div class="row">
+                        <div class="checkbox checkbox-primary" style="margin-left:20px;">
+                            <input type="checkbox" id="isStamp">
+                            <label for="isStamp"><strong>Active / Inactive Stamping.</strong></label>
+                        </div>
+                        <button id="calibrationApplyButton" type="submit" class="btn btn-primary buttonproperty">Apply</button>
+                        <button type="button" style="display:none" id="generateAction"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

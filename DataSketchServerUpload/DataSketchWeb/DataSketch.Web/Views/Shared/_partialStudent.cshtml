@@ -1,0 +1,38 @@
+﻿<thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>User Name</th>
+        <th>Class</th>
+        <th>Standard</th>
+        <th>School</th>
+        <th class="text-center">Action</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.UserName</td>
+            <td>@item.ClassName</td>
+            <td>@item.StandardName</td>
+            <td>@item.SchoolName</td>
+            <td class="text-center">
+                @{
+        int Active = item.IsActive ? 1 : 0;
+                }
+                <a onclick='ActiveInactiveStudent(@item.StudentId,@Active)'>
+                    <i class='@(@item.IsActive == true ? "fa fa-check fa-x text-navy" : "fa fa-x fa-times-circle-o text-danger")'></i>
+                </a>
+                <a href="~/Home/AddEditStudent?id=@item.StudentId">
+                    <i class="fa fa-edit text-success fa-x "></i>
+                </a>
+                <a onclick='DeleteUser(@item.StudentId)'>
+                    <i class="fa fa-trash text-danger fa-x"></i>
+                </a>
+            </td>
+        </tr>
+    }
+</tbody>

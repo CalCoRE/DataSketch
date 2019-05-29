@@ -1,0 +1,190 @@
+﻿@using System.Web.Script.Serialization;
+@model DataSketch.Models.StudentMasterModel
+@{
+
+    Layout = "~/Views/Shared/BasicLayout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#passwordInputAddon').click(function () {
+            if ($('#Password').attr('type') == 'password') {
+                $("#Password").attr("type", "text");
+            } else {
+                $("#Password").attr("type", "password");
+            }
+        })
+        $('#confirmPasswordInputAddon').click(function ()
+        {
+            if ($('#ConfirmPassword').attr('type') == 'password') {
+                $("#ConfirmPassword").attr("type", "text");
+            } else {
+                $("#ConfirmPassword").attr("type", "password");
+            }
+        })
+        $('#Standard').change(function () {
+            $.ajax({
+                url: "GetClassStandardWise?standardId=" + $('#Standard').val(),
+                type: "GET",
+                contentType: "application/json",
+                dataType: "html",
+                success: function (result) {
+                    var resultObj = JSON.parse(result)
+                    console.log(resultObj)
+                    $('#Class').html("")
+                    $.each(resultObj, function (data, value) {
+                        $('#Class').append('<option value=' + value.ClassId + '>' + value.ClassName + '</option')
+                    });
+                },
+                error: function (errormessage) {
+                    toastr['error']("Something went wrong please try again.");
+                }
+            });
+        })
+        $("#Password").attr("placeholder", "Password");
+        $("#ConfirmPassword").attr("placeholder", "ConfirmPassword");
+        $('#UserName').change(function () {
+            $.ajax({
+                url: "CheckUserName?UserName=" + $('#UserName').val(),
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result)
+                    if (result == true) {
+                        $('#UserName').val("");
+                        $('#ValidateUserName').show()
+                    }
+                    else {
+                        $('#ValidateUserName').hide()
+                    }
+                },
+                error: function (errormessage) {
+                    if (errormessage.status == 200) {
+                        $('#ValidateUserName').hide()
+                    }
+                }
+            });
+        });
+    });
+    function validateForm()
+    {
+        if($("#ManageStudent").valid())
+        {
+            showLoader()
+            return true;
+        }
+        return false;
+    }
+</script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox-content">
+                    @using (Html.BeginForm("AddEditStudent", "Home", FormMethod.Post, new { @class = "m-t form-horizontal", role = "form", @id = "ManageStudent" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.StudentId)
+                        <div class="form-group">
+                            @Html.Label("FirstName", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @type = "text", @placeholder = "First Name" })
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("LastName", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @type = "text", @placeholder = "Last Name" })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("UserName", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @type = "text", @placeholder = "User name", @id = "UserName" })
+                                @Html.ValidationMessageFor(m => m.UserName)
+                                <div id="ValidateUserName" style="color:red;" hidden>User name already taken!</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Password", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                <div class="input-group" data-autoclose="true">
+                                    @Html.EditorFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "Password" })
+                                    <span class="input-group-addon" id="passwordInputAddon">
+                                        <span class="fa fa-eye"></span>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("ConfirmPassword", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                <div class="input-group" data-autoclose="true">
+                                    @Html.EditorFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @id = "ConfirmPassword" })
+                                    <span class="input-group-addon" id="confirmPasswordInputAddon">
+                                        <span class="fa fa-eye"></span>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Teacher", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(m => m.Teacher, new SelectList(Model.lstTeacher, "TeacherId", "FullName"), "Select Teacher", new { @class = "form-control", @id = "Teacher" })
+                                @Html.ValidationMessageFor(m => m.Teacher)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("School", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(m => m.School, new SelectList(Model.lstSchool, "SchoolId", "SchoolName"), "Select School", new { @class = "form-control", @id = "School" })
+                                @Html.ValidationMessageFor(m => m.School)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Standard", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(m => m.Standard, new SelectList(Model.lstStandard, "StandardId", "Standard"), "Select Standard", new { @class = "form-control", @id = "Standard" })
+                                @Html.ValidationMessageFor(m => m.Standard)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Class", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(m => m.Class, new SelectList(Model.lstClass, "ClassId", "ClassName"), "Select Class", new { @class = "form-control", @id = "Class" })
+                                @Html.ValidationMessageFor(m => m.Class)
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <button id="addEditTeacherSubmit" class="btn btn-primary" onclick="return validateForm()" type="submit">Submit</button>
+                                <button class="btn btn-white" onclick="CancelAction('Students')" type="button">Cancel</button>
+                                <button class="btn btn-white" type="reset">Reset</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        //toastr.success('Without any options', 'Simple notification!')
+    });
+
+    function ResetForm() {
+        $(':input', '#ManageStudent')
+            .not(':button, :submit, :reset, :hidden')
+            .val('')
+            .removeAttr('checked')
+            .removeAttr('selected');
+    }
+</script>

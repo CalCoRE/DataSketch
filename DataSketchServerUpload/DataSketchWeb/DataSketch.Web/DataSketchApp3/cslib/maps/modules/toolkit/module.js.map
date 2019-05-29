@@ -1,0 +1,1 @@
+{"version":3,"file":"../../../modules/toolkit/module.js","sources":["modules/toolkit/module.coffee"],"names":[],"mappings":"AAAA;AAAA,MAAA;;;EAAA,MAAA,CAAO,SAAC,OAAD;AACL,QAAA;IAAA,MAAA,GAAS,OAAA,CAAQ,iBAAR;WAEH;;;;;;;;;OAAsB;EAHvB,CAAP;AAAA","sourcesContent":["define (require) ->\n  Module = require 'core/app/module'\n\n  class ToolbarModule extends Module    "]}

@@ -1,0 +1,13 @@
+@import "../../../../scss_includes/variables";
+
+.field-button {
+  .button {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 10px;
+    background: $light-gray;
+    border: 1px solid $black;
+    cursor: pointer;
+  }
+}

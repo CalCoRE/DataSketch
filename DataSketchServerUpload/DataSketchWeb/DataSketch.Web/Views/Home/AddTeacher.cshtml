@@ -1,0 +1,95 @@
+﻿@model DataSketch.Models.TeacherMasterModel
+@{
+    ViewBag.Title = "AddTeacher";
+    ViewBag.Parent = "Teachers";
+    Layout = "~/Views/Shared/BasicLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox-content">
+                    @using (Html.BeginForm("AddTeacher", "Home", FormMethod.Post, new { @class = "m-t form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.TeacherId)
+                        <div class="form-group">
+                            @Html.Label("FirstName", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @type = "text", @placeholder = "First Name" })
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("LastName", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @type = "text", @placeholder = "Last Name" })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("EmailAddress", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @type = "text", @placeholder = "Email Address" })
+                                @Html.ValidationMessageFor(m => m.EmailAddress)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Password", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.EditorFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("ConfirmPassword", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.EditorFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("School", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(m => m.SchoolId, new SelectList(Model.lstSchool, "SchoolId", "SchoolName"), "Select School", new { @class = "form-control", @id = "SchoolId" })
+                                @Html.ValidationMessageFor(m => m.SchoolId)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Standard</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @foreach (var check in Model.lstStandard)
+                                        {
+                                        <div class="col-md-4 checkbox checkbox-inline" style="margin-left:0px;">
+                                            <input id=@check.StandardId type="checkbox">
+                                            <label for=@check.StandardId>
+                                                @check.Standard
+                                            </label>
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-white" type="submit">Cancel</button>
+                                        <button class="btn btn-primary" type="submit">Add Teacher</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Password").attr("placeholder", "Password");
+        $("#ConfirmPassword").attr("placeholder", "ConfirmPassword");
+    });
+</script>

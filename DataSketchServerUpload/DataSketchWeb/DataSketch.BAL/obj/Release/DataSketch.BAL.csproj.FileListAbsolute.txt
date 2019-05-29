@@ -1,0 +1,11 @@
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Release\DataSketch.BAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Release\DataSketch.BAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Release\DataSketch.DAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Release\EntityFramework.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Release\EntityFramework.SqlServer.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Release\DataSketch.DAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Release\EntityFramework.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\bin\Release\EntityFramework.SqlServer.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Release\DataSketch.BAL.csprojResolveAssemblyReference.cache
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Release\DataSketch.BAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.BAL\obj\Release\DataSketch.BAL.pdb

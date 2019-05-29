@@ -1,0 +1,17 @@
+﻿<div class="tool snapgrid-1">
+    <div class="modal fade" id="SliderInputModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" id="SliderInput" style=" margin: 0 auto; float: right; ">
+            <div class="modal-content savecanvas-tool">
+                <div class="modal-body form_body" id="SliderModalBody">
+                        <div class="col-md-11" id="rangeslider">
+                            <input type="hidden" id="OnInputOfSlider" value="true"/>
+                            <input type="range" title="Grid Size Slider" id="GridSizeSlider" class="form-control slider" oninput="$('#OnInputOfSlider').click()">
+                        </div>
+                        <div class="col-md-1" id="rangeslidervalue">
+                            <label id="SliderValue"></label>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

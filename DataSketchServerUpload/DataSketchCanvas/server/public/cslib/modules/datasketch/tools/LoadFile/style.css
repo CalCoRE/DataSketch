@@ -1,0 +1,16 @@
+.LoadInput-tool .palette-well {
+  width: 100%;
+  font-size: 12px; }
+
+.loadcanvas-tool {
+  top: 250px;
+  left: 500px;
+  height: 150px; }
+
+#LoadFile.toolbar {
+  background: none !important;
+  border: none !important;
+  top: 250px;
+  left: 450px; }
+
+/*# sourceMappingURL=../../../../maps/modules/datasketch/tools/loadfile/style.css.map */

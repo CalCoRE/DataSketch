@@ -1,0 +1,13 @@
+.tool.SaveCanvas {
+  background: url("icons/save.png") center center no-repeat;
+  display: none; }
+
+.tool.LoadCanvas {
+  background: url("icons/load.png") center center no-repeat;
+  background-size: 35px; }
+
+#LoadSave {
+  top: 460px !important;
+  left: 20px !important; }
+
+/*# sourceMappingURL=../../../../maps/modules/datasketch/tools/loadsave/style.css.map */

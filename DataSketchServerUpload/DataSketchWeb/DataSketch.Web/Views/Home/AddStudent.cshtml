@@ -1,0 +1,121 @@
+﻿@using System.Web.Script.Serialization;
+@model DataSketch.Models.ManageStudent
+@{
+
+    Layout = "~/Views/Shared/BasicLayout.cshtml";
+}
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).ready(function () {
+        $("#Password").attr("placeholder", "Password");
+        $("#ConfirmPassword").attr("placeholder", "ConfirmPassword");
+        console.log($('#UserName'))
+        $('#UserName').change(function () {
+            debugger
+            $.ajax({
+                url: "CheckUserName?UserName=" + $('#UserName').val(),
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    if (result != null) {
+                        $('#UserName').val("");
+                        $('#ValidateUserName').show()
+                    }
+                    else {
+                        $('#ValidateUserName').addClass("hidden")
+                    }
+                },
+                error: function (errormessage) {
+                    console.log(errormessage)
+                }
+            });
+        });
+    });
+</script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox-content">
+                    @using (Html.BeginForm("AddStudent", "Home", FormMethod.Post, new { @class = "m-t form-horizontal", role = "form" }))
+                    {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.StudentId)
+                    <div class="form-group">
+                        @Html.Label("FirstName", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @type = "text", @placeholder = "First Name" })
+                            @Html.ValidationMessageFor(m => m.FirstName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("LastName", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @type = "text", @placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(m => m.LastName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("UserName", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @type = "text", @placeholder = "User name",@id="UserName" })
+                            @Html.ValidationMessageFor(m => m.UserName)
+                            <div id="ValidateUserName" style="color:red;" hidden>User name already taken!</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Password", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.EditorFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("ConfirmPassword", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.EditorFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Teacher", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(m => m.Teacher ,new SelectList(Model.lstTeacher, "TeacherId", "FullName"),"Select Teacher",new { @class = "form-control",@id="Teacher"})
+                            @Html.ValidationMessageFor(m => m.Teacher)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("School", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(m => m.School,new SelectList(Model.lstSchool, "SchoolId", "SchoolName"),"Select School",new { @class = "form-control",@id="School"})
+                            @Html.ValidationMessageFor(m => m.School)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Standard", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(m => m.Standard,new SelectList(Model.lstStandard, "StandardId", "Standard"),"Select Standard",new { @class = "form-control",@id="Standard"})
+                            @Html.ValidationMessageFor(m => m.Standard)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Class", new { @class = "col-sm-2 control-label"})
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(m => m.Class,new SelectList(Model.lstClass, "ClassId", "ClassName"),"Select Class",new { @class = "form-control",@id="Class"})
+                            @Html.ValidationMessageFor(m => m.Class)
+                        </div>
+                    </div>                    
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-white">Cancel</button>
+                            <button class="btn btn-primary" type="submit">Add Student</button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

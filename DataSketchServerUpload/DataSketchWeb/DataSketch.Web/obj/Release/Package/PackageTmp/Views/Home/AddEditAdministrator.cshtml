@@ -1,0 +1,130 @@
+﻿@using System.Web.Script.Serialization;
+@model DataSketch.Models.UserMasterModel
+@{
+
+    Layout = "~/Views/Shared/BasicLayout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#passwordInputAddon').click(function () {
+            if ($('#Password').attr('type') == 'password') {
+                $("#Password").attr("type", "text");
+            } else {
+                $("#Password").attr("type", "password");
+            }
+        })
+        $('#confirmPasswordInputAddon').click(function ()
+        {
+            if ($('#ConfirmPassword').attr('type') == 'password') {
+                $("#ConfirmPassword").attr("type", "text");
+            } else {
+                $("#ConfirmPassword").attr("type", "password");
+            }
+        })
+        
+        $("#Password").attr("placeholder", "Password");
+        $("#ConfirmPassword").attr("placeholder", "ConfirmPassword");
+        $('#EmailAddress').change(function () {
+            $.ajax({
+                url: "CheckEmailAddress?EmailAddress=" + $('#EmailAddress').val(),
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    console.log(result)
+                    if (result == true) {
+                        $('#EmailAddress').val("");
+                        $('#ValidateEmailAddress').show()
+                    }
+                    else {
+                        $('#ValidateEmailAddress').hide()
+                    }
+                },
+                error: function (errormessage) {
+                    if (errormessage.status == 200) {
+                        $('#ValidateEmailAddress').hide()
+                    }
+                }
+            });
+        });
+    });
+    function validateForm()
+    {
+        if($("#ManageAdministrator").valid())
+        {
+            showLoader()
+            return true;
+        }
+        return false;
+    }
+</script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox-content">
+                    @using (Html.BeginForm("AddEditAdministrator", "Home", FormMethod.Post, new { @class = "m-t form-horizontal", role = "form", @id = "ManageAdministrator" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.UserId)
+                        <div class="form-group">
+                            @Html.Label("EmailAdddress", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @type = "text", @placeholder = "Email address", @id = "EmailAddress" })
+                                @Html.ValidationMessageFor(m => m.EmailAddress)
+                                <div id="ValidateEmailAddress" style="color:red;" hidden>Email address already taken!</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Password", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                <div class="input-group" data-autoclose="true">
+                                    @Html.EditorFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "Password" })
+                                    <span class="input-group-addon" id="passwordInputAddon">
+                                        <span class="fa fa-eye"></span>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("ConfirmPassword", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-6">
+                                <div class="input-group" data-autoclose="true">
+                                    @Html.EditorFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @id = "ConfirmPassword" })
+                                    <span class="input-group-addon" id="confirmPasswordInputAddon">
+                                        <span class="fa fa-eye"></span>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+                                <button id="addEditAdministratorSubmit" class="btn btn-primary" onclick="return validateForm()" type="submit">Submit</button>
+                                <button class="btn btn-white" onclick="CancelAction('Administrator')" type="button">Cancel</button>
+                                <button class="btn btn-white" type="reset">Reset</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        //toastr.success('Without any options', 'Simple notification!')
+    });
+
+    function ResetForm() {
+        $(':input', '#ManageAdministrator')
+            .not(':button, :submit, :reset, :hidden')
+            .val('')
+            .removeAttr('checked')
+            .removeAttr('selected');
+    }
+</script>

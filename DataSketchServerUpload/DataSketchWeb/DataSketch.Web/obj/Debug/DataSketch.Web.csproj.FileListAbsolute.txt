@@ -1,0 +1,112 @@
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.csprojResolveAssemblyReference.cache
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.dll.config
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.pdb
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\Antlr3.Runtime.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.BAL.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.DAL.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.SqlServer.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\log4net.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\Newtonsoft.Json.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Helpers.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Mvc.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Optimization.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Razor.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Deployment.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Razor.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\WebGrease.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.BAL.pdb
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.DAL.pdb
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.SqlServer.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\log4net.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Helpers.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Mvc.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Optimization.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Razor.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Deployment.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Razor.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\Newtonsoft.Json.xml
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\bin\Antlr3.Runtime.pdb
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.dll
+D:\Current Projects\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.dll.config
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Antlr3.Runtime.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.BAL.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.DAL.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.SqlServer.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\log4net.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Newtonsoft.Json.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Helpers.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Http.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Mvc.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Optimization.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Razor.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Deployment.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Razor.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\WebGrease.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Net.Http.Formatting.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.BAL.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.DAL.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.SqlServer.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\log4net.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Http.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Helpers.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Mvc.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Optimization.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Razor.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Deployment.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Razor.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Newtonsoft.Json.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Antlr3.Runtime.pdb
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Net.Http.Formatting.xml
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.csprojResolveAssemblyReference.cache
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.dll
+D:\Working\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.dll.config
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.Web.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Antlr3.Runtime.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.BAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.DAL.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.SqlServer.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\log4net.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Newtonsoft.Json.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Helpers.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Mvc.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Optimization.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Razor.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Deployment.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Razor.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\WebGrease.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.BAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\DataSketch.DAL.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\EntityFramework.SqlServer.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\log4net.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Helpers.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Mvc.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Optimization.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.Razor.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Deployment.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\System.Web.WebPages.Razor.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Newtonsoft.Json.xml
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\bin\Antlr3.Runtime.pdb
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.csprojResolveAssemblyReference.cache
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.dll
+D:\DriveBackup\Working\DataSketch\DataSketchWeb\DataSketch.Web\obj\Debug\DataSketch.Web.pdb

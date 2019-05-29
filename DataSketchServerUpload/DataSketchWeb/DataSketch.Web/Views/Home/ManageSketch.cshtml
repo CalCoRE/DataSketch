@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "Manage sketch";
+    Layout = "~/Views/Shared/BasicLayout.cshtml";
+}
+<div class="modal fade" id="SketchShare" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            @using (Html.BeginForm("ShareSketchMapping", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "ManageStudent" }))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Share sketch</h4>
+                </div>
+                <div class="modal-body" style="padding: 0px 0px 40px 30px; height: 130px;">
+                    <div id="ShareDetails">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" id="ManageSketch">
+        @if (@Convert.ToString(HttpContext.Current.Session["Role"]) == "Teacher")
+        {
+
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <h2>Self Sketches</h2>
+                        <div class="table-responsive">
+                            <table id="tblTeacherSketchList" class="text-center table table-striped table-bordered table-hover datatables-example">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Sketch Name</th>
+                                        <th class="text-center">Created On</th>
+                                        <th class="text-center">Modified On</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Item1)
+                                    {
+                                        <tr>
+                                            <td>@item.SketchName</td>
+                                            <td>
+                                                @if (@item.CreatedOn != null)
+                                                {
+                                                    @item.CreatedOn.ToString("dd/MM/yyyy")
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (@item.UpdatedOn != null)
+                                                {
+                                                    @item.UpdatedOn.ToString("dd/MM/yyyy")
+                                                }
+                                            </td>
+                                            <td>
+                                                @{
+                                        int Active = item.IsActive ? 1 : 0;
+                                                }
+                                                <a onclick="ActiveInacitveSketch(@item.UserId,@item.SketchId,@Active)">
+                                                    <i class='@(@item.IsActive == true ? "fa fa-check fa-x text-navy" : "fa fa-x fa-times-circle-o text-danger")'></i>
+                                                </a>
+                                                <a href="@Url.Action("Index", "DataSketch")?userId=@item.UserId&sketchName=@item.SketchName&mode=edit">
+                                                    <i class="fa fa-edit text-success "></i>
+                                                </a>
+                                                <a onclick="DeleteSketch(@item.UserId,@item.SketchId)">
+                                                    <i class="fa fa-trash text-danger"></i>
+                                                </a>
+                                                <a onclick="GetStudentListOfTeacher(@item.SketchId)">
+                                                    <i class="fa fa-share-alt"></i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    @if (@Convert.ToString(HttpContext.Current.Session["Role"]) == "Teacher")
+                    {
+                        <h2>Student Sketches</h2>
+                    }
+                    <div class="table-responsive">
+                        <table id="tblStudentSketchList" class="text-center table table-striped table-bordered table-hover datatables-example">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Sketch Name</th>
+                                    <th class="text-center">Created By</th>
+                                    <th class="text-center">Created On</th>
+                                    <th class="text-center">Modified On</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Item2)
+                                {
+                                    <tr>
+                                        <td>@item.SketchName</td>
+                                        <td>@item.FirstName @item.LastName</td>
+                                        <td>
+                                            @if (@item.CreatedOn != null)
+                                            {
+                                                @item.CreatedOn.ToString("dd/MM/yyyy")
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (@item.UpdatedOn != null)
+                                            {
+                                                @item.UpdatedOn.ToString("dd/MM/yyyy")
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                    int Active = item.IsActive ? 1 : 0;
+                                            }
+                                            <a onclick="ActiveInacitveSketch(@item.UserId,@item.SketchId,@Active)">
+                                                <i class='@(@item.IsActive == true ? "fa fa-check fa-x text-navy" : "fa fa-x fa-times-circle-o text-danger")'></i>
+                                            </a>
+                                            <a href="@Url.Action("Index", "DataSketch")?userId=@item.UserId&sketchName=@item.SketchName&mode=edit">
+                                                <i class="fa fa-edit text-success "></i>
+                                            </a>
+                                            <a onclick="DeleteSketch(@item.UserId,@item.SketchId)">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
+                                            <a onclick="GetStudentList(@item.UserId,@item.SketchId)">
+                                                <i class="fa fa-share-alt"></i>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            InitDataTable('tblTeacherSketchList');
+            InitDataTable('tblStudentSketchList');
+        });
+        function ActiveInacitveSketch(UserId, SketchId, isActive) {
+            if (confirm("Are you sure you want to make this sketch" + (isActive == 1 ? "inactive" : "active") + " ?")) {
+                blockUI()
+                $.ajax({
+                    url: '@Url.Action("ManageSketch", "Home")',
+                    type: "POST",
+                    dataType: "html",
+                    data: { UserId: UserId, SketchId: SketchId, Operation: "ActiveInactive" },
+                    success: function (result) {
+                        toastr['success']("Sketch " + (isActive == 1 ? "inactive" : "activated") + " successfully.");
+                        $('#ManageSketch').html(result);
+                        InitDataTable('tblTeacherSketchList');
+                        InitDataTable('tblStudentSketchList');
+                        unBlockUI()
+                    },
+                    error: function (errormessage) {
+                        unBlockUI()
+                        toastr['error']("Something went wrong please try again.");
+                    }
+                })
+            }
+        }
+        function DeleteSketch(UserId, SketchId) {
+            if (confirm("Are you sure you want to delete sketch?")) {
+                blockUI()
+                $.ajax({
+                    url: '@Url.Action("ManageSketch", "Home")',
+                    type: "POST",
+                    dataType: "html",
+                    data: { UserId: UserId, SketchId: SketchId, Operation: "Delete" },
+                    success: function (result) {
+                        toastr['success']("Sketch deleted successfully.");
+                        $('#ManageSketch').html(result);
+                        InitDataTable('tblTeacherSketchList');
+                        InitDataTable('tblStudentSketchList');
+                        unBlockUI()
+                    },
+                    error: function (errormessage) {
+                        unBlockUI()
+                        toastr['error']("Something went wrong please try again.");
+                    }
+                })
+            }
+        }
+
+        function GetStudentList(UserId, SketchId) {
+            blockUI()
+            $.ajax({
+                url: '@Url.Action("GetStudentByStandard", "Home")',
+                type: "POST",
+                dataType: "html",
+                data: {UserId:UserId, SketchId: SketchId },
+                success: function (result) {
+                    $('#ShareDetails').html(result);
+                    $('#SketchShare').modal('show');
+                    unBlockUI()
+                },
+                error: function (errormessage) {
+                    unBlockUI()
+                    toastr['error']("Something went wrong please try again.");
+                }
+            })
+        }
+        function GetStudentListOfTeacher(SketchId) {
+            blockUI()
+            $.ajax({
+                url: '@Url.Action("GetStudentListForTeacher", "Home")',
+                type: "POST",
+                dataType: "html",
+                data: { SketchId: SketchId },
+                success: function (result) {
+                    $('#ShareDetails').html(result);
+                    unBlockUI()
+                    $('#SketchShare').modal('show');
+                },
+                error: function (errormessage) {
+                    unBlockUI()
+                    toastr['error']("Something went wrong please try again.");
+                }
+            })
+        }
+    </script>
+}

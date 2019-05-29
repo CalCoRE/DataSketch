@@ -1,0 +1,95 @@
+#snapgrid {
+  top: 240px;
+  right: 20px; }
+
+.tool.snapgrid-1 {
+  background: url("icons/snaptogrid.png") center center no-repeat; }
+
+#ex1 {
+  right: 40px !important;
+  position: absolute; }
+
+#SliderInput.modal-dialog {
+  width: 400px;
+  top: 240px;
+  right: 70px; }
+
+.tool.snapgrid-1 .form_body:before {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  border-left: 11px solid #a2a2a2;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 9; }
+
+.tool.snapgrid-1 .modal-body.form_body:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  border-left: 10px solid #ffffff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 99; }
+
+#SliderModalBody.modal-body {
+  position: relative;
+  padding: 20px 0px 25px 5px; }
+
+#rangeslider.col-md-11 {
+  padding: 0px 5px !important; }
+
+#rangeslidervalue.col-md-1 {
+  padding: 0px !important;
+  top: -4px; }
+
+#SliderInputModal.modal-backdrop {
+  display: none; }
+
+#GridSizeSlider {
+  padding: 0px 0px !important; }
+
+.slidecontainer {
+  width: 100%; }
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s; }
+
+.slider:hover {
+  opacity: 1; }
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #428bca;
+  cursor: pointer; }
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #428bca;
+  cursor: pointer; }
+
+/*# sourceMappingURL=../../../../maps/modules/datasketch/tools/snaptogrid/style.css.map */

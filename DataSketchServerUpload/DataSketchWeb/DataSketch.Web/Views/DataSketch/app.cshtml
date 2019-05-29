@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>DataSketch</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
+<body class="modal-open">
+    <script type="text/javascript">
+        window.DataSketchConfig = {
+            dataSource: "data/test.csv",
+            timePerRow: 1 / 2
+        };
+    </script>
+    @*<script data-main="./cslib/init" src="../../DataSketchApp/cslib/thirdparty/require-2.1.18.js"></script>*@
+    <div id="LoaderShowHide">
+        <div class="loader" style="display:none" id="pageLoader"></div>
+    </div>
+    <div class="modal-backdrop fade in" id="DisableBackground" style="display:none"></div>
+    <table>
+        <tbody id="ObjectProperties" class="ObjectProperties" hidden>
+            <tr></tr>
+        </tbody>
+    </table>
+    @Scripts.Render("~/DataSketchApp")
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="~/Content/patterns/1.png" width="48" height="48">
+                    </span>
+
+                    <span class=" text-white block m-t-xs"> <strong class="font-bold">Welcome</strong> </span>
+                    <span class=" text-white m-t-xs block">@Convert.ToString(HttpContext.Current.Session["UserName"])</span>
+
+                </div>
+                <div class="logo-element">
+                    DS
+                </div>
+            </li>
+            @{
+                <li class='@Html.IsSelected(action: "Dashboard")'>
+                    <a href="~/Home/Dashboard"><i class="fa fa-bar-chart"></i> <span class="nav-label">Dashboard</span></a>
+                </li>
+                <li class='@(Html.IsSelected(controller: "DataSketch", action: "Index") != "" ? "active" : Html.IsSelected(controller: "DataSketch", action: "Index"))'>
+                    <a href="~/DataSketch/Index"><i class="fa fa-paint-brush"></i> <span class="nav-label">New Sketch</span></a>
+                </li>
+                if (@Convert.ToString(HttpContext.Current.Session["Role"]) == "Administrator" || @Convert.ToString(HttpContext.Current.Session["Role"]) == "SuperAdministrator")
+                {
+                    <li class='@(Html.IsSelected(action: "Teachers") != "" ? "active" : Html.IsSelected(action: "AddEditTeacher"))'>
+                        <a href="~/Home/Teachers"><i class="fa fa-user"></i> <span class="nav-label">Teachers</span></a>
+                    </li>
+                }
+                if (@Convert.ToString(HttpContext.Current.Session["Role"]) != "Student")
+                {
+                    <li class='@(Html.IsSelected(action: "Students") != "" ? "active" : Html.IsSelected(action: "AddEditStudent"))'>
+                        <a href="~/Home/Students"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Students</span></a>
+                    </li>
+                }
+                if (@Convert.ToString(HttpContext.Current.Session["Role"]) == "Administrator" || @Convert.ToString(HttpContext.Current.Session["Role"]) == "SuperAdministrator")
+                {
+                    <li class='@Html.IsSelected(action: "SetUpSchool")'>
+                        <a href="~/Home/SetUpSchool"><i class="fa fa-cog"></i> <span class="nav-label">Setup School</span></a>
+                    </li>
+                }
+                if (@Convert.ToString(HttpContext.Current.Session["Role"]) != "Administrator" && @Convert.ToString(HttpContext.Current.Session["Role"]) != "SuperAdministrator")
+                {
+                    <li class='@Html.IsSelected(action: "ManageSketch")'>
+                        <a href="~/Home/ManageSketch"><i class="fa fa-cog"></i> <span class="nav-label">Manage Sketch</span></a>
+                    </li>
+                    <li class='@Html.IsSelected(action: "SharedSketch")'>
+                        <a href="~/Home/SharedSketch"><i class="fa fa-share-alt"></i> <span class="nav-label">Shared Sketch</span></a>
+                    </li>
+                }
+                if (@Convert.ToString(HttpContext.Current.Session["Role"]) == "SuperAdministrator")
+                {
+                    <li class='@(Html.IsSelected(action: "Administrator") != "" ? "active" : Html.IsSelected(action: "AddEditAdministrator"))'>
+                        <a href="~/Home/Administrator"><i class="fa fa-user"></i> <span class="nav-label">Administrator</span></a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</nav>

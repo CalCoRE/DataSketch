@@ -1,0 +1,38 @@
+.LoadInput-tool {
+  .palette-well {
+    width: 100%;
+	font-size:12px;
+  }  
+}
+.loadcanvas-tool{
+    top: 250px;
+    left: 500px;
+	height:150px;
+}
+button.jscolor {
+	font-size: 12.5px;
+}
+#LoadFile.toolbar{
+background:none !important;
+border:none !important;
+top: 250px;
+left:450px;
+}
+.buttonproperty{
+float: right; 
+background-color: #efefef;
+color:black;
+border:none;
+margin-right:5px;
+}
+.colorpropertymodal{
+background-color: #efefef;
+color:black;
+border:none;
+margin-right:5px;
+}
+.sliderlabel{
+font-size: 13px;
+vertical-align: middle; 
+float: left;
+}

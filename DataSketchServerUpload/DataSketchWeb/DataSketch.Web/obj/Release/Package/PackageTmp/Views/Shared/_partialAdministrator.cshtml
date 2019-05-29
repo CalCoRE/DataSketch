@@ -1,0 +1,31 @@
+﻿<thead>
+    <tr>
+        <th>Email Address</th>
+        <th>Password</th>
+        <th class="text-center">Action</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.EmailAddress</td>
+            <td>@item.Password</td>
+            <td class="text-center">
+                @{
+                    int Active = item.IsActive ? 1 : 0;
+                }
+                <a onclick='ActiveInactiveAdministrator(@item.UserId,@Active)'>
+                    <i class='@(@item.IsActive == true ? "fa fa-check fa-x text-navy" : "fa fa-x fa-times-circle-o text-danger")'></i>
+                </a>
+                <a href="~/Home/AddEditAdministrator?id=@item.UserId">
+                    <i class="fa fa-edit text-success fa-x "></i>
+                </a>
+                <a onclick='DeleteAdministrator(@item.UserId)'>
+                    <i class="fa fa-trash text-danger fa-x"></i>
+                </a>
+            </td>
+        </tr>
+                    }
+</tbody>
+

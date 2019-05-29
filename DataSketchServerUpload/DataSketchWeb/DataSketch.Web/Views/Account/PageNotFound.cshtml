@@ -1,0 +1,51 @@
+﻿@{
+    if (HttpContext.Current.Session != null && HttpContext.Current.Session["UserId"] != null && Convert.ToInt64(HttpContext.Current.Session["UserId"]) > 0)
+    {
+        ViewBag.Title = "Page not found";
+        Layout = "~/Views/Shared/BasicLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_BlankLayout.cshtml";
+    }
+}
+
+<title>DataSketch | 404 Error</title>
+
+@Styles.Render("~/Content/css")
+@Styles.Render("~/font-awesome/css")
+<style type="text/css">
+    .wrapper .middle-box {
+        margin-top: 0px !important;
+    }
+</style>
+
+<div class="wrapper wrapper-content minHeight animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div style="padding-top:0px auto;" class="middle-box text-center animated fadeInDown">
+                <h1>404</h1>
+                <h3 class="font-bold">Page Not Found</h3>
+
+                <div class="error-desc">
+                    Sorry, but the page you are looking for has note been found. Try checking the URL for error, then hit the refresh button on your browser or try found something else in our app.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            alert(1);
+            if ($('.page-wrapper').length > 0) {
+                alert(2);
+                $('.page-wrapper')[0].style.height = window.innerHeight;
+            }
+        })
+    </script>
+}

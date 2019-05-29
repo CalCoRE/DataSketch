@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="489c78ff2a0747c19099bace202b8b68" Name="Diagram1">
+        <EntityTypeShape EntityType="DataSketchModel.ClassMaster" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.EmailerService" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.Role" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.SchoolMaster" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.SketchMaster" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.SketchShareMapping" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.StandardClassMapping" Width="1.5" PointX="7.5" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.StandardMaster" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.StudentMaster" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.sysdiagram" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.TeacherMaster" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.TeacherStandardMapping" Width="1.5" PointX="10.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.UserClass" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.UserMaster" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataSketchModel.Log" Width="1.5" PointX="7.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="DataSketchModel.FK_ClassMaster_ClassMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_StandardClassMapping_ClassMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_StudentMaster_ClassMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_UserClass_ClassMaster1" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_UserMaster_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_StudentMaster_SchoolMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_TeacherMaster_SchoolMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_SketchMaster_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_SketchShareMapping_SketchMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_SketchShareMapping_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_StandardClassMapping_StandardMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_StudentMaster_StandardMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_TeacherStandardMapping_StandardMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_StudentMaster_TeacherMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_TeacherMaster_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_TeacherStandardMapping_TeacherMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DataSketchModel.FK_UserClass_ClassMaster" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
